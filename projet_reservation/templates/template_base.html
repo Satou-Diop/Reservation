@@ -38,14 +38,15 @@
                         </ul>
                     </div>
                       <span class="navbar-text">
-                        {% if !{{  estConnecte }} %}
-                           
+                        {% if request.session.info_utilisateur.nom %}
+                            <h1>Bienvenue, {{ request.session.info_utilisateur.nom }} !</h1>
+                        {% else %}
+                          <div class="d-flex ">
+                            <a href="/inscription" class="link-underline-opacity-0"><button class="bouton" >S'INSCRIRE</button></a>
+                            <a href="/connexion"><button class="bouton">SE CONNECTER</button></a>
+                          </div>
                         {% endif %}
                         
-                          <!-- <div class="d-flex ">
-                              <a href="/inscription" class="link-underline-opacity-0"><button class="bouton" >S'INSCRIRE</button></a>
-                              <a href="/connexion"><button class="bouton">SE CONNECTER</button></a>
-                            </div> -->
                       </span>
                 </div>
                 

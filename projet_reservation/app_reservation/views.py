@@ -2,22 +2,24 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from .models import Utilisateur
-import mysql.connector
+import mysql.connector as sql
 
-
+config = {
+    'user': 'admin_reservation',
+    'password': 'Reservation123@',
+    'host': 'localhost',
+    'database': 'bd_app',
+}
+# Établir une connexion à la base de données
+conn = sql.connect(**config)
+cursor = conn.cursor()
 nom,prenom,email,telephone,adresse,mot_de_passe='','','','','',''
 # Create your views here.
 def index(request):
-    # Definir les variables globales
+    # Definir les variables globale
+    return render(request, 'index.html',  {})
     
-    context = {
-        'variable': 'Contenu dynamique'
-    }
-    # Effectuer des opérations
     
-    # Renvoyer une réponse HTTP
-    #return HttpResponse('Un texte pour tester')
-    return render(request, 'index.html', context)
 
 def connexion(request):
     if request.method=="POST":
@@ -27,16 +29,32 @@ def connexion(request):
         if(email!='' and mot_de_passe!=''): 
             try:
                 message=''
-                utilisateur = Utilisateur.objects.filter(email__iexact=email, mot_de_passe__exact=mot_de_passe).first()
-                print(utilisateur)
-                if utilisateur :
-                    return redirect('/')  # Rediriger vers la page d'accueil après l'inscription réussie   
-                else :
+                conn = sql.connect(**config)
+                cursor = conn.cursor()
+                requete="select * from app_reservation_utilisateur where  email='{}' and  BINARY  mot_de_passe='{}'".format(email,mot_de_passe)
+                cursor.execute(requete)
+                res=cursor.fetchall()
+                if res==[]:
                     message='Login ou mot de passe incorrect'
+                    cursor.close()
+                    conn.close()
                     return render(request, 'connexion.html', {'erreur_message': message})
+                    
+                else :
+                    keys = ['id', 'nom', 'prenom', 'addresse', 'email', 'telephone']
+                    result = dict(zip(keys, res[0]))
+                    result['estConnecte'] = True
+                    cursor.close()
+                    conn.close()
+                    # Stocker le dictionnaire dans la session
+                    request.session['info_utilisateur'] = result
+                    print(request.session['info_utilisateur'].get('nom'))
+                    print('test')
+                    return redirect('index')
+                
             except Exception as e:
                 print(str(e))  # Afficher l'erreur pour le débogage
-                message='Login ou mot de passe incorrect'
+                message='Erreur route'
                 return render(request, 'connexion.html', {'erreur_message': message})
         
     # Effectuer des opérations
@@ -60,11 +78,13 @@ def inscription(request):
         mot_de_passe = request.POST.get('mot_de_passe')
         mot_de_passe2 =request.POST.get('mot_de_passe2')
         if mot_de_passe!=mot_de_passe2:
-            return HttpResponse('Les motes de passe ne corresponde pas')
+            return HttpResponse('Les mots de passe ne correspondent pas')
         try:
-            utilisateur = Utilisateur.objects.create(nom=nom, prenom=prenom, email=email, telephone=telephone,adresse=adresse,mot_de_passe=mot_de_passe)
-            utilisateur.save()
-            return redirect('login')  # Rediriger vers la page d'accueil après l'inscription réussie
+            requete="insert into app_reservation_utilisateur (id,nom,prenom,adresse,email,telephone,mot_de_passe) values (NULL,'{}','{}','{}','{}','{}','{}')".format(nom,prenom,adresse,email,telephone,mot_de_passe)
+            cursor.execute(requete)
+            cursor.close()
+            conn.close()
+            return redirect('connexion')  # Rediriger vers la page d'accueil après l'inscription réussie
         except Exception as e:
             print(str(e))  # Afficher l'erreur pour le débogage
             return render(request, 'inscription.html', {'error_message': 'erreur'})
