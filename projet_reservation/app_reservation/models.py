@@ -40,7 +40,7 @@ def generer_numero():
 #         utilisateur.telephone = generer_numero()
 #         utilisateur.mot_de_passe='passer'
 #         utilisateur.save()
-#     except Exception as e:
+#     except Exceptionas  e:
 #         print(str(e))
 
 

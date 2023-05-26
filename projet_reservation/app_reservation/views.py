@@ -5,8 +5,8 @@ from .models import Utilisateur
 import mysql.connector as sql
 
 config = {
-    'user': 'admin_reservation',
-    'password': 'Reservation123@',
+    'user': 'fatou',
+    'password': 'SEYnabou16',
     'host': 'localhost',
     'database': 'bd_app',
 }

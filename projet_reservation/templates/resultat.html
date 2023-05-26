@@ -1,0 +1,506 @@
+{% extends 'template_base.html' %}
+
+{% block contenu %}
+{% load static %}
+    <!-- Le formulaire -->
+    <div  class="ban">
+      <div class="container texte">
+        <h5>Bienvenue à</h5>
+        <h1>SEN TRIP</h1>
+        <h4>POUR VOS VOYAGES, RESERVEZ VOS VOLS,  VÉHICULES ET CHAMBRES D’HOTELS</h4>
+      </div>
+  
+      <div class="container ">
+        <div class="tabs">
+          <input type="radio" name="tabs" id="tabone" checked="checked">
+          <label for="tabone">VOLS</label>
+          <div class="tab">
+            <!-- PARTIE VOLS -->
+            <div class="row">
+              <div class="col-2">
+                <select class="form-select selection" >
+                  <option selected>Aller-Retour</option>
+                  <option value="1">Simple</option>
+                  
+                </select>
+              </div>
+              <div class="col-2">
+                <select class="form-select selection" >
+                  <option selected>Economique</option>
+                  <option value="1">Premiere Classe</option>
+                  
+                </select>
+              </div>
+              <div class="col-2">
+                <select class="form-select selection" >
+                  <option selected>Adulte</option>
+                  <option value="1">Enfant</option>
+                  
+                </select>
+              </div>
+            </div>
+           
+            <div class="row">
+              <div class="col-3">
+                <div class="lab_input">
+                  <span>Départ : </span>
+                  <div class="dateheure">
+                   <input class="input" type="text" placeholder="Départ"> 
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="lab_input">
+                  <span>Arrivée: </span>
+                  <div class="dateheure">
+                   <input class="input"  type="text" placeholder="Arrivée"> 
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="lab_input">
+                  <span>Date départ : </span>
+                  <div class="dateheure">
+                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input class="input"  type="date">
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="lab_input">
+                  <span>Date arrivée : </span>
+                  <div class="dateheure">
+                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" >
+                  </div>
+                </div>
+              </div>
+            </div>
+           <br>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="bouton" >RECHERCHER</button>
+            </div>
+            
+           </div>
+          <input type="radio" name="tabs" id="tabtwo">
+          <label for="tabtwo">HOTELS</label>
+          <div class="tab">
+            <!-- PARTIE HOTELS -->
+            <div class="row">
+              <div class="col-3">
+                <div class="lab_input">
+                  <span>Nom ou ville: </span>
+                  <div class="dateheure">
+                  <input type="text" class="input"   placeholder="ex : Dakar"> 
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="lab_input">
+                  <span>Date de reservation : </span>
+                  <div class="dateheure">
+                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" ><input  class="input"  type="time" >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="lab_input">
+                  <span>Date de sortie : </span>
+                  <div class="dateheure">
+                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input class="input"  type="date"><input class="input"  type="time" >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="lab_input">
+                  <span>Nombres : </span>
+                  <div class="dateheure">
+                   <input class="input"  type="number" placeholder="ex : 2 adultes" min="1" max="10">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="bouton" >RECHERCHER</button>
+            </div>
+            
+          </div>
+          <input type="radio" name="tabs" id="tabthree">
+          <label for="tabthree">VOITURES</label>
+          <div class="tab">
+            <!-- PARTIE VOITURE -->
+              <div class="row">
+                <div class="col-4">
+                  <div class="lab_input">
+                    <span>Lieu: </span>
+                    <div class="dateheure">
+                    <input type="text" class="input"   placeholder="ex : Dakar"> 
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="lab_input">
+                    <span>Date de location : </span>
+                    <div class="dateheure">
+                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" ><input  class="input"  type="time" >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="lab_input">
+                    <span>Date de retour : </span>
+                    <div class="dateheure">
+                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input class="input"  type="date"><input class="input"  type="time" >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="bouton" >RECHERCHER</button>
+              </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <!-- Fin du formulaire -->
+        <!-- effets -->
+        <div class="container">
+          <br><br><br>
+          <div>
+            <H1 class="line-1 anim-typewriter">NOS TOPS DESTINATIONS</H1>
+            <hr class="souligne">
+          </div>
+          <div class="row">
+              <div class="col-md-4 col-sm-6">
+                  <div class="box">
+                      <img src="{% static 'img/d1.jpg' %}">
+                      <div class="box-content">
+                          <h3 class="title">Cancun</h3>
+                          <span class="post">500.000fr</span>
+                      </div>
+                      <ul class="icon">
+                          <li><a href="#"><img src="{% static '/img/avion.png'%}"  alt=""  srcset=""></i></a></li>
+                          <li><a href="#"><img src="{% static 'img/lit.png' %}"alt="" srcset=""></a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                  <div class="box">
+                      <img src="{% static 'img/d3.jpg' %}">
+                      <div class="box-content">
+                          <h3 class="title">Mecca</h3>
+                          <span class="post">900.000fr</span>
+                      </div>
+                      <ul class="icon">
+                        <li><a href="#"><img src="{% static '/img/avion.png'%}"  alt=""  srcset=""></i></a></li>
+                        <li><a href="#"><img src="{% static 'img/lit.png' %}" alt="" srcset=""></a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <div class="box">
+                    <img src="{% static 'img/d2.jpg' %}">
+                    <div class="box-content">
+                        <h3 class="title">Nevada</h3>
+                        <span class="post">400.000fr</span>
+                    </div>
+                    <ul class="icon">
+                      <li><a href="#"><img src="{% static '/img/avion.png'%}"  alt=""  srcset=""></i></a></li>
+                      <li><a href="#"><img src="{% static 'img/lit.png' %}" alt="" srcset=""></a></li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="box">
+                    <img src="{% static 'img/d4.jpeg' %}">
+                    <div class="box-content">
+                        <h3 class="title">Dubai</h3>
+                        <span class="post">500.000fr</span>
+                    </div>
+                    <ul class="icon">
+                      <li><a href="#"><img src="{% static '/img/avion.png'%}"  alt=""  srcset=""></i></a></li>
+                      <li><a href="#"><img src="{% static 'img/lit.png' %}" alt="" srcset=""></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="box">
+                    <img src="{% static 'img/d5.jpeg' %}">
+                    <div class="box-content">
+                        <h3 class="title">Suisse</h3>
+                        <span class="post">900.000fr</span>
+                    </div>
+                    <ul class="icon">
+                      <li><a href="#"><img src="{% static '/img/avion.png'%}"  alt=""  srcset=""></i></a></li>
+                      <li><a href="#"><img src="{% static 'img/lit.png' %}" alt="" srcset=""></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="box">
+                  <img src="{% static 'img/d6.jpg' %}">
+                  <div class="box-content">
+                      <h3 class="title">Guinée</h3>
+                      <span class="post">400.000fr</span>
+                  </div>
+                  <ul class="icon">
+                    <li><a href="#"><img src="{% static '/img/avion.png'%}"  alt=""  srcset=""></i></a></li>
+                          <li><a href="#"><img src="{% static 'img/lit.png' %}" alt="" srcset=""></a></li>
+                  </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+      <br> <br>
+        <!-- fin effets -->
+     <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          <h2 class="aus" >À Propos</h2>
+          <hr class="trait">
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+            <ul>
+              <li> <img src="{% static '/img/verifie.png' %}" alt=""> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li><img src="{% static '/img/heure.png' %}" alt=""> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <a href="#" class="btn-learn-more">Learn More</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- End About Us Section -->
+
+
+     <!-- FIN DECORATIONS -->
+    <br>
+    
+    <!-- CAROUSSELLES VOITURES -->
+    <div class="container">
+      <div>
+        <h4 class="s1">Location de voiture</h4>
+        <h1 class="s2">Les plus demandés</h1>
+        <h2 class="s3">Voitures</h2>
+      </div>
+    </div>
+    <div class="container slider">
+      
+      <div  id="container">
+        <div id="slider-container">
+          <span onclick="slideRight()" class="btn"></span>
+            <div id="slider">
+              <div class="slide">
+                <img src="{% static '/img/v1.jpg'%}" alt="">
+                <div class="description" >
+                  <div class="marque"><h4>Renaul Megane</h4> <p>2 adultes, 3 valises</p></div>
+                  <div class="lieu"> Saly, Mbour</div>
+                  <div class="prix"> 25.OOOfr / jour </div>
+                  <button class="bt">Voir l'offre</button>
+
+                </div>
+              </div>
+             
+                <div class="slide">
+                  <img src="{% static '/img/V2.jpeg'%}" alt="">
+                  <div class="description" >
+                    <div class="marque"><h4>Jepp</h4> <p>5 adultes</p></div>
+                    <div class="lieu"> Dakar</div>
+                    <div class="prix"> 45.OOOfr / jour </div>
+                    <button class="bt">Voir l'offre</button>
+  
+                  </div>
+                </div>
+               
+                  <div class="slide">
+                    <img src="{% static '/img/v3.jpeg'%}" alt="">
+                    <div class="description" >
+                      <div class="marque"><h4>Ford Escape</h4> <p>3 adultes, 2 bagages</p></div>
+                      <div class="lieu"> Saint-Louis</div>
+                      <div class="prix"> 58.OOOfr / jour </div>
+                      <button class="bt">Voir l'offre</button>
+    
+                    </div>
+                  </div>
+                 
+                    <div class="slide">
+                      <img src="{% static '/img/v3.jpeg'%}" alt="">
+                      <div class="description" >
+                        <div class="marque"><h4>Tesla</h4> <p>2 adultes, 3 valises</p></div>
+                        <div class="lieu"> Almadies</div>
+                        <div class="prix"> 100.OOOfr / jour </div>
+                        <button class="bt">Voir l'offre</button>
+      
+                      </div>
+                    </div>
+                   
+                      <div class="slide">
+                        <img src="{% static '/img/v1.jpg'%}" alt="">
+                        <div class="description" >
+                          <div class="marque"><h4>Renaul Megane</h4> <p>2 adultes, 3 valises</p></div>
+                          <div class="lieu"> Saly, Mbour</div>
+                          <div class="prix"> 25.OOOfr / jour </div>
+                          <button class="bt">Voir l'offre</button>
+        
+                        </div>
+                      </div>
+                     
+                        <div class="slide">
+                          <img src="{% static '/img/v3.jpeg'%}" alt="">
+                          <div class="description" >
+                            <div class="marque"><h4>Dacia Duster</h4> <p>4 adultes</p></div>
+                            <div class="lieu"> Saly, Mbour</div>
+                            <div class="prix"> 25.OOOfr / jour </div>
+                            <button class="bt">Voir l'offre</button>
+          
+                          </div>
+                        </div>
+                       
+                          <div class="slide">
+                            <img src="{% static '/img/v1.jpg'%}" alt="">
+                            <div class="description" >
+                              <div class="marque"><h4>Ford</h4> <p>2 adultes, 3 valises</p></div>
+                              <div class="lieu"> Saly, Mbour</div>
+                              <div class="prix"> 25.OOOfr / jour </div>
+                              <button class="bt">Voir l'offre</button>
+            
+                            </div>
+                          </div>
+                         
+                            <div class="slide">
+                              <img src="{% static '/img/v3.jpeg'%}" alt="">
+                              <div class="description" >
+                                <div class="marque"><h4>Range Rover</h4> <p>2 adultes, 3 valises</p></div>
+                                <div class="lieu"> Saly, Mbour</div>
+                                <div class="prix"> 25.OOOfr / jour </div>
+                                <button class="bt">Voir l'offre</button>
+              
+                              </div>
+                            </div>
+                           
+                              <div class="slide">
+                                <img src="{% static '/img/V2.jpeg'%}" alt="">
+                                <div class="description" >
+                                  <div class="marque"><h4>Renaul Megane</h4> <p>2 adultes, 3 valises</p></div>
+                                  <div class="lieu"> Saly, Mbour</div>
+                                  <div class="prix"> 25.OOOfr / jour </div>
+                                  <button class="bt">Voir l'offre</button>
+                
+                                </div>
+                              </div>
+                             
+                                <div class="slide">
+                                  <img src="{% static '/img/v3.jpeg'%}" alt="">
+                                  <div class="description" >
+                                    <div class="marque"><h4>Renaul Megane</h4> <p>2 adultes, 3 valises</p></div>
+                                    <div class="lieu"> Saly, Mbour</div>
+                                    <div class="prix"> 25.OOOfr / jour </div>
+                                    <button class="bt">Voir l'offre</button>
+                  
+                                  </div>
+                                </div>
+          </div>
+          <span onclick="slideLeft()" class="btn"></span>
+        </div>
+      </div>
+    </div>
+   
+    <!-- FIN CARROUSELLES VOITUES -->
+     <!-- LES PARTENAIRES -->
+     <div class="section_partner container">
+      <div class="div1">
+          <p class="p1">PARTNERS</p>
+          <p class="p2">NOS PARTENAIRES</p>
+          <p class="p3">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+      <div class="div2 row">
+          <div class="col-sm text-center align-self-center"><img src="{% static '/img/emirate.png'%}" alt="test" class="img-thumbnail border-0"></div>
+          <div class="col-sm text-center align-self-center"><img src="{% static '/img/airm.png'%} " alt="" class="img-thumbnail border-0"></div>
+          <div class="col-sm text-center align-self-center"><img src="{% static '/img/airsn.png'%} " alt="" class="img-thumbnail border-0"></div>
+          <div class="col-sm text-center align-self-center"><img src="{% static '/img/emirate.png'%} " alt="" class="img-thumbnail border-0"></div>
+          <div class="col-sm text-center align-self-center"><img src="{% static '/img/AIRBNB.png'%} " alt="" class="img-thumbnail border-0"></div>
+      </div>
+
+      
+      <button class="boutton2">
+         Voir Plus
+      </button>
+
+    </div>
+    <!-- FIN PARTENAIRES -->
+    
+
+    <br>
+    <!-- contacts -->
+    <section id="contact">
+  
+      <h1 class="section-header">Contact</h1>
+      
+      <div class="contact-wrapper">
+      
+      <!-- Left contact page --> 
+        
+        <form id="contact-form" class="form-horizontal" role="form">
+           
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" id="name" placeholder="NAME" name="name" value="" required>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="" required>
+            </div>
+          </div>
+    
+          <textarea class="form-control" rows="10" placeholder="MESSAGE" name="message" required></textarea>
+          
+          <button class="btn btn-primary send-button" id="submit" type="submit" value="SEND">
+            <div class="alt-send-button">
+              <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
+            </div>
+          
+          </button>
+          
+        </form>
+        
+      <!-- Left contact page --> 
+        
+          <div class="direct-contact-container">
+    
+            <ul class="contact-list">
+              <li class="list-item"><i class="fa fa-map-marker fa-2x"><span class="contact-text place">Mermoz, Dakar, SEnegal</span></i></li>
+              
+              <li class="list-item"><i class="fa fa-phone fa-2x"><span class="contact-text phone"><a href="tel:+221 77 123 45 67" title="Give me a call">(221) 33 456 67 65</a></span></i></li>
+              <li class="list-item"><i class="fa fa-envelope fa-2x"><span class="contact-text gmail"><a href="mailto:#" title="Send me an email">sentripcontact@gmail.com</a></span></i></li>
+            </ul>  
+            <div class="copyright">Lorem ipsum dolor sit amet  .</div>
+            <div class="copyright">Lorem ipsum dolor ur adipisicing elit. .</div>
+          </div>
+        
+      </div>
+      
+    </section>        
+    <!-- fin contacts -->
+{% endblock %}

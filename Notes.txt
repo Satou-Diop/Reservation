@@ -1,0 +1,4 @@
+    #pour arreter un port
+sudo lsof -t -i tcp:Numero du port | xargs kill -9
+
+sudo kill -9 $(sudo lsof -t -i :3000)
