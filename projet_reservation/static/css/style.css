@@ -1366,3 +1366,33 @@ border: 1px solid rgba(255, 255, 255, 0.81);
   font-style: italic;
   color: red;
 }
+
+.menu_drop{
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #172B4D;
+  font-size: 22px;
+  color: white;
+}
+.a_drop{
+ font-size: 22px;
+  color: white;
+  text-decoration: none;
+  padding-left: 5%;
+}
+.a_drop:hover{
+  font-weight: 600;
+   color: #00a2ff;
+   
+ }
+.li_drop:hover{
+  color: white;
+  background-color: #003597;
+}
+.bouton_drop {
+  
+  border: none;
+  font-size: 24px;
+  color: white;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0);
+
+}
