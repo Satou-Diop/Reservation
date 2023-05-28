@@ -81,49 +81,62 @@ function slideLeft() {
 };
 
 // #####################################LATYR###############################################*
-function verificationRegistration(name, firstName, phoneNumber, email, password) {
-    // Validate the phone number.
-    var phoneNumber = "771234567";
-    var regex = /^(77|78|70|76|75)\d{7}$/;
-    var isValid = regex.test(phoneNumber);
-    console.log(isValid); // Résultat : true
-    
+function register(event) {
+    event.preventDefault();
   
-    // Validate the name and first name.
-    regex = /^[a-zA-Z]+$/;
-    if (!regex.test(Prénom),Nom || !regex.test(Prénom,Nom)) {
-      return false;
+    var nom = document.getElementById('nom').value;
+    var prenom = document.getElementById('prenom').value;
+    var email = document.getElementById('email').value;
+    var telephone = document.getElementById('telephone').value;
+    var adresse = document.getElementById('adresse').value;
+    var motDePasse = document.getElementById('passeword').value;
+    var motDePasse2 = document.getElementById('passeword').value;
+  
+    var errors = [];
+  
+    var regex = /^[a-zA-Z]+$/;
+    if (!regex.test(nom) || !regex.test(prenom)) {
+      errors.push('Nom et prénom doivent contenir uniquement des lettres.');
     }
   
-    // Validate the email.
     regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!regex.test(email)) {
-      return false;
+      errors.push('Adresse email invalide.');
     }
   
-    // Validate the password.
+    regex = /^(77|78|70|76|75)\d{7}$/;
+    if (!regex.test(telephone)) {
+      errors.push('Numéro de téléphone invalide.');
+    }
+  
     regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-    if (!regex.test(password)) {
-      return false;
+    if (motDePasse !== motDePasse2) {
+      errors.push("Les mots de passe ne correspondent pas.");
     }
   
-    // The registration is valid.
-    return true;
+    if (errors.length > 0) {
+      var errorElement = document.getElementById('error-message');
+      errorElement.innerHTML = '';
+      errorElement.classList.add('text-danger');
+      errors.forEach(function (error) {
+        var errorItem = document.createElement('p');
+        errorItem.textContent = error;
+        errorElement.appendChild(errorItem);
+      });
+    } else {
+      // Soumettre le formulaire
+      document.getElementById('inscription_form').submit();
+    }
   }
+  
+  document.getElementById('inscription_form').addEventListener('submit', register);
+  
+  
+  
+  
+  
 
-if (verificationRegistration(Prénom, Nom, téléphone, email, password)) {
-  // The registration is valid.
-  showAlert("Enregistrement avec succès.", "green");
-} else {
-  // The registration is not valid.
-  showAlert("Votre enregistrement n'est pas valide. Veuillez corriger les erreurs et réessayer !", "red");
-}
 
-function showAlert(message, color) {
-  var alertStyle = "color: " + color + "; position: fixed; bottom: 0; width: 100%; text-align: center; font-size: 18px;";
-  var alertHTML = '<div style="' + alertStyle + '">' + message + '</div>';
-  document.body.insertAdjacentHTML('beforeend', alertHTML);
-}
 
 
   

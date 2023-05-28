@@ -2,6 +2,10 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
+.error-message {
+  color: red;
+  font-size: 12px;
+}
 
 .banniere {
   display: flex;
@@ -220,7 +224,7 @@ input[type="time"] {
 .tabs {
   display: -webkit-box;
   display: -webkit-flex;
-  display: -ms-flexbox;
+  display: -ml-flexbox;
   display: flex;
   width: 100%;
   -webkit-flex-wrap: wrap;
@@ -1077,6 +1081,32 @@ to{border-right-color: transparent;}
     text-transform: uppercase;
     letter-spacing: 6px;
   }
+  .align-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .button {
+    background-color: blue;
+    color: white;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .frame {
+    margin: 0 10px; /* Adjust the margin as desired */
+    display: flex;
+    align-items: center;
+  }
+  
+  .button.blue {
+    background-color: blue;
+    color: white;
+  }
+  
   
   .contact-wrapper {
     display: flex;

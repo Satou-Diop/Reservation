@@ -27,6 +27,18 @@ def index(request):
     #return HttpResponse('Un texte pour tester')
     return render(request, 'index.html', context)
 
+def booking(request):
+    # Definir les variables globales
+    
+    context = {
+        'variable': 'Contenu dynamique'
+    }
+    # Effectuer des opérations
+    
+    # Renvoyer une réponse HTTP
+    #return HttpResponse('Un texte pour tester')
+    return render(request, 'booking.html', context)
+
 def connexion(request):
     if request.method=="POST":
         message=''

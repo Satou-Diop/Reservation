@@ -10,74 +10,74 @@
         <H4>POUR VOS VOYAGES, RESERVEZ VOS VOLS,  VÉHICULES ET CHAMBRES D’HOTELS</H4>
       </div>
   
-      <div class="container ">
+      <div class="container">
         <div class="tabs">
           <input type="radio" name="tabs" id="tabone" checked="checked">
-          <label for="tabone">VOLS</label>
+          <!-- <label for="tabone">FLIGHTS</label> -->
           <div class="tab">
-            <!-- PARTIE VOLS -->
-            <div class="row">
-              <div class="col-2">
-                <select class="form-select selection" >
-                  <option selected>Aller-Retour</option>
-                  <option value="1">Simple</option>
-                  
+            <!-- FLIGHTS PART -->
+            <div class="line" style="display: flex; align-items: center;">
+              <div class="col-2 p-5">
+                <select class="form-select selection">
+                  <option>Aller-retour</option>
+                  <option>Aller-Simple</option>
                 </select>
               </div>
               <div class="col-2">
-                <select class="form-select selection" >
-                  <option selected>Economique</option>
-                  <option value="1">Premiere Classe</option>
-                  
+                <select class="form-select selection">
+                  <option>Economy</option>
+                  <option>première classe</option>
                 </select>
               </div>
               <div class="col-2">
-                <select class="form-select selection" >
-                  <option selected>Adulte</option>
-                  <option value="1">Enfant</option>
-                  
+                <select class="form-select selection">
+                  <option>Adult</option>
+                  <option>Enfant</option>
                 </select>
               </div>
             </div>
-           
-            <div class="row">
+    
+            <div class="line" style="display: flex; align-items: center;">
               <div class="col-3">
                 <div class="lab_input">
-                  <span>Départ : </span>
-                  <div class="dateheure">
-                   <input class="input" type="text" placeholder="Départ"> 
+                  <span>Aeréport depart:</span>
+                  <div class="datetime">
+                    <input class="input" type="text" placeholder="Start">
                   </div>
                 </div>
               </div>
               <div class="col-3">
                 <div class="lab_input">
-                  <span>Arrivée: </span>
-                  <div class="dateheure">
-                   <input class="input"  type="text" placeholder="Arrivée"> 
+                  <span>Aeréport d'Arrivée:</span>
+                  <div class="datetime">
+                    <input class="input" type="text" placeholder="Arrival">
                   </div>
                 </div>
               </div>
               <div class="col-3">
                 <div class="lab_input">
-                  <span>Date départ : </span>
-                  <div class="dateheure">
-                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input class="input"  type="date">
+                  <span>Date Depart:</span>
+                  <div class="datetime">
+                    <img src="{% static 'img/calendar.png' %}" class="calendar" alt="My Image">
+                    <input class="input" type="date">
                   </div>
                 </div>
               </div>
               <div class="col-3">
                 <div class="lab_input">
-                  <span>Date arrivée : </span>
-                  <div class="dateheure">
-                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" >
-                  </div>
+                   <span>Date Arrivée:</span>
+                    <div class="datetime">
+                    <img src="{% static 'img/calendar.png' %}" class="calendar" alt="My Image">
+                    <input type="date" class="input">
+                   </div>
+                 </div>
                 </div>
-              </div>
-            </div>
-           <br>
+             </div>
+            <br>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="bouton" >RECHERCHER</button>
-            </div>
+           <button class="button2">RECHERCHER</button>
+          </div>
+         </div>
             
            </div>
           <input type="radio" name="tabs" id="tabtwo">

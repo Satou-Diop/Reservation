@@ -24,5 +24,7 @@ urlpatterns = [
     path("resultat/", views.resultat, name='resultat'),
     path("connexion/", views.connexion, name='connexion'),
     path("inscription/", views.inscription, name='inscription'),
+    path("", views.booking, name='booking'),
+
     
 ]
