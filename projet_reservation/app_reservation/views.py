@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from .models import Utilisateur
 import mysql.connector as sql
+from django.shortcuts import render, get_object_or_404
 from .models import Vol
-
 config = {
     'user': 'phpmyadmin',
     'password': 'Mbambe92',
@@ -29,17 +29,9 @@ def index(request):
     return render(request, 'index.html', context)
 
 from django.shortcuts import render
-from .models import Vol
 
-def recherche_vol(request):
-    
-        # Effectuer la recherche en fonction des critères
-    context = {
-        'variable': 'Contenu dynamique'
-    }
-        # Passer les résultats de la recherche au template
-    return render(request, 'recherche_vol.html')
-    
+
+
 
 
 def connexion(request):
@@ -112,6 +104,17 @@ def inscription(request):
         }
         return render(request, 'inscription.html', context)
 
+def resultat(request):
+    # Récupérer des données depuis le modèle
+    
+    context = {
+        'variable': 'Contenu dynamique'
+    }
+    # Effectuer des opérations
+    
+    # Renvoyer une réponse HTTP
+    #return HttpResponse('Un texte pour tester')
+    return render(request, 'resultat.html', context)
 
 def resultatvol(request):
     # Récupérer des données depuis le modèle
@@ -123,7 +126,7 @@ def resultatvol(request):
     
     # Renvoyer une réponse HTTP
     #return HttpResponse('Un texte pour tester')
-    return render(request, 'resultatvol.html', context)
+    return render(request, 'resultat.html', context)
 
 
 

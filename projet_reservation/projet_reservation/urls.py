@@ -17,14 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app_reservation import views
+from django.urls import path
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name='index'),
-    path("resultatvol/", views.resultat, name='resultatvol'),
+    path("resultat/", views.resultat, name='resultat'),
+    path("resultatvol/", views.resultatvol, name='resultatvol'),
     path("connexion/", views.connexion, name='connexion'),
     path("inscription/", views.inscription, name='inscription'),
-    path("recherche_vol/", views.recherche_vol, name='recherche_vol'),
+   
     
 
     
