@@ -408,25 +408,25 @@ input[type="time"] {
   gap: 20px
 }
 
-.boutton2 {
+.bouton {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 16px 33px;
-  gap: 10px;
-  width: 178px;
-  height: 44px;
-  background: #0090e4;
-  border-radius: 4px;
-  flex: none;
-  order: 2;
-  flex-grow: 0;
+  padding: 14px 18px;
+  width: 170px;
+  height: 40px;
+  text-decoration: none;
+  background: #0DA0F3;
+  border-radius: 45px;
+  font-family: 'Barlow';
   font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
   color: #FFFFFF;
+  margin-bottom: 10px;
+  margin-left: 5PX;
 }
 
 .box {
@@ -1396,3 +1396,7 @@ border: 1px solid rgba(255, 255, 255, 0.81);
   font-style: italic;
   color: red;
 }
+
+
+
+

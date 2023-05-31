@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from .models import Utilisateur
 import mysql.connector as sql
+from .models import Vol
 
 config = {
     'user': 'phpmyadmin',
@@ -27,17 +28,19 @@ def index(request):
     #return HttpResponse('Un texte pour tester')
     return render(request, 'index.html', context)
 
-def booking(request):
-    # Definir les variables globales
+from django.shortcuts import render
+from .models import Vol
+
+def recherche_vol(request):
     
+        # Effectuer la recherche en fonction des critères
     context = {
         'variable': 'Contenu dynamique'
     }
-    # Effectuer des opérations
+        # Passer les résultats de la recherche au template
+    return render(request, 'recherche_vol.html')
     
-    # Renvoyer une réponse HTTP
-    #return HttpResponse('Un texte pour tester')
-    return render(request, 'booking.html', context)
+
 
 def connexion(request):
     if request.method=="POST":
@@ -110,7 +113,7 @@ def inscription(request):
         return render(request, 'inscription.html', context)
 
 
-def resultat(request):
+def resultatvol(request):
     # Récupérer des données depuis le modèle
     
     context = {
@@ -120,7 +123,7 @@ def resultat(request):
     
     # Renvoyer une réponse HTTP
     #return HttpResponse('Un texte pour tester')
-    return render(request, 'resultat.html', context)
+    return render(request, 'resultatvol.html', context)
 
 
 

@@ -1,0 +1,81 @@
+{% extends 'template_base.html' %}
+
+{% block contenu %}
+{% load static %}
+     <!-- The formulary -->
+     <div class="ban">
+       <div class="container text">
+         <h5>Welcome to</h5>
+         <h1>SEN TRIP</h1>
+         <h4>POUR VOS VOYAGES, RESERVEZ VOS VOLS, VEHICULES ET CHAMBRES D’HOTELS</h4>
+       </div>
+
+       <div class="container">
+         <div class="tabs">
+           <input type="radio" name="tabs" id="tabone" checked="checked">
+           <label for="tabone">FLIGHTS</label>
+           <div class="tab">
+             <!-- FLIGHTS PART -->
+             <div class="line" style="display: flex; align-items: center;">
+               <div class="col-2">
+                 <select class="form-select selection">
+                   <option>Aller-retour</option>
+                   <option>Aller-Simple</option>
+                 </select>
+               </div>
+               <div class="col-2">
+                 <select class="form-select selection">
+                   <option>Economy</option>
+                   <option>first class</option>
+                 </select>
+               </div>
+               <div class="col-2">
+                 <select class="form-select selection">
+                   <option>Adult</option>
+                   <option>Child</option>
+                 </select>
+               </div>
+             </div>
+
+             <div class="line" style="display: flex; align-items: center;">
+               <div class="col-3">
+                 <div class="lab_input">
+                   <span>Airport :</span>
+                   <div class="dateheure">
+                     <input class="input" type="text" placeholder="Start">
+                   </div>
+                 </div>
+               </div>
+               <div class="col-3">
+                 <div class="lab_input">
+                   <span>Arrivée:</span>
+                   <div class="dateheure">
+                     <input class="input" type="text" placeholder="Arrival">
+                   </div>
+                 </div>
+               </div>
+               <div class="col-3">
+                 <div class="lab_input">
+                   <span>Departure date:</span>
+                   <div class="dateheure">
+                     <!-- <img src="{% static 'img/calendar.png' %}" class="calendar" alt="Calendar Icon"> -->
+                     <input class="input" type="date">
+                   </div>
+                 </div>
+               </div>
+               <div class="col-3">
+                 <div class="lab_input">
+                    <span>Arrival date:</span>
+                     <div class="dateheure">
+                     <!-- <img src="{% static 'img/calendar.png' %}" class="calendar" alt="Calendar Icon"> -->
+                     <input type="date" class="input">
+                    </div>
+                  </div>
+                 </div>
+              </div>
+             <br>
+             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+             <!-- <a href="{% url 'inscription' %}"><button class="button">RECHERCHER</button></a> -->
+             <button class="bouton">RECHERCHER </button>
+              </div>
+  {% endblock %}

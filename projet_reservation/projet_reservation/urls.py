@@ -21,10 +21,11 @@ from app_reservation import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name='index'),
-    path("resultat/", views.resultat, name='resultat'),
+    path("resultatvol/", views.resultat, name='resultatvol'),
     path("connexion/", views.connexion, name='connexion'),
     path("inscription/", views.inscription, name='inscription'),
-    path("", views.booking, name='booking'),
+    path("recherche_vol/", views.recherche_vol, name='recherche_vol'),
+    
 
     
 ]
