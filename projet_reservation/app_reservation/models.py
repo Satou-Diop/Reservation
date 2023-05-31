@@ -128,6 +128,8 @@ class Hotel(models.Model):
     id_hotel = models.CharField(max_length=10, primary_key=True)
     nom = models.CharField(max_length=255)
     code_pays = models.CharField(max_length=255)
+    ville=models.CharField(max_length=255)
+    photo= models.CharField(max_length=255)
 
 #INSERTION DES DONNÉES DANS LA TABLE HOTEL
 # for i in ['DKR','CSK','XLS','ZIG']: #Code ville de Dakar, Cap Skiring, Saint-Louis, Ziguinchor
@@ -148,8 +150,8 @@ class Chambre(models.Model):
     hotel = models.ForeignKey(Hotel, to_field='id_hotel', on_delete=models.CASCADE, related_name='hotel')
     type_chambre= models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    prix = models.DecimalField(max_digits=10, decimal_places=2)
-    nombre_place = models.DecimalField(max_digits=10, decimal_places=2)
+    prix = models.IntegerField()
+    nombre_place = models.IntegerField()
     photo= models.CharField(max_length=255)
 
 def choix_aleatoire(liste_mots):

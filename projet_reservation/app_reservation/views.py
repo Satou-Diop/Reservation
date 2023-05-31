@@ -22,6 +22,7 @@ def index(request):
     
 
 def connexion(request):
+    submitted=False
     if request.method=="POST":
         message=''
         email = request.POST.get('email')
@@ -48,8 +49,6 @@ def connexion(request):
                     conn.close()
                     # Stocker le dictionnaire dans la session
                     request.session['info_utilisateur'] = result
-                    print(request.session['info_utilisateur'].get('nom'))
-                    print('test')
                     return redirect('index')
                 
             except Exception as e:
@@ -80,6 +79,8 @@ def inscription(request):
         if mot_de_passe!=mot_de_passe2:
             return HttpResponse('Les mots de passe ne correspondent pas')
         try:
+            conn = sql.connect(**config)
+            cursor = conn.cursor()
             requete="insert into app_reservation_utilisateur (id,nom,prenom,adresse,email,telephone,mot_de_passe) values (NULL,'{}','{}','{}','{}','{}','{}')".format(nom,prenom,adresse,email,telephone,mot_de_passe)
             cursor.execute(requete)
             cursor.close()
@@ -101,14 +102,119 @@ def inscription(request):
 
 
 def resultat(request):
-    # Récupérer des données depuis le modèle
+    if 'hotel_info' in request.session:
+
+        if request.POST.get('lieu')!= request.session['hotel_info']['lieu'] and request.POST.get('lieu') :
+            lieu = request.POST.get('lieu')
+        else: 
+            lieu = request.session['hotel_info']['lieu']
+
+        if request.POST.get('date_reservation') != request.session['hotel_info']['arrivee'] and request.POST.get('date_reservation') :
+            date_reservation  = request.POST.get('date_reservation')
+        else: 
+            date_reservation = request.session['hotel_info']['arrivee']
+
+        if request.POST.get('date_restitution') != request.session['hotel_info']['depart'] and request.POST.get('date_restitution') :
+            date_restitution  = request.POST.get('date_restitution')
+        else: 
+            date_restitution = request.session['hotel_info']['depart']
+
+        if request.POST.get('nombre') != request.session['hotel_info']['nombre'] and request.POST.get('nombre') :
+            nombre  = request.POST.get('nombre')
+        else: 
+            nombre = request.session['hotel_info']['nombre']
+              
+        
+    else:
+       
+        lieu  = request.POST.get('lieu')
+        date_reservation  = request.POST.get('date_reservation')
+        date_restitution  = request.POST.get('date_restitution')
+        nombre  = request.POST.get('nombre')
     
-    context = {
-        'variable': 'Contenu dynamique'
-    }
-    # Effectuer des opérations
+    try:
+        message=''
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="select * from app_reservation_hotel where nom LIKE '%{}%' or ville LIKE '%{}%' ".format(lieu,lieu)
+        cursor.execute(requete)
+        res=cursor.fetchall()
+        if res==[]:
+            request.session['hotel_info'] = {
+                'lieu':lieu,
+                'arrivee':date_reservation,
+                'depart':date_restitution,
+                'nombre':nombre
+            }
+            return render(request, 'resultat.html', {})
+            
+        else :
+            resultats=[]
+            keys = ['id', 'nom', 'code','ville','photo']
+            for i in res:
+                result = dict(zip(keys, i))
+                resultats.append(result)
+            liste_hotels = {item['id']: {'nom': item['nom'], 'code': item['code'],'ville': item['ville'],'photo': item['photo']} for item in resultats}
+            context = {'liste_hotels': liste_hotels}
+            cursor.close()
+            conn.close()
+            # Stocker le dictionnaire dans la session
+            request.session['hotel_info'] = {
+                'lieu':lieu,
+                'arrivee':date_reservation,
+                'depart':date_restitution,
+                'nombre':nombre
+            }
+            
+            return render(request, 'resultat.html', context)
+        
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request, 'connexion.html', {'erreur_message': message})
+
+
+def chambre(request):
     
-    # Renvoyer une réponse HTTP
-    #return HttpResponse('Un texte pour tester')
-    return render(request, 'resultat.html', context)
+    id_hotel  = request.POST.get('id_hotel')
+    request.session['id_hotel']=request.POST.get('id_hotel')
+    try:
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete1="select * from app_reservation_hotel where id_hotel='{}' ".format(id_hotel)
+        cursor.execute(requete1)
+        res=cursor.fetchall()
+        keys = ['id', 'nom', 'code','ville','photo']
+        hotel = dict(zip(keys, res[0]))
+        print(hotel)
+        context = {
+                'hotel': hotel,
+                }
+        requete2="select * from app_reservation_chambre where hotel_id='{}' ".format(id_hotel)
+        cursor.execute(requete2)
+        res=cursor.fetchall()
+        if res==[]:
+            return render(request, 'chambre.html', context)
+            
+        else :
+            resultats=[]
+            keys = ['id', 'type', 'description','prix','nombre','photo']
+            for i in res:
+                result = dict(zip(keys, i))
+                resultats.append(result)
+            liste_chambre = {item['id']: { 'type': item['type'],'description': item['description'],'prix': item['prix'],'nombre': item['nombre'],'photo': item['photo']} for item in resultats}
+            
+            context = {
+                'hotel': hotel,
+                'liste_chambre': liste_chambre}
+            cursor.close()
+            conn.close()
+            # Stocker le dic{{hotel.nom}}tionnaire dans la session
+            return render(request, 'chambre.html', context)
+        
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request, 'chambre.html', {'erreur_message': message})
+
 
