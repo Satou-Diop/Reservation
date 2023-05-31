@@ -1,0 +1,31 @@
+body{
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9F4F0lVyUNEmKgK_veXaO0m9g4fIbePvUGQ&usqp=CAU");}
+
+
+.car{
+    font-weight: bold;
+    text-align: center;
+    color: aliceblue;
+}
+
+.card-body{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(27, 24, 98);
+}
+
+.card-img-top{
+    width: 100%;
+}
+
+
+.card-title{
+    color: azure;
+    font-weight: bold;
+}
+.card-body p{
+    color: azure;
+
+}

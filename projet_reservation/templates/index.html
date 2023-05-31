@@ -69,14 +69,15 @@
                 <div class="lab_input">
                   <span>Date arrivée : </span>
                   <div class="dateheure">
-                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" >
+                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+                    <input type="date" class="input" >
                   </div>
                 </div>
               </div>
             </div>
            <br>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="bouton" >RECHERCHER</button>
+                <button class="bouton" >RECHERCHER</button>
             </div>
             
            </div>
@@ -97,7 +98,9 @@
                 <div class="lab_input">
                   <span>Date de reservation : </span>
                   <div class="dateheure">
-                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" ><input  class="input"  type="time" >
+                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+                    <input type="date" class="input" >
+                    <input  class="input"  type="time" >
                   </div>
                 </div>
               </div>
@@ -118,10 +121,9 @@
                 </div>
               </div>
             </div>
-
             <br>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="bouton" >RECHERCHER</button>
+              <button class="bouton">RECHERCHER</button>
             </div>
             
           </div>
@@ -142,22 +144,27 @@
                   <div class="lab_input">
                     <span>Date de location : </span>
                     <div class="dateheure">
-                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" ><input  class="input"  type="time" >
+                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+                      <input class="input"  type="date">
+                      <input class="input" type="time" >
                     </div>
                   </div>
+
                 </div>
                 <div class="col-4">
                   <div class="lab_input">
                     <span>Date de retour : </span>
                     <div class="dateheure">
-                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input class="input"  type="date"><input class="input"  type="time" >
+                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+                      <input class="input"  type="date">
+                      <input class="input"  type="time" >
                     </div>
                   </div>
                 </div>
               </div>
               <br>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="bouton" >RECHERCHER</button>
+                <a href="{%url 'car_list'%}"><button class="bouton">RECHERCHER</button></a>
               </div>
           </div>
         </div>
@@ -317,7 +324,6 @@
                   <div class="lieu"> Saly, Mbour</div>
                   <div class="prix"> 25.OOOfr / jour </div>
                   <button class="bt">Voir l'offre</button>
-
                 </div>
               </div>
              
@@ -441,15 +447,13 @@
           <div class="col-sm text-center align-self-center"><img src="{% static '/img/AIRBNB.png'%} " alt="" class="img-thumbnail border-0"></div>
       </div>
 
-      
       <button class="boutton2">
          Voir Plus
       </button>
 
     </div>
     <!-- FIN PARTENAIRES -->
-    
-
+        
     <br>
     <!-- contacts -->
     <section id="contact">
@@ -496,11 +500,10 @@
               <li class="list-item"><i class="fa fa-envelope fa-2x"><span class="contact-text gmail"><a href="mailto:#" title="Send me an email">sentripcontact@gmail.com</a></span></i></li>
             </ul>  
             <div class="copyright">Lorem ipsum dolor sit amet  .</div>
-            <div class="copyright">Lorem ipsum dolor ur adipisicing elit. .</div>
+            <div class="copyright">Lorem ipsum dolor ur adipisicing elit.</div>
           </div>
         
       </div>
-      
     </section>        
     <!-- fin contacts -->
 {% endblock %}

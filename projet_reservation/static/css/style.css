@@ -170,7 +170,7 @@ a{
 
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none;
+  /* display: none; */
   -webkit-appearance: none;
 }
 
@@ -1366,3 +1366,5 @@ border: 1px solid rgba(255, 255, 255, 0.81);
   font-style: italic;
   color: red;
 }
+
+

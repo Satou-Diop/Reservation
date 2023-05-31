@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
@@ -12,7 +13,7 @@ config = {
 }
 # Établir une connexion à la base de données
 conn = sql.connect(**config)
-cursor = conn.cursor()
+cursor = conn.cursor()       
 nom,prenom,email,telephone,adresse,mot_de_passe='','','','','',''
 # Create your views here.
 def index(request):
@@ -111,4 +112,30 @@ def resultat(request):
     # Renvoyer une réponse HTTP
     #return HttpResponse('Un texte pour tester')
     return render(request, 'resultat.html', context)
+
+
+
+
+
+
+#LES VOITURES
+
+
+import json
+from django.shortcuts import render
+
+def car_list(request):
+
+    current_dir = os.getcwd()
+
+    # Construire le chemin d'accès complet au fichier car_data.json
+
+    file_path = os.path.join(current_dir, 'Data','car_data.json')
+
+    with open(file_path) as json_file:
+        cars = json.load(json_file)
+    
+    return render(request, 'car_list.html', {'cars': cars})
+
+
 
