@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from .models import Utilisateur
 import mysql.connector as sql
+from datetime import datetime
 
 config = {
     'user': 'admin_reservation',
@@ -218,3 +219,56 @@ def chambre(request):
         return render(request, 'chambre.html', {'erreur_message': message})
 
 
+def deconnexion(request):
+    # Supprimer la session
+    request.session.flush()
+
+    # Autres traitements de votre vue
+
+    return redirect(index)
+
+def reservation(request):
+    id_chambre  = request.POST.get('id_chambre')
+    if 'info_utilisateur' in request.session:
+        info_utilisateur = request.session['info_utilisateur']
+        if 'id' in info_utilisateur:
+            id_user = info_utilisateur['id']
+    if 'hotel_info' in request.session:
+        arrivee = request.session['hotel_info']['arrivee']
+        arrivee_datetime = datetime.strptime(arrivee, '%Y-%m-%d').replace(hour=0, minute=0, second=0)
+        depart = request.session['hotel_info']['depart']
+        depart_datetime = datetime.strptime(depart, '%Y-%m-%d').replace(hour=0, minute=0, second=0)
+
+    print(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
+    try:
+        message=''
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="INSERT INTO app_reservation_reservations_hotel (id, date_reservation, date_restitution, chambre_id, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
+        cursor.execute(requete)
+        # Valider les modifications
+        conn.commit()
+        cursor.execute("SELECT * FROM `app_reservation_reservations_hotel` ORDER BY id DESC LIMIT 1;")
+        res=cursor.fetchall()
+        keys = ['id', 'arrivee', 'depart', 'id_chambre']
+        reservations = dict(zip(keys, res[0]))
+        cursor.execute(" SELECT * FROM app_reservation_chambre WHERE id = '{}' ".format(reservations['id_chambre']))
+        res=cursor.fetchall()
+        keys = ['id', 'type', 'desc','prix', 'nombre']
+        chambre = dict(zip(keys, res[0]))
+        context = {
+                'reservation': reservations,
+                'chambre':chambre
+                }
+        cursor.close()
+        conn.close()
+        return render(request, 'reservation.html', context)
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request, 'connexion.html', {'erreur_message': message})
+
+
+    # Autres traitements de votre vue
+
+    

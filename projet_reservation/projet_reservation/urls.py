@@ -23,7 +23,9 @@ urlpatterns = [
     path("", views.index, name='index'),
     path("resultat/", views.resultat, name='resultat'),
     path("chambre/", views.chambre, name='chambre'),
+    path("reservation/", views.reservation, name='reservation'),
     path("connexion/", views.connexion, name='connexion'),
+    path("deconnexion/", views.deconnexion, name='deconnexion'),
     path("inscription/", views.inscription, name='inscription'),
     
 ]

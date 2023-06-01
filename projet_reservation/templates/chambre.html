@@ -125,7 +125,7 @@
                     
                 </div>
                 <div class="col-sm-6 btn_div ">
-                    <button class="btn_res  " data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reserver</button>
+                    <button class="btn_res  " data-bs-toggle="modal" data-info="{{ key }}" data-bs-target="#staticBackdrop2">Reserver</button>
                 </div>
 
               </div>
@@ -149,7 +149,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -162,8 +162,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary"> Confirmer</button>
-      </div>
+        <form action="{% url 'reservation' %}" method="post"  id="myForm">
+        {% csrf_token %}
+        <input type="hidden"  name='id_chambre' id='id_chambre'  >
+        <button type="submit"  class="btn btn-primary confirmer"> Confirmer</button>
+        </form>
+    </div>
     {% else %}
     <div class="modal-body">
         Vous devez-vous connecter pour pouvoir effectuer une réservation 
@@ -180,6 +184,6 @@
 </div>
 </div>
 </section>
-    
+
 
 {% endblock %}

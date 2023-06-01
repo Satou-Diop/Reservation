@@ -1684,6 +1684,10 @@ li{
   border-radius: 5px;
   background-color: #E7F1FF;
 }
+.r_info{
+  background-color: #edeef3;
+  border-radius: 2px;
+}
 
 .r_titre{
   
@@ -1697,28 +1701,51 @@ li{
   text-overflow: ellipsis;
   margin-top: 2%;
 }
-.r_titre h2{
-  
-  font-size: 36px;
-  text-transform: uppercase;
-  color: #030a31;
-  font-weight: 700;
+.t2{
+  color: #040313;
+  font-weight: 600;
 }
 
 .res_t{
   font-weight: 600;
   color: #030731;
-  font-size: 24px;
+  font-size: clamp(18px,22px,30px)
+
+}
+.res_t2{
+  font-weight: 500;
+  color: #212122;
+  font-size: clamp(18px,22px,30px);
+  font-style: italic;
+  justify-self: flex-end;
+
 }
 .res_m{
   font-weight: 600;
   color: #030731;
-  font-size: 24px;
+  font-size: clamp(20px,22px,30px)
 }
 .res_p{
   font-weight: 600;
   color: green;
   font-size: 24px;
+}
+.notif{
+  border: 1px solid green;
+  margin-bottom: 0px;
+  width: max-content;
+  padding-inline: 5%;
+  color: green;
+  border-radius: 2px;
+  background-color: rgba(0, 128, 0, 0.068);
+}
+.inf_ch{
+  margin-top: 1%;
+  min-height: 300px;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .bt_p {
@@ -1738,6 +1765,14 @@ li{
 .bt_p:hover{
   transform: translateY(-1px);
   background-color: #3eb8ff;
+}
+.h_name{
+  font-size: 22px;
+  font-style: italic;
+  color: #00032e;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Accordeon */
