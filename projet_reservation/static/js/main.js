@@ -78,7 +78,8 @@
 //     if (currentPosition > 0) {
 //         buttons[0].classList.remove('inactive');
 //     }
-// };
+// // };
+
 var chambre_selectionner;
 var mes_boutons = document.querySelectorAll('.btn_res')
 mes_boutons.forEach(function(button) {
@@ -113,4 +114,14 @@ form.addEventListener('submit', function(event) {
 
   // Effectuer la requête AJAX pour envoyer les données du formulaire
   form.submit();
+});
+
+var boutons = document.querySelectorAll('.accordion-button')
+boutons.forEach(function(button) {
+  button.addEventListener('click', function() {
+    button.firstElementChild.checked=true
+    
+    // Utiliser les informations spécifiques selon vos besoins
+   
+  });
 });

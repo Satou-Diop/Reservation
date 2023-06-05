@@ -269,6 +269,10 @@ def reservation(request):
         return render(request, 'connexion.html', {'erreur_message': message})
 
 
-    # Autres traitements de votre vue
-
     
+
+
+def paiement(request):
+    id_reservation  = request.POST.get('id_reservation')
+
+    return render(request,'paiement.html',{'id_reservation' :id_reservation})
