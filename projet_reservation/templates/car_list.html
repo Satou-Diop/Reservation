@@ -9,22 +9,48 @@
 
 <ul>
   <div class="row row-cols-4 g-4">
-{% for car in cars %}
+    {% for key, value in liste_voiture.items %}
 <div class="col">
     <div class="card">
-        <!-- <img class="card-img-top" src="/home/fatima/ProjectDjango/Reservation/projet_reservation/static/img/voiture3.jpeg" alt="Card image cap"> -->
-        <img class="card-img-top" src="https://www.viaprestige-lifestyle.com/wp-content/uploads/2013/12/lamborghini-huracan-2014-Viaprestige-e1388316632678-1.jpg" alt="Card image cap">
-
+        <img class="card-img-top" src="{% static 'img/'|add:value.photo %}">
         <div class="card-body">
-          <h5 class="card-title">{{ car.marque }} - {{ car.model }}</h5>
-            <p>Type de carburant : {{ car.fuel_type }}</p>
-            <p>Capacité : {{ car.capacity }}</p>
-            <p>Transmission : {{ car.transmission }}</p>
+          <h5 class="card-title">{{ value.marque }} - {{ value.modele }}</h5>
+            <p>Type de carburant : {{ value.type }}</p>
+            <p>Capacité : {{ value.nombre_place }}</p>
+            
+        <!-- ['id', 'marque','modele','localisation','annee','type','prix', 'nombre_place','photo','disponible'] -->
+
+
+            <p>Transmission : test</p>
           <p class="card-text">Description: <br> Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           <a href="{%url 'resultat'%}" class="btn btn-primary">Reserver</a>
         </div>
       </div>
 </div>
+
+
+
+<!-- <div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="https://www.viaprestige-lifestyle.com/wp-content/uploads/2013/12/lamborghini-huracan-2014-Viaprestige-e1388316632678-1.jpg" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ car.marque }} - {{ car.model }}</h5>
+        <p class="card-text">Capacité : {{ car.capacity }}</p>
+        <p class="card-text"><small class="text-muted">Transmission : {{ car.transmission }}</small></p>
+        <p class="card-text">Description: <br> Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="{%url 'resultat'%}" class="btn btn-primary">Reserver</a>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
 {% endfor %}
 </div>
 </ul>

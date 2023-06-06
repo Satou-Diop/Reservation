@@ -45,7 +45,6 @@ class Aeroport(models.Model):
     code_pays = models.CharField(max_length=255)
 
 
-
 class Vol(models.Model):
     compagnie = models.ForeignKey(Compagnie, to_field='code', on_delete=models.CASCADE, related_name='compagnie')
     aeroport_depart = models.ForeignKey(Aeroport, to_field='code', on_delete=models.CASCADE, related_name='vols_depart')

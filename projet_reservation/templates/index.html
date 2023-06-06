@@ -7,7 +7,7 @@
       <div class="container texte">
         <h5>Bienvenue à</h5>
         <h1>SEN TRIP</h1>
-        <h4>POUR VOS VOYAGES, RESERVEZ VOS VOLS,  VÉHICULES ET CHAMBRES D’HOTELS</h4>
+        <h4>POUR VOS VOYAGES, RESERVEZ VOS VOLS,VÉHICULES ET CHAMBRES D’HOTELS</h4>
       </div>
   
       <div class="container ">
@@ -77,14 +77,14 @@
             </div>
            <br>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="bouton" >RECHERCHER</button>
+              <button class="bouton" >RECHERCHER</button>
             </div>
-            
            </div>
+
+            <!-- PARTIE HOTELS -->
           <input type="radio" name="tabs" id="tabtwo">
           <label for="tabtwo">HOTELS</label>
           <div class="tab">
-            <!-- PARTIE HOTELS -->
             <div class="row">
               <div class="col-3">
                 <div class="lab_input">
@@ -125,47 +125,53 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <button class="bouton">RECHERCHER</button>
             </div>
-            
           </div>
+                       
+          
+          <!-- PARTIE VOITURE -->
           <input type="radio" name="tabs" id="tabthree">
           <label for="tabthree">VOITURES</label>
           <div class="tab">
-            <!-- PARTIE VOITURE -->
-              <div class="row">
-                <div class="col-4">
-                  <div class="lab_input">
-                    <span>Lieu: </span>
-                    <div class="dateheure">
-                    <input type="text" class="input"   placeholder="ex : Dakar"> 
+              <form action="{% url 'car_list' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-4">
+
+                    <div class="lab_input">
+                      <span>Lieu: </span>
+                      <div class="dateheure">
+                      <input type="text" name="Lieulocation" class="input"  placeholder="ex : Dakar"> 
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-4">
-                  <div class="lab_input">
-                    <span>Date de location : </span>
-                    <div class="dateheure">
-                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
-                      <input class="input"  type="date">
-                      <input class="input" type="time" >
+
+                  <div class="col-4">
+                    <div class="lab_input">
+                      <span>Date de location : </span>
+                      <div class="dateheure">
+                        <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+                        <input class="input"  name="Datelocation"  type="date">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="lab_input">
+                      <span>Date de retour : </span>
+                      <div class="dateheure">
+                        <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+                        <input class="input" name="Retourlocation"  type="date">
+                      </div>
                     </div>
                   </div>
 
                 </div>
-                <div class="col-4">
-                  <div class="lab_input">
-                    <span>Date de retour : </span>
-                    <div class="dateheure">
-                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
-                      <input class="input"  type="date">
-                      <input class="input"  type="time" >
-                    </div>
-                  </div>
-                </div>
-              </div>
+            
               <br>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="{%url 'car_list'%}"><button class="bouton">RECHERCHER</button></a>
+                <button class="bouton" type="submit">RECHERCHER</button>
               </div>
+              </form>
           </div>
         </div>
   
@@ -299,7 +305,6 @@
     </section>
     <!-- End About Us Section -->
 
-
      <!-- FIN DECORATIONS -->
     <br>
     
@@ -403,7 +408,6 @@
               
                               </div>
                             </div>
-                           
                               <div class="slide">
                                 <img src="{% static '/img/V2.jpeg'%}" alt="">
                                 <div class="description" >
