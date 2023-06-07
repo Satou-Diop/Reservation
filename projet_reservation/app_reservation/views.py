@@ -76,9 +76,7 @@ def inscription(request):
         telephone = request.POST.get('telephone')
         adresse = request.POST.get('adresse')
         mot_de_passe = request.POST.get('mot_de_passe')
-        mot_de_passe2 =request.POST.get('mot_de_passe2')
-        if mot_de_passe!=mot_de_passe2:
-            return HttpResponse('Les mots de passe ne correspondent pas')
+
         try:
             conn = sql.connect(**config)
             cursor = conn.cursor()

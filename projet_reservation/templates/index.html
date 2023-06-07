@@ -84,7 +84,7 @@
           <label for="tabtwo">HOTELS</label>
           <div class="tab">
             <!-- PARTIE HOTELS -->
-            <form method="POST" action="{% url 'resultat' %}">
+            <form method="POST" action="{% url 'resultat' %}" id="form_hotel">
               {% csrf_token %}
               <div class="row">
                 <div class="col-3">

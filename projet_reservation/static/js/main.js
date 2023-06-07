@@ -92,19 +92,134 @@ mes_boutons.forEach(function(button) {
   });
 
 var confirmation = document.querySelector('.confirmer')
-
-confirmation.addEventListener('click',()=>{
+confirmation?.addEventListener('click',()=>{
     var chambre = document.getElementById('id_chambre')
     chambre.value =chambre_selectionner
-    console.log("Valeur =")
-    console.log( chambre.value)
 })
+
+const validation = (values) => {
+  const errors = {};
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  const regex2 = /^7[7,8,6,0,5]\d{7}$/;
+  if (!values.nom) {
+    errors.nom = "Veuillez saisir votre nom!";
+  }
+  else if(values.nom.length<2){
+    errors.nom = "Le nom doit avoir minimum 2 caractéres";
+  }
+  if (!values.prenom) {
+    errors.prenom = "Veuillez saisir votre prenom!";
+  }
+  else if(values.prenom.length<3){
+    errors.prenom = "Le prenom doit avoir minimum 2 caractéres";
+  }
+
+  if (!values.email) {
+    errors.email = "Veuillez saisir votre adresse mail!";
+  } else if (!regex.test(values.email)) {
+    errors.email = "Format du mail invalide !";
+  }
+  if (!values.adresse) {
+    errors.adresse = "Veuillez saisir votre adresse!";
+  }
+  else if(values.adresse.length<2){
+    errors.adresse = "L'adresse doit avoir minimum 2 caractéres";
+  }
+  if (!values.telephone) {
+    errors.telephone = "Veuillez saisir votre numero";
+  }else if (!regex2.test(values.telephone.split(" ").join(""))) {
+    errors.telephone = "Format du numero de telephone invalide!"}
+
+  if (!values.mot_de_passe) {
+    errors.mot_de_passe = "Veuillez saisir le mot de passe";
+  } else if (values.mot_de_passe.length < 4) {
+    errors.mot_de_passe = "Le mot de passe doit être supérieure à 4 caractères";
+  } else if (values.mot_de_passe.length > 20) {
+    errors.mot_de_passe = "Le mot de passe doit être inférieur à 20 caractères";
+  }
+  if (!values.mot_de_passe2) {
+    errors.mot_de_passe2 = "Veuillez confirmer le mot de passe";
+  } else if (values.mot_de_passe2 !== values.mot_de_passe) {
+    errors.mot_de_passe2 = "Mots de passe incompatibles !";
+  }
+  return errors;
+}; 
+console.log('test')
+// Formulaire d'inscription validation
+var form_inscription = document.getElementById('form_inscription');
+form_inscription?.addEventListener('submit', function(event) {
+  event.preventDefault(); // Empêcher le comportement par défaut du formulaire (rechargement de la page)
+  valeurs={
+    "nom": document.getElementById('nom').value,
+    "prenom": document.getElementById('prenom').value,
+    "email" : document.getElementById('email').value,
+    "telephone" : document.getElementById('telephone').value,
+    "adresse": document.getElementById('adresse').value,
+    "mot_de_passe" : document.getElementById('mot_de_passe').value,
+    "mot_de_passe2" : document.getElementById('mot_de_passe2').value,
+  }
+  console.log('etet')
+  var liste_erreur=validation(valeurs);
+  console.log(liste_erreur)
+  if( Object.keys(liste_erreur).length === 0){
+    form_inscription.submit();
+  }
+  else {
+    
+    if(liste_erreur?.nom){
+      document.getElementById('erreurnom').innerHTML=liste_erreur?.nom
+    }
+    else{
+      document.getElementById('erreurnom').innerHTML=''
+    }
+    if(liste_erreur.prenom){
+      document.getElementById('erreurprenom').innerHTML=liste_erreur.prenom
+    }
+    else{
+      document.getElementById('erreurprenom').innerHTML=''
+    }
+   
+   if(liste_erreur?.email){
+    document.getElementById('erreuremail').innerHTML=liste_erreur?.email
+   }
+   else{
+    document.getElementById('erreuremail').innerHTML=''
+   }
+    if(liste_erreur?.telephone){
+      document.getElementById('erreurtelephone').innerHTML=liste_erreur?.telephone
+    }else{
+      document.getElementById('erreurtelephone').innerHTML=''
+    }
+     
+     if(liste_erreur?.adresse){
+      document.getElementById('erreuradresse').innerHTML=liste_erreur?.adresse
+     }else{
+      document.getElementById('erreuradresse').innerHTML=''
+     }
+     
+     if(liste_erreur?.mot_de_passe){
+      document.getElementById('erreurmotdepasse').innerHTML=liste_erreur?.mot_de_passe
+     }else{
+      document.getElementById('erreurmotdepasse').innerHTML=''
+     }
+   
+    if(liste_erreur?.mot_de_passe2){
+      document.getElementById('erreurmotdepasse2').innerHTML=liste_erreur?.mot_de_passe2
+    }
+    else{
+      document.getElementById('erreurmotdepasse2').innerHTML=''
+    }
+
+  }
+
+});
+
 
 // Récupérer l'élément <form> par son id
 var form = document.getElementById('myForm');
 
 // Écouter l'événement "submit" du formulaire
-form.addEventListener('submit', function(event) {
+form?.addEventListener('submit', function(event) {
   event.preventDefault(); // Empêcher le comportement par défaut du formulaire (rechargement de la page)
 
   // Envoyer la requête de soumission du formulaire
