@@ -2,7 +2,7 @@
 
 {% block contenu %}
 {% load static %}
-<section class="chambre">
+<section class="chambre" id="info_reservation">
     <div class="container">
       <br>
       <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -75,7 +75,7 @@
                     Nuitée:
                 </div>
                 <div class="col-sm-6 res_t2 ">
-                  {{ chambre.prix }}
+                  {{ chambre.prix }} Francs CFA
                 </div>
             </div>
           </div>
@@ -95,8 +95,11 @@
         <div class="col-sm-8 text-end res_m">
             Montant Total :
         </div>
-        <div class="col-sm-4 res_p ">
-          {{ chambre.prix }} Francs CFA
+        <input type="hidden" id="date_arrivee" value="{{ reservation.arrivee }} ">
+        <input type="hidden" id="date_depart" value="{{ reservation.depart }}">
+        <input type="hidden" id="montantTotal" value="{{ chambre.prix }}">
+        <div class="col-sm-4 res_p " value="{{ chambre.prix }} ">
+          <span id="Total"></span> Francs CFA
         </div>
     </div>
     

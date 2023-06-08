@@ -1799,3 +1799,58 @@ li{
 .p_text{
   font-weight: 600;
 }
+
+.modifier{
+  background-color: rgb(0, 197, 0);
+  border-radius: 50%;
+  border: none;
+  margin-right: 2%;;
+}
+.modifier:hover{
+  background-color: rgb(15, 226, 15);
+}
+.supprimer{
+  background-color:red;
+  border-radius: 50%;
+  border: none;
+  margin-right: 2%;
+}
+.supprimer:hover{
+  background-color: rgb(255, 63, 63);
+}
+ 
+.statut1{
+  padding-inline:2%;
+  border: 1px solid rgb(4, 190, 4);
+  width: max-content;
+  border-radius: 4px;
+  color: green;
+  font-style: italic;
+  background-color: rgb(198, 238, 198);
+  margin-bottom: 0%;
+}
+.statut2{
+  padding-inline:2%;
+  border: 1px solid rgb(230, 150, 0);
+  width: max-content;
+  border-radius: 4px;
+  color: rgb(230, 150, 0);
+  font-style: italic;
+  background-color: rgb(255, 228, 178);
+  margin-bottom: 0%;
+}
+.r_text{
+  font-size: 22px;
+}
+.carte_res{
+  background-color: white;
+  padding: 5px;
+  margin: 1%;
+  border-radius: 2px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.liste_res{
+  min-height: 40vh;;
+  max-height: 50vh;
+  overflow: auto;
+}

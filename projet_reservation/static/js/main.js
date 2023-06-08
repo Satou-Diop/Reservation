@@ -144,7 +144,8 @@ const validation = (values) => {
   }
   return errors;
 }; 
-console.log('test')
+
+
 // Formulaire d'inscription validation
 var form_inscription = document.getElementById('form_inscription');
 form_inscription?.addEventListener('submit', function(event) {
@@ -158,7 +159,6 @@ form_inscription?.addEventListener('submit', function(event) {
     "mot_de_passe" : document.getElementById('mot_de_passe').value,
     "mot_de_passe2" : document.getElementById('mot_de_passe2').value,
   }
-  console.log('etet')
   var liste_erreur=validation(valeurs);
   console.log(liste_erreur)
   if( Object.keys(liste_erreur).length === 0){
@@ -213,6 +213,75 @@ form_inscription?.addEventListener('submit', function(event) {
   }
 
 });
+
+const validationDate = (values) => {
+  const erreurs = {}
+  var arrivee = new Date(values?.arrivee);
+  var depart = new Date(values.depart);
+  var dateActuelle = new Date();
+   if (arrivee<dateActuelle) {
+    erreurs.arrivee = "La date de reservation doit être ultérieur à la date d'aujourd'hui !";
+  }
+  if (depart<dateActuelle) {
+    erreurs.depart= "La date de restitution doit être ultérieur à la date d'aujourd'hui !";
+  }
+  if (arrivee>depart) {
+    erreurs.dates = "La date de départ ne doit pas preceder la date d'arrivee";
+  }
+  return erreurs;
+
+}
+//Controle recherche hotel
+var form_hotel = document.getElementById('form_hotel');
+form_hotel?.addEventListener('submit', function(event) {
+  event.preventDefault(); 
+  dates={
+    "depart": document.getElementById('depart').value,
+    "arrivee": document.getElementById('arrivee').value,
+  }
+  var liste_erreur=validationDate(dates);
+  console.log(liste_erreur)
+  if( Object.keys(liste_erreur).length === 0){
+    document.getElementById('erreurHotel').innerHTML=''
+    form_hotel.submit();
+  }
+  else{
+    document.getElementById('erreurHotel').innerHTML=''
+    Object.entries(liste_erreur).forEach(function([cle, valeur]) {
+      document.getElementById('erreurHotel').innerHTML+="** "+valeur+"<br>"
+    });
+   
+    
+  }
+});
+
+var info_reservation=document.getElementById('info_reservation')
+var date_arrivee=document.getElementById('date_arrivee');
+var date_depart=document.getElementById('date_depart');
+function FormaterDate(date) {
+  var datesplit = date.split(',');
+  var format= datesplit[0]+" "+datesplit[1]
+  var dateObj = new Date(format);
+  return dateObj;
+}
+function nombreJoursEntreDates(date1, date2) {
+  var unJour = 24 * 60 * 60 * 1000; // Nombre de millisecondes dans une journée
+  var date1Arrondie = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+  var date2Arrondie = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
+
+  var differenceJours = Math.round(Math.abs((date1Arrondie - date2Arrondie) / unJour));
+
+  return differenceJours;
+}
+if(date_arrivee?.value){
+  var montantTotal=document.getElementById('montantTotal');
+  var Total=document.getElementById('Total');
+  console.log(date_arrivee.value.split(','))
+  var diff =nombreJoursEntreDates(FormaterDate(date_arrivee.value),FormaterDate(date_depart.value))
+  console.log(montantTotal)
+  Total.textContent= parseInt(montantTotal.value)*diff
+}
+
 
 
 // Récupérer l'élément <form> par son id

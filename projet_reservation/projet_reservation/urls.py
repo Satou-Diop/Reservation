@@ -24,6 +24,7 @@ urlpatterns = [
     path("resultat/", views.resultat, name='resultat'),
     path("chambre/", views.chambre, name='chambre'),
     path("reservation/", views.reservation, name='reservation'),
+    path("mes_reservations/", views.mes_reservations, name='mes_reservations'),
     path("paiement/", views.paiement, name='paiement'),
     path("connexion/", views.connexion, name='connexion'),
     path("deconnexion/", views.deconnexion, name='deconnexion'),

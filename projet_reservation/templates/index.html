@@ -91,7 +91,7 @@
                   <div class="lab_input">
                     <span>Nom ou ville: </span>
                     <div class="dateheure">
-                    <input type="text" class="input" name="lieu"   placeholder="ex : Dakar" required> 
+                    <input type="text" class="input" name="lieu" id="lieu"  placeholder="ex : Dakar" required> 
                     </div>
                   </div>
                 </div>
@@ -99,7 +99,7 @@
                   <div class="lab_input">
                     <span>Date de reservation : </span>
                     <div class="dateheure">
-                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" name="date_reservation" required>
+                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input"  id="arrivee" name="date_reservation" required>
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@
                   <div class="lab_input">
                     <span>Date de sortie : </span>
                     <div class="dateheure">
-                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input class="input"  type="date" name="date_restitution" required>
+                      <img src="{% static 'img/calendar.png' %}"  class="calendrier" alt="Ma Image"><input class="input"  type="date"  id="depart" name="date_restitution" required>
                     </div>
                   </div>
                 </div>
@@ -115,13 +115,14 @@
                   <div class="lab_input">
                     <span>Nombres : </span>
                     <div class="dateheure">
-                     <input class="input"  type="number" placeholder="ex : 2 adultes" min="1" max="10" name="nombre">
+                     <input class="input"  id="place" type="number" placeholder="ex : 2 adultes" min="1" max="10" name="nombre">
                     </div>
                   </div>
                 </div>
               </div>
   
               <br>
+              <p class="erreurmessage" id="erreurHotel"></p>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="bouton" type="submit" >RECHERCHER</button>
               </div>

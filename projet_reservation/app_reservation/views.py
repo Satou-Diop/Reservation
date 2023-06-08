@@ -237,7 +237,7 @@ def reservation(request):
         depart = request.session['hotel_info']['depart']
         depart_datetime = datetime.strptime(depart, '%Y-%m-%d').replace(hour=0, minute=0, second=0)
 
-    print(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
+    
     try:
         message=''
         conn = sql.connect(**config)
@@ -274,3 +274,35 @@ def paiement(request):
     id_reservation  = request.POST.get('id_reservation')
 
     return render(request,'paiement.html',{'id_reservation' :id_reservation})
+
+
+def mes_reservations(request):
+    
+    if 'info_utilisateur' in request.session:
+        info_utilisateur = request.session['info_utilisateur']
+        if 'id' in info_utilisateur:
+            id_user = info_utilisateur['id']
+    try:
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="INSERT INTO app_reservation_reservations_hotel (id, date_reservation, date_restitution, chambre_id, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
+        cursor.execute(requete)
+        # Valider les modifications
+        conn.commit()
+        cursor.execute("SELECT * FROM `app_reservation_reservations_hotel` where utilisateur_id ='{}' ".format(id_user))
+        res=cursor.fetchall()
+        if res==[]:
+            return render(request,'mes_reservations.html',{})
+        else :
+            keys = ['id', 'arrivee', 'depart']
+            reservations = dict(zip(keys, res[0]))
+            context = {
+                'reservation': reservations,
+            }
+            cursor.close()
+            conn.close()
+            return render(request,'mes_reservations.html',context)
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request,'mes_reservations.html',{})
