@@ -40,10 +40,27 @@
                         </ul>
                     </div>
                       <span class="navbar-text">
+                        {% if request.session.info_utilisateur.nom %}
+                        <ul class="navbar-nav">
+                          <li class="nav-item dropdown">
+                            <button class="bouton_drop dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                              <img src="{% static 'img/icone_user.png' %}" alt=""  style="width: 40px; height: 40px;"> {{ request.session.info_utilisateur.prenom }}  {{ request.session.info_utilisateur.nom }} 
+                            </button>
+                            <ul class="dropdown-menu menu_drop ">
+                              <li class="li_drop"><a class="a_drop text-light" href="#">Profil</a></li>
+                              <li class="li_drop"><a class="a_drop text-light" href="#">Mes réservations</a></li>
+                              <li class="li_drop" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a class="a_drop text-light" href="#">Déconnexion</a></li>
+
+                            </ul>
+                          </li>
+                        </ul>
+                        {% else %}
                           <div class="d-flex ">
-                              <a href="/inscription" class="link-underline-opacity-0"><button class="bouton" >S'INSCRIRE</button></a>
-                              <a href="/connexion"><button class="bouton">SE CONNECTER</button></a>
-                            </div>
+                            <a href="/inscription" class="link-underline-opacity-0"><button class="bouton" >S'INSCRIRE</button></a>
+                            <a href="/connexion"><button class="bouton">SE CONNECTER</button></a>
+                          </div>
+                        {% endif %}
+                        
                       </span>
                 </div>
                 
@@ -62,7 +79,7 @@
       <div class="container py-5">
         <div class="row py-4">
           <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><h2>SENTRIP</h2>
-            <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+            <p class="font-italic text-muted"> Notre entreprise de réservation d'hôtels, vols et voitures est dédiée à simplifier vos voyages et à vous offrir des solutions pratiques et abordables. Nous mettons l'accent sur l'expérience utilisateur exceptionnelle, en vous donnant accès à une large sélection d'options, des prix compétitifs et un service client de qualité. Votre confidentialité et la sécurité de vos données sont également primordiales pour nous, et nous nous engageons à respecter les normes les plus élevées en matière de protection des informations personnelles. Que ce soit pour vos voyages d'affaires ou vos vacances en famille, nous sommes là pour vous aider à planifier et à réserver en toute tranquillité. Faites confiance à notre entreprise pour rendre vos voyages plus simples et plus agréables. Nous vous remercions de votre confiance et nous sommes impatients de vous accompagner dans vos prochaines aventures</p>
             <ul class="list-inline mt-4">
               <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
               <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -103,6 +120,27 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 p_text text-center text-dark" id="staticBackdropLabel">Déconnexion</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           
+            <div class="modal-body text-dark">
+                Souhaitez vous deconnecter  ?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger"> Deconnexion</button>
+              </div>
+            
+            
+          </div>
+        </div>
+        </div>
   
       <!-- Copyrights -->
       <div class="bg-black py-4">

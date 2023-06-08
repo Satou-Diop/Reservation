@@ -76,7 +76,7 @@ WSGI_APPLICATION = "projet_reservation.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bd_app',
+        'NAME': 'latyr',
         'USER': 'phpmyadmin',
         'PASSWORD': 'Mbambe92',
         'HOST': 'localhost',
@@ -127,9 +127,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"

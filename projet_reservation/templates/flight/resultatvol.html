@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Résultat de recherche de vol</title>
-</head>
-<body>
-  <h1>Résultat de recherche de vol</h1>
+{% extends 'index.html' %}
 
-  <div class="flight">
-    <div class="title">Vol 1</div>
-    <div class="details">Départ: Paris - Arrivée: New York</div>
-    <div class="details">Durée du vol: 8 heures</div>
-    <div class="price">Prix: $500</div>
-  </div>
-
-  <div class="flight">
-    <div class="title">Vol 2</div>
-    <div class="details">Départ: Londres - Arrivée: Tokyo</div>
-    <div class="details">Durée du vol: 12 heures</div>
-    <div class="price">Prix: $800</div>
-  </div>
-
-  <div class="flight">
-    <div class="title">Vol 3</div>
-    <div class="details">Départ: Berlin - Arrivée: Sydney</div>
-    <div class="details">Durée du vol: 16 heures</div>
-    <div class="price">Prix: $1000</div>
-  </div>
-
-</body>
-</html>
+{% block contenu %}
+    {% load static %}
+    <div class="listBody">
+        <h1>Résultats de recherche de vols</h1>
+        <div class="row">
+            {% for key, value in liste_vols.items %}
+                <div class="col-md-2">
+                    <div class="card mb-3">
+                        <img src="{% static 'img/'|add:value.image %} " class="card-img-top" alt="Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ value.compagnie }}</h5>
+                            <p>Prix : ${{ value.prix }}</p>
+                            <p>Nombre de places disponibles : {{ value.nombre_place }}</p>
+                            <p>Date de départ : {{ value.date_depart }}</p>
+                            <p>Date d'arrivée : {{ value.date_arrivee }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'reservation_vol' %}" class="btn btn-primary">Voir les offres</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

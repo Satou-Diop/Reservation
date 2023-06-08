@@ -1,0 +1,10 @@
+{% extends 'template_base.html' %}
+
+{% block contenu %}
+    {% load static %}
+
+<h1>Confirmation de réservation</h1>
+<p>Merci, {{ nom }}, votre réservation a été effectuée avec succès !</p>
+<p>Nous vous enverrons un email de confirmation à l'adresse indiquée : {{ email }}.</p>
+
+{% endblock %}

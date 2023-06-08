@@ -1,0 +1,41 @@
+{% extends 'template_base.html' %}
+
+{% block contenu %}
+    {% load static %}
+
+    <form method="POST" action="{% url 'resultat' %}">
+      {% csrf_token %}
+    
+      <!-- Champs du formulaire -->
+      <div class="form-group">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="num_vol">Numéro de vol :</label>
+        <select type="text" id="num_vol" name="num_vol" class="form-control" required>
+          <option value="LH">LH</option>
+          <option value="AY">AY</option>
+        </select>
+
+      </div>
+    
+      <div class="form-group">
+        <label for="mode_paiement">Mode de paiement :</label>
+        <select id="mode_paiement" name="mode_paiement" class="form-control" required>
+          <option value="carte_credit">Carte de crédit</option>
+          <option value="paypal">PayPal</option>
+          <option value="virement">Virement bancaire</option>
+        </select>
+      </div>
+    
+      <!-- Bouton de soumission -->
+      <a href="{% url 'confirmation_vol' %}" type="submit" class="btn btn-primary">Réserver</a>
+    </form>
+    {% endblock%}

@@ -27,6 +27,10 @@ urlpatterns = [
     path("resultatvol/", views.resultatvol, name='resultatvol'),
     path("connexion/", views.connexion, name='connexion'),
     path("inscription/", views.inscription, name='inscription'),
+    path('reservation_vol/', views.reservation_vol, name='reservation_vol'),
+    path('confirmation_vol/', views.confirmation_vol, name='confirmation_vol'),
+
+
    
     
 

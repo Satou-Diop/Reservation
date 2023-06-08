@@ -44,44 +44,57 @@
            
             <div class="row">
               <div class="col-3">
-                <div class="lab_input">
-                  <span>Départ : </span>
-                  <div class="dateheure">
-                   <input class="input" type="text"  placeholder="Départ"> 
+                  <div class="lab_input">
+                      <span>Départ : </span>
+                      <div class="dateheure">
+                          <select class="form-select selection" name="departure">
+                                  <option value="chosir">choisir</option>
+                                  <option value="MAD">MAD</option>
+
+                          </select>
+                      </div>
                   </div>
-                </div>
               </div>
               <div class="col-3">
-                <div class="lab_input">
-                  <span>Arrivée: </span>
-                  <div class="dateheure">
-                   <input class="input"  type="text" placeholder="Arrivée"> 
+                  <div class="lab_input">
+                      <span>Arrivée: </span>
+                      <div class="dateheure">
+                          <select class="form-select selection" name="arrival">
+                            <option value="choisir">choisir</option>
+
+                                  <option value="FRA">FRA</option>
+                                  <option value="ORD">ORD</option>
+                                  <option value="SFO">SFO</option>
+                                  <option value="CCU ">CCU</option>
+                          </select>
+                      </div>
                   </div>
-                </div>
               </div>
               <div class="col-3">
-                <div class="lab_input">
-                  <span>Date départ : </span>
-                  <div class="dateheure">
-                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input class="input"  type="date">
+                  <div class="lab_input">
+                      <span>Date départ : </span>
+                      <div class="dateheure">
+                          <input class="input" type="datetime-local" name="departure_time" placeholder="aaaa-mm-jj">
+                      </div>
                   </div>
-                </div>
               </div>
               <div class="col-3">
-                <div class="lab_input">
-                  <span>Date arrivée : </span>
-                  <div class="dateheure">
-                    <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" >
+                  <div class="lab_input">
+                      <span>Date arrivée : </span>
+                      <div class="dateheure">
+                          <input class="input" type="datetime-local" name="arrival_time" placeholder="aaaa-mm-jj">
+                      </div>
                   </div>
-                </div>
               </div>
-            </div>
-           <br>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="bouton" type="submit" >RECHERCHER</button>
-            </div>
-          </form>
-           </div>
+          </div>
+          <br>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="bouton" type="submit">RECHERCHER</button>
+          </div>
+      </form>
+      
+         
+           </div> 
           <input type="radio" name="tabs" id="tabtwo">
           <label for="tabtwo">HOTELS</label>
           <div class="tab">
