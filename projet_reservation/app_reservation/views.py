@@ -19,8 +19,7 @@ nom,prenom,email,telephone,adresse,mot_de_passe='','','','','',''
 def index(request):
     # Definir les variables globale
     return render(request, 'index.html',  {})
-    
-    
+     
 
 def connexion(request):
     if request.method=="POST":
@@ -111,7 +110,7 @@ def resultat(request):
     
     # Renvoyer une réponse HTTP
     #return HttpResponse('Un texte pour tester')
-    return render(request, 'car_list.html', context)
+    return render(request, 'reservation_voiture.html', context)
 
 #LES VOITURES
 
@@ -119,50 +118,51 @@ import json
 from django.shortcuts import render
 
 def car_list(request):
-    Lieulocation  = request.POST.get('Lieulocation')
-    Datelocation  = request.POST.get('Datelocation')
-    Retourlocation  = request.POST.get('Retourlocation')
+    if request.method =="POST":
+        Lieulocation  = request.POST.get('Lieulocation')
+        Datelocation  = request.POST.get('Datelocation')
+        Retourlocation  = request.POST.get('Retourlocation')
 
-    try:
-        message=''
-        conn = sql.connect(**config)
-        cursor = conn.cursor()
-        requete="select * from app_reservation_voiture where localisation LIKE '%{}%'  ".format(Lieulocation)
-        cursor.execute(requete)
-        res=cursor.fetchall()
-        print(res)
-        if res==[]:
-            # request.session['hotel_info'] = {
-            #     'lieu':lieu,
-            #     'arrivee':date_reservation,
-            #     'depart':date_restitution,
-            #     'nombre':nombre
-            # }
-            return render(request, 'car_list.html', {})
+        try:
+            message=''
+            conn = sql.connect(**config)
+            cursor = conn.cursor()
+            requete="select * from app_reservation_voiture where localisation LIKE '%{}%'  ".format(Lieulocation)
+            cursor.execute(requete)
+            res=cursor.fetchall()
+            print(res)
+            if res==[]:
+                # request.session['hotel_info'] = {
+                #     'lieu':lieu,
+                #     'arrivee':date_reservation,
+                #     'depart':date_restitution,
+                #     'nombre':nombre
+                # }
+                return render(request, 'car_list.html', {})
+                
+            else :
+                resultats=[]
+                keys = ['id', 'marque','modele','localisation','annee','type','prix', 'nombre_place','photo','disponible']
+                for i in res:
+                    result = dict(zip(keys, i))
+                    resultats.append(result)
+                liste_voiture= {item['id']: {'marque': item['marque'], 'modele': item['modele'],'localisation': item['localisation'],'annee': item['annee'],'type': item['type'],'prix': item['prix'],'nombre_place': item['nombre_place'],'photo': item['photo'],'disponible': item['disponible']} for item in resultats}
+                context = {'liste_voiture': liste_voiture}
+                cursor.close()
+                conn.close()
+                # Stocker le dictionnaire dans la session
+                # request.session['voiture_info'] = {
+                #     'lieu':Lieulocation,
+                #     'arrivee':Datelocation,
+                #     'depart':Retourlocation,
+                # }
+                
+                return render(request, 'car_list.html', context)
             
-        else :
-            resultats=[]
-            keys = ['id', 'marque','modele','localisation','annee','type','prix', 'nombre_place','photo','disponible']
-            for i in res:
-                result = dict(zip(keys, i))
-                resultats.append(result)
-            liste_voiture= {item['id']: {'marque': item['marque'], 'modele': item['modele'],'localisation': item['localisation'],'annee': item['annee'],'type': item['type'],'prix': item['prix'],'nombre_place': item['nombre_place'],'photo': item['photo'],'disponible': item['disponible']} for item in resultats}
-            context = {'liste_voiture': liste_voiture}
-            cursor.close()
-            conn.close()
-            # Stocker le dictionnaire dans la session
-            # request.session['voiture_info'] = {
-            #     'lieu':Lieulocation,
-            #     'arrivee':Datelocation,
-            #     'depart':Retourlocation,
-            # }
-            
-            return render(request, 'car_list.html', context)
-        
-    except Exception as e:
-        print(str(e))  # Afficher l'erreur pour le débogage
-        message='Erreur route'
-        return render(request, 'connexion.html', {'erreur_message': message})
+        except Exception as e:
+            print(str(e))  # Afficher l'erreur pour le débogage
+            message='Erreur route'
+            return render(request, 'connexion.html', {'erreur_message': message})
 
 
 # current_dir = os.getcwd()
@@ -178,3 +178,20 @@ def car_list(request):
 
 
 
+def reservation_voiture(request):
+
+    return render(request,'reservation_voiture.html',{})
+
+   
+
+
+def paiement(request):
+
+    return render(request,'paiement.html',{})
+
+
+
+def voir_plus(request):
+
+    return render(request,'voir_plus.html',{})
+   

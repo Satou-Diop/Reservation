@@ -7,14 +7,14 @@
       <br>
       <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="/">Accueil</a></li>
           <li class="breadcrumb-item active" aria-current="page">Hotel</li>
         </ol>
       </nav>
     </div>
 
   <div class="container ">
-    <form  method="POST" action="{% url 'resultat' %}">
+    <form  method="POST" action="{% url 'reservation_voiture' %}">
         {% csrf_token %}
         <div class="row form2">
 

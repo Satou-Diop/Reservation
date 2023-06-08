@@ -21,10 +21,14 @@ from app_reservation import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name='index'),
-    path("resultat/", views.resultat, name='resultat'),
+    path("reservation_voiture/", views.reservation_voiture, name='reservation_voiture'),
     path("connexion/", views.connexion, name='connexion'),
     path("inscription/", views.inscription, name='inscription'),
-    path('car_list/', views.car_list, name='car_list'),
+    path("car_list/", views.car_list, name='car_list'),
+    path("paiement/", views.paiement, name='paiement'),
+    path("voir_plus/", views.voir_plus, name='voir_plus')
+
+
     # path('res/', views.res_app, name='res_app')
 
 ]

@@ -127,7 +127,6 @@
             </div>
           </div>
                        
-          
           <!-- PARTIE VOITURE -->
           <input type="radio" name="tabs" id="tabthree">
           <label for="tabthree">VOITURES</label>
@@ -140,7 +139,7 @@
                     <div class="lab_input">
                       <span>Lieu: </span>
                       <div class="dateheure">
-                      <input type="text" name="Lieulocation" class="input"  placeholder="ex : Dakar"> 
+                      <input type="text" name="Lieulocation" class="input"  placeholder="ex : Dakar" required> 
                       </div>
                     </div>
                   </div>
@@ -149,8 +148,8 @@
                     <div class="lab_input">
                       <span>Date de location : </span>
                       <div class="dateheure">
-                        <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
-                        <input class="input"  name="Datelocation"  type="date">
+                        <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Mon Image">
+                        <input class="input"  name="Datelocation"  type="date" >
                       </div>
                     </div>
                   </div>
@@ -160,7 +159,7 @@
                       <span>Date de retour : </span>
                       <div class="dateheure">
                         <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
-                        <input class="input" name="Retourlocation"  type="date">
+                         <input class="input" name="Retourlocation"  type="date"  > 
                       </div>
                     </div>
                   </div>
