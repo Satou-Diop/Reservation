@@ -4,6 +4,10 @@ from django.contrib.auth import authenticate
 from .models import Utilisateur
 import mysql.connector as sql
 from datetime import datetime
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 
 config = {
     'user': 'admin_reservation',
@@ -82,6 +86,7 @@ def inscription(request):
             cursor = conn.cursor()
             requete="insert into app_reservation_utilisateur (id,nom,prenom,adresse,email,telephone,mot_de_passe) values (NULL,'{}','{}','{}','{}','{}','{}')".format(nom,prenom,adresse,email,telephone,mot_de_passe)
             cursor.execute(requete)
+            conn.commit()
             cursor.close()
             conn.close()
             return redirect('connexion')  # Rediriger vers la page d'accueil après l'inscription réussie
@@ -260,6 +265,17 @@ def reservation(request):
                 }
         cursor.close()
         conn.close()
+        if 'info_utilisateur' in request.session:
+            info_utilisateur = request.session['info_utilisateur']
+            if 'email' in info_utilisateur:
+                email_user = info_utilisateur['email']
+                subject = 'Bienvenue sur notre site'
+                html_message = render_to_string('confirmation.html', {'user_email': email_user})
+                plain_message = strip_tags(html_message)
+
+                email = EmailMultiAlternatives(subject, plain_message, to=[email_user])
+                email.attach_alternative(html_message, "text/html")
+                email.send()
         return render(request, 'reservation.html', context)
     except Exception as e:
         print(str(e))  # Afficher l'erreur pour le débogage

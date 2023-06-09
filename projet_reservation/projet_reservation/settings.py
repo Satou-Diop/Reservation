@@ -131,3 +131,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'aissatou2109diop@gmail.com'  # Votre adresse e-mail
+EMAIL_HOST_PASSWORD = 'aitduubusgqqrbli'  # Votre mot de passe
