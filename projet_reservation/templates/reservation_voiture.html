@@ -1,7 +1,9 @@
-{% extends 'template_base.html' %}
+  {% extends 'template_base.html' %}
 {% block contenu %}
   {% load static %}  
+
 <section>
+  
   <div class="container">
     <br>
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -29,7 +31,7 @@
           <div class="inf_ch">
               <div class="row ">
 
-                <div class="col-sm-4 text-end res_t  ">
+                <div class="col-sm-4 text-end res_t ">
                     Type de réservation :
                 </div>
 
@@ -39,7 +41,7 @@
               </div>
 
             <div class="row ">
-              <div class="col-sm-4 text-end res_t ">
+              <div class="col-sm-4 text-end res_t "   id="voi">
                   Type de Voiture:
               </div>
               
@@ -69,7 +71,6 @@
                   Description:
                 </div>
                 <div class="col-sm-6 res_t2 ">
-                  Some quick example text to build on the card title 
                   and make up the bulk of the card's content.
                 </div>
             </div>

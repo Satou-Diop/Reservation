@@ -4,6 +4,12 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from .models import Utilisateur
 import mysql.connector as sql
+from datetime import datetime
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+import json
+from django.shortcuts import render
 
 config = {
     'user': 'fatou',
@@ -22,6 +28,7 @@ def index(request):
      
 
 def connexion(request):
+    submitted=False
     if request.method=="POST":
         message=''
         email = request.POST.get('email')
@@ -48,8 +55,6 @@ def connexion(request):
                     conn.close()
                     # Stocker le dictionnaire dans la session
                     request.session['info_utilisateur'] = result
-                    print(request.session['info_utilisateur'].get('nom'))
-                    print('test')
                     return redirect('index')
                 
             except Exception as e:
@@ -66,6 +71,7 @@ def connexion(request):
         'variable': 'Contenu dynamique'
         }
         return render(request, 'connexion.html', context)
+    
 
 
 def inscription(request):
@@ -76,12 +82,13 @@ def inscription(request):
         telephone = request.POST.get('telephone')
         adresse = request.POST.get('adresse')
         mot_de_passe = request.POST.get('mot_de_passe')
-        mot_de_passe2 =request.POST.get('mot_de_passe2')
-        if mot_de_passe!=mot_de_passe2:
-            return HttpResponse('Les mots de passe ne correspondent pas')
+
         try:
+            conn = sql.connect(**config)
+            cursor = conn.cursor()
             requete="insert into app_reservation_utilisateur (id,nom,prenom,adresse,email,telephone,mot_de_passe) values (NULL,'{}','{}','{}','{}','{}','{}')".format(nom,prenom,adresse,email,telephone,mot_de_passe)
             cursor.execute(requete)
+            conn.commit()
             cursor.close()
             conn.close()
             return redirect('connexion')  # Rediriger vers la page d'accueil après l'inscription réussie
@@ -100,6 +107,7 @@ def inscription(request):
         return render(request, 'inscription.html', context)
 
 
+
 def resultat(request):
     # Récupérer des données depuis le modèle
     
@@ -114,8 +122,6 @@ def resultat(request):
 
 #LES VOITURES
 
-import json
-from django.shortcuts import render
 
 def car_list(request):
     if request.method =="POST":
@@ -177,6 +183,16 @@ def car_list(request):
     # return render(request, 'car_list.html', {'cars': cars})
 
 
+def deconnexion(request):
+    # Supprimer la session
+    request.session.flush()
+
+    # Autres traitements de votre vue
+
+    return redirect(index)
+
+
+
 
 def reservation_voiture(request):
 
@@ -194,4 +210,44 @@ def paiement(request):
 def voir_plus(request):
 
     return render(request,'voir_plus.html',{})
+
+
+def resultat(request):
+
+    return render(request,'resultat.html',{})
+
+
+def my_reservations(request):
+    
+    if 'info_utilisateur' in request.session:
+        info_utilisateur = request.session['info_utilisateur']
+        if 'id' in info_utilisateur:
+            id_user = info_utilisateur['id']
+    try:
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="INSERT INTO app_reservation_reservations_hotel (id, date_reservation, date_restitution, chambre_id, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
+        cursor.execute(requete)
+        # Valider les modifications
+        conn.commit()
+        cursor.execute("SELECT * FROM `app_reservation_reservations_hotel` where utilisateur_id ='{}' ".format(id_user))
+        res=cursor.fetchall()
+        if res==[]:
+            return render(request,'my_reservations.html',{})
+        else :
+            keys = ['id', 'arrivee', 'depart']
+            reservations = dict(zip(keys, res[0]))
+            context = {
+                'reservation': reservations,
+            }
+            cursor.close()
+            conn.close()
+            return render(request,'my_reservations.html',context)
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request,'my_reservations.html',{})
    
+
+
+

@@ -26,7 +26,9 @@ urlpatterns = [
     path("inscription/", views.inscription, name='inscription'),
     path("car_list/", views.car_list, name='car_list'),
     path("paiement/", views.paiement, name='paiement'),
-    path("voir_plus/", views.voir_plus, name='voir_plus')
+    path("voir_plus/", views.voir_plus, name='voir_plus'),
+    path("my_reservations/", views.my_reservations, name='my_reservations'),
+    path("deconnexion/", views.deconnexion, name='deconnexion'),
 
 
     # path('res/', views.res_app, name='res_app')
