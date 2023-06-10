@@ -14,3 +14,5 @@ git push --set-upstream origin fatou
 
 # activation de l'env virtuel
 source mon_env/bin/activate
+
+python3 manage.py runserver
