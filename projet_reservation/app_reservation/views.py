@@ -13,8 +13,8 @@ from django.shortcuts import render
 from datetime import datetime
 
 config = {
-    'user': 'fatou',
-    'password': 'SEYnabou16',
+    'user': 'admin_reservation',
+    'password': 'Reservation123@',
     'host': 'localhost',
     'database': 'bd_app',
 }
@@ -210,8 +210,50 @@ def paiement(request):
 
 
 def voir_plus(request):
+    id_voiture  = request.POST.get('id_voiture')
+    print(id_voiture)
+    try:
+        message=''
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="select * from app_reservation_voiture where id = {}  ".format(int(id_voiture))
+        cursor.execute(requete)
+        res=cursor.fetchall()
+        print(res)
+        if res==[]:
+            # request.session['hotel_info'] = {
+            #     'lieu':lieu,
+            #     'arrivee':date_reservation,
+            #     'depart':date_restitution,
+            #     'nombre':nombre
+            # }
+            return render(request, 'voir_plus.html', {})
+            
+        else :
+            resultats=[]
+            keys = ['id', 'marque','modele','localisation','annee','type','prix', 'nombre_place','photo','disponible']
+            for i in res:
+                result = dict(zip(keys, i))
+                resultats.append(result)
+            liste_voiture= {item['id']: {'marque': item['marque'], 'modele': item['modele'],'localisation': item['localisation'],'annee': item['annee'],'type': item['type'],'prix': item['prix'],'nombre_place': item['nombre_place'],'photo': item['photo'],'disponible': item['disponible']} for item in resultats}
+            context = {'liste_voiture': liste_voiture}
+            cursor.close()
+            conn.close()
+            # Stocker le dictionnaire dans la session
+            # request.session['voiture_info'] = {
+            #     'lieu':Lieulocation,
+            #     'arrivee':Datelocation,
+            #     'depart':Retourlocation,
+            # }
+            
+            return render(request, 'voir_plus.html', context)
+        
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request, 'connexion.html', {'erreur_message': message})
 
-    return render(request,'voir_plus.html',{})
+   
 
 
 def resultat(request):

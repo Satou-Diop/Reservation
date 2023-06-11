@@ -106,8 +106,12 @@
             <br>
        
           <p class="card-text"> Prix: {{value.prix}} CFA /jours  </p>
-          
-          <a href="{%url 'voir_plus'%}" class="btn btn-primary">Voir l’offre</a>
+          <form action="{%url 'voir_plus'%}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id_voiture" value="{{ key }}">
+            <button class="btn btn-primary">Voir l’offre</button>
+          </form>
+        
 
       </div>
 </div>
