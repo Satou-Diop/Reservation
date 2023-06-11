@@ -1,35 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Bootstrap Horizontal Card Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-   
-    <style>
-        .bcontent {
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container bcontent">
-        <h2>Bootstrap Horizontal Card</h2>
-        <hr />
-        <div class="card" style="width: 500px;">
-            <div class="row no-gutters">
-                <div class="col-sm-5">
-                    <img class="card-img" src="/images/defaultimg.png" alt="Suresh Dasari Card">
-                </div>
-                <div class="col-sm-7">
-                    <div class="card-body">
-                        <h5 class="card-title">Suresh Dasari</h5>
-                        <p class="card-text">Suresh Dasari is a founder and technical lead developer in tutlane.</p>
-                        <a href="#" class="btn btn-primary">View Profile</a>
-                    </div>
-                </div>
-            </div>
+<div class="card">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img class="card-img-top" src="{% static 'img/'|add:value.photo %}">
         </div>
-    </div>
-</body>
-</html>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ value.marque }} - {{ value.modele }}</h5>
+                <div class="icon">
+                    <span class="iTHr-icon">
+                        <svg viewBox="0 0 200 200" width="10px" height="10px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:20px;height:20px;line-height:inherit;color:inherit">
+                            <path d="M180 155.435V177.5H20v-22.064c50.314-24.61 110.67-24.128 160-.001zm-80-36.132c17.673 0 32-14.446 32-32.267V54.768c0-17.821-14.327-32.268-32-32.268S68 36.946 68 54.768v32.268c0 17.82 14.327 32.267 32 32.267z"></path>
+                        </svg>
+                        {{ value.nombre_place }}
+                    </span>
+
+                    <span style="transform:translate3d(0,0,0);vertical-align:middle;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale" class="iTHr-icon">
+                        <svg viewBox="0 0 200 200" width="50px" height="15px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:inherit;height:inherit;line-height:inherit;color:inherit">
+                            <path d="M78.182 42h43.636v14.5h14.546V41.855c0-7.924-6.451-14.355-14.407-14.355H78.044c-7.956 0-14.407 6.431-14.407 14.355V56.5h14.546V42zM20 63.75V158c0 8.004 6.516 14.5 14.545 14.5h130.909c8.029 0 14.545-6.496 14.545-14.5V63.75H20z"></path>
+                        </svg>
+                    </span>{{value.nombre_place }}
+
+                    <span style="transform:translate3d(0,0,0);vertical-align:middle;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale" class="iTHr-icon">
+                        <svg viewBox="0 0 200 200" width="50px" height="15px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:inherit;height:inherit;line-height:inherit;color:inherit">
+                            <path d="M30.3 50.78a4.25 4.25 0 00-.2 1.1v48a6 6 0 006 6h58v42c0 .4.2
