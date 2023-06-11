@@ -27,14 +27,15 @@
       <div class="lab_input">
         
         <div class="dateheure">
-        <input type="text" class="input"   placeholder="ex : Dakar" value="{{ request.session.hotel_info.lieu }}"> 
+        <input type="text" class="input" placeholder="ex : Dakar" value="{{ request.session.hotel_info.lieu }}"> 
         </div>
       </div>
     </div>
     <div class="col-5">
       <div class="lab_input">
         <div class="dateheure">
-          <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" value="{{ request.session.hotel_info.arrivee }}" ><input type="date" class="input" value="{{ request.session.hotel_info.depart }}">
+          <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+          <input type="datetime-local" class="input" value="{{ request.session.hotel_info.arrivee }}" >
         </div>
       </div>
     </div>
@@ -42,7 +43,10 @@
     <div class="col-3">
       <div class="lab_input">
         <div class="dateheure">
-         <input class="input"  type="number" placeholder="ex : 2 adultes" min="1" max="10" value="{{ request.session.hotel_info.nombre}}">
+          <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+         
+          <input type="datetime-local" class="input" value="{{ request.session.hotel_info.depart }}">
+
         </div>
       </div>
     </div>
@@ -56,19 +60,46 @@
 <br>
 
 
-
-
-
 <ul>
   <div class="row row-cols-4 g-4">
     {% for key, value in liste_voiture.items %}
-<div class="col">
+<div class="col" id="contenu">
     <div class="card">
         <img class="card-img-top" src="{% static 'img/'|add:value.photo %}">
         <div class="card-body">
           <h5 class="card-title">{{ value.marque }} - {{ value.modele }}</h5>
-            
-           <!-- <p>Type de carburant : {{ value.type }}</p>
+
+
+         
+           
+              <span class="iTHr-icon">
+                <svg viewBox="0 0 200 200" width="10px"  height="10px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:20px;height:20px;line-height:inherit;color:inherit">
+                <path d="M180 155.435V177.5H20v-22.064c50.314-24.61 110.67-24.128 160-.001zm-80-36.132c17.673 0 32-14.446 32-32.267V54.768c0-17.821-14.327-32.268-32-32.268S68 36.946 68 54.768v32.268c0 17.82 14.327 32.267 32 32.267z">
+                </path>
+                </svg>
+                {{ value.nombre_place }}
+              </span>
+          
+           
+            <span style="transform:translate3d(0,0,0);vertical-align:middle;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale" class="iTHr-icon">
+            <svg viewBox="0 0 200 200" width="50px"  height="15px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:inherit;height:inherit;line-height:inherit;color:inherit">
+            <path d="M78.182 42h43.636v14.5h14.546V41.855c0-7.924-6.451-14.355-14.407-14.355H78.044c-7.956 0-14.407 6.431-14.407 14.355V56.5h14.546V42zM20 63.75V158c0 8.004 6.516 14.5 14.545 14.5h130.909c8.029 0 14.545-6.496 14.545-14.5V63.75H20z">
+            </path>
+          </svg>
+           </span>{{value.nombre_place }}
+          
+           
+           
+            <span style="transform:translate3d(0,0,0);vertical-align:middle;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale" class="iTHr-icon">
+              <svg viewBox="0 0 200 200" width="50px"  height="15px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:inherit;height:inherit;line-height:inherit;color:inherit">
+              <path d="M30.3 50.78a4.25 4.25 0 00-.2 1.1v48a6 6 0 006 6h58v42c0 .4.2.7.2 1.1a16 16 0 1011.6 0a4.25 4.25 0 00.2-1.1v-42H158v42c0 .4.2.7.2 1.1a16 16 0 1011.6 0a4.25 4.25 0 00.2-1.1v-96c0-.4-.2-.7-.2-1.1a16 16 0 10-11.6 0a4.25 4.25 0 00-.2 1.1v42h-52v-42c0-.4-.2-.7-.2-1.1a16 16 0 10-11.6 0a4.25 4.25 0 00-.2 1.1v42H42v-42c0-.4-.2-.7-.2-1.1A16 16 0 1020 35.88a16.1 16.1 0 0010.3 14.9z">
+              </path>
+              </svg>
+            </span> {{value.type}}
+          
+      
+          
+          <!-- <p>Type de carburant : {{ value.type }}</p>
             <p>Capacité : {{ value.nombre_place }}</p>
             <p>Annee: {{value.annee}} </p>
             <p>type: {{value.type}} </p>
@@ -77,9 +108,8 @@
        
           <p class="card-text res_m ">Description: </p>
           <p> Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="{%url 'voir_plus'%}" class="btn btn-primary">Voir Plus</a>
+          <a href="{%url 'voir_plus'%}" class="btn btn-primary">Voir l’offre</a>
 
-        </div>
       </div>
 </div>
 {% endfor %}

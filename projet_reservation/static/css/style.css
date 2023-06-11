@@ -192,8 +192,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   width: 100%;
 }
 
-
-
 .input {
   border: none;
   width: 100%;
@@ -612,6 +610,7 @@ input[type="time"] {
 
 .about .content .btn-learn-more:hover {
   background: #0DA0F3;
+
   color: #fff;
   text-decoration: none;
 }
@@ -1019,7 +1018,7 @@ article p:first-letter {
 /* Animation */
 .anim-typewriter{
 animation: typewriter 4s steps(44) 1s 1 normal both,
-           blinkTextCursor 500ms steps(44) infinite normal;
+  blinkTextCursor 500ms steps(44) infinite normal;
 }
 @keyframes typewriter{
 from{width: 0;}
@@ -1326,17 +1325,17 @@ to{border-right-color: transparent;}
 }
 .login_card{
   background: rgba(255, 255, 255, 0.22);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(3.9px);
--webkit-backdrop-filter: blur(3.9px);
-border: 1px solid rgba(255, 255, 255, 0.81);
-background: rgba(255, 255, 255, 0.22);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(3.9px);
--webkit-backdrop-filter: blur(3.9px);
-border: 1px solid rgba(255, 255, 255, 0.81);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.9px);
+  -webkit-backdrop-filter: blur(3.9px);
+  border: 1px solid rgba(255, 255, 255, 0.81);
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.9px);
+  -webkit-backdrop-filter: blur(3.9px);
+  border: 1px solid rgba(255, 255, 255, 0.81);
 }
 .bouton_con{
   background-color: #0090e4;
@@ -1649,8 +1648,6 @@ li{
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
   
-  
-
 
 .prix{
   color: #010870;

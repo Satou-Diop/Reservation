@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import json
 from django.shortcuts import render
+from datetime import datetime
 
 config = {
     'user': 'fatou',
@@ -195,10 +196,11 @@ def deconnexion(request):
 
 
 def reservation_voiture(request):
-
+ 
     return render(request,'reservation_voiture.html',{})
 
    
+
 
 
 def paiement(request):
