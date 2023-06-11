@@ -79,3 +79,46 @@ function slideLeft() {
         buttons[0].classList.remove('inactive');
     }
 };
+
+
+
+
+// pour le bouton supprimer
+
+// Récupération de tous les boutons de classe "supprimer"
+const boutonsSupprimer = document.querySelectorAll('.supprimer');
+
+// Fonction pour supprimer l'élément parent du bouton cliqué
+function supprimerElement() {
+  const element = this.parentNode;
+  element.parentNode.removeChild(element);
+}
+
+// Ajout d'un gestionnaire d'événement de clic pour chaque bouton
+boutonsSupprimer.forEach(bouton => {
+  bouton.addEventListener('click', supprimerElement);
+});
+
+
+
+//pour bouton editer
+
+
+// Récupération de tous les boutons de classe "editer"
+const boutonsEditer = document.querySelectorAll('.modifier');
+
+// Fonction pour éditer le contenu de l'élément parent du bouton cliqué
+function editerElement() {
+  const element = this.parentNode;
+  const texte = element.firstChild.textContent;
+  const nouveauTexte = prompt('Modifier le texte', texte);
+
+  if (nouveauTexte) {
+    element.firstChild.textContent = nouveauTexte;
+  }
+}
+
+// Ajout d'un gestionnaire d'événement de clic pour chaque bouton
+boutonsEditer.forEach(bouton => {
+  bouton.addEventListener('click', editerElement);
+});
