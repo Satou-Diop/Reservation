@@ -13,8 +13,8 @@ from django.shortcuts import render
 from datetime import datetime
 
 config = {
-    'user': 'admin_reservation',
-    'password': 'Reservation123@',
+    'user': 'fatou',
+    'password': 'SEYnabou16',
     'host': 'localhost',
     'database': 'bd_app',
 }

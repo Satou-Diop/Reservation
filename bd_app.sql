@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 26 mai 2023 à 08:54
+-- Généré le : dim. 11 juin 2023 à 11:05
 -- Version du serveur : 8.0.33-0ubuntu0.22.04.2
 -- Version de PHP : 8.1.2-1ubuntu2.11
 
@@ -186,8 +186,8 @@ CREATE TABLE `app_reservation_chambre` (
   `id` bigint NOT NULL,
   `type_chambre` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `prix` decimal(10,2) NOT NULL,
-  `nombre_place` decimal(10,2) NOT NULL,
+  `prix` int NOT NULL,
+  `nombre_place` int NOT NULL,
   `photo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `hotel_id` varchar(10) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -197,53 +197,53 @@ CREATE TABLE `app_reservation_chambre` (
 --
 
 INSERT INTO `app_reservation_chambre` (`id`, `type_chambre`, `description`, `prix`, `nombre_place`, `photo`, `hotel_id`) VALUES
-(1, 'Chambre de Luxe', 'Vue sur la mer', '90000.00', '2.00', 'c4.jpeg', 'RDDKR117'),
-(2, 'Chambre Premium', 'Vue sur le jardin', '990000.00', '4.00', 'c4.jpeg', 'IQDKRTER'),
-(3, 'Chambre Premium', 'Vue sur la ville', '90000.00', '2.00', 'c4.jpeg', 'FGDKRLDN'),
-(4, 'Chambre Premium', 'Vue sur la mer', '150000.00', '4.00', 'c2.jpg', 'IQDKRTER'),
-(5, 'Chambre de Luxe', 'Vue sur la ville', '120000.00', '4.00', 'c3.jpeg', 'WKDKR563'),
-(6, 'Suite', 'Vue sur le jardin', '150000.00', '4.00', 'c3.jpeg', 'TYDKRRAC'),
-(7, 'Suite Junior', 'Vue sur le jardin', '150000.00', '2.00', 'c3.jpeg', 'TYDKRRHI'),
-(8, 'Suite Junior', 'Vue sur la mer', '50000.00', '2.00', 'c1.jpg', 'FGDKRLDN'),
-(9, 'Chambre Simple', 'Vue sur la mer', '120000.00', '2.00', 'c4.jpeg', 'TYDKRRHI'),
-(10, 'Suite', 'Vue sur la ville', '990000.00', '5.00', 'c3.jpeg', 'TYDKRRAC'),
-(11, 'Suite Junior', 'Vue sur l’océan', '50000.00', '4.00', 'c1.jpg', 'TYDKRRHI'),
-(12, 'Chambre Simple', 'Vue sur la mer', '50000.00', '2.00', 'c4.jpeg', 'IQDKRTER'),
-(13, 'Suite Junior', 'Vue sur la ville', '90000.00', '2.00', 'c2.jpg', 'IQDKRTER'),
-(14, 'Chambre Simple', 'Vue sur l’océan', '120000.00', '1.00', 'c1.jpg', 'FGDKRLDN'),
-(15, 'Chambre Simple', 'Vue sur la mer', '120000.00', '1.00', 'c1.jpg', 'TYDKRRAC'),
-(16, 'Chambre de Luxe', 'Vue sur le jardin', '90000.00', '2.00', 'c4.jpeg', 'FGDKRLDN'),
-(17, 'Suite', 'Vue sur la mer', '150000.00', '4.00', 'c2.jpg', 'IQDKRTER'),
-(18, 'Chambre de Luxe', 'Vue sur le jardin', '120000.00', '1.00', 'c3.jpeg', 'RDDKR117'),
-(19, 'Chambre de Luxe', 'Vue sur la ville', '990000.00', '1.00', 'c2.jpg', 'IQDKRTER'),
-(20, 'Chambre Simple', 'Vue sur l’océan', '90000.00', '4.00', 'c1.jpg', 'FGDKRLDN'),
-(21, 'Suite', 'Vue sur la mer', '50000.00', '4.00', 'c2.jpg', 'IQDKRTER'),
-(22, 'Chambre de Luxe', 'Vue sur la mer', '150000.00', '1.00', 'c1.jpg', 'FGDKRLDN'),
-(23, 'Chambre Simple', 'Vue sur l’océan', '90000.00', '5.00', 'c1.jpg', 'IQDKRTER'),
-(24, 'Chambre Simple', 'Vue sur la mer', '120000.00', '5.00', 'c3.jpeg', 'RDDKR117'),
-(25, 'Chambre Premium', 'Vue sur la ville', '90000.00', '5.00', 'c2.jpg', 'RDDKR117'),
-(26, 'Chambre Simple', 'Vue sur le jardin', '50000.00', '2.00', 'c4.jpeg', 'FGDKRLDN'),
-(27, 'Chambre Simple', 'Vue sur la mer', '120000.00', '2.00', 'c3.jpeg', 'TYDKRRHI'),
-(28, 'Suite', 'Vue sur la mer', '50000.00', '4.00', 'c3.jpeg', 'FGDKRLDN'),
-(29, 'Chambre Premium', 'Vue sur la mer', '90000.00', '1.00', 'c4.jpeg', 'FGDKRLDN'),
-(30, 'Chambre Simple', 'Vue sur le jardin', '90000.00', '2.00', 'c3.jpeg', 'IQDKRTER'),
-(31, 'Chambre de Luxe', 'Vue sur la ville', '120000.00', '2.00', 'c3.jpeg', 'FGDKRLDN'),
-(32, 'Suite Junior', 'Vue sur le jardin', '90000.00', '5.00', 'c3.jpeg', 'WKDKR563'),
-(33, 'Suite Junior', 'Vue sur la ville', '90000.00', '1.00', 'c3.jpeg', 'FGDKRLDN'),
-(34, 'Suite', 'Vue sur la ville', '90000.00', '2.00', 'c3.jpeg', 'FGDKRLDN'),
-(35, 'Chambre Simple', 'Vue sur la mer', '90000.00', '2.00', 'c2.jpg', 'WKDKR563'),
-(36, 'Chambre de Luxe', 'Vue sur le jardin', '90000.00', '1.00', 'c3.jpeg', 'IQDKRTER'),
-(37, 'Suite Junior', 'Vue sur le jardin', '990000.00', '2.00', 'c1.jpg', 'TYDKRRHI'),
-(38, 'Chambre Premium', 'Vue sur la ville', '120000.00', '4.00', 'c4.jpeg', 'IQDKRTER'),
-(39, 'Chambre Simple', 'Vue sur la mer', '90000.00', '2.00', 'c2.jpg', 'IQDKRTER'),
-(40, 'Chambre de Luxe', 'Vue sur la ville', '120000.00', '2.00', 'c4.jpeg', 'TYDKRRHI'),
-(41, 'Chambre Premium', 'Vue sur la mer', '50000.00', '4.00', 'c4.jpeg', 'RDDKR117'),
-(42, 'Chambre Premium', 'Vue sur la mer', '50000.00', '1.00', 'c1.jpg', 'FGDKRLDN'),
-(43, 'Chambre de Luxe', 'Vue sur l’océan', '120000.00', '4.00', 'c1.jpg', 'FGDKRLDN'),
-(44, 'Suite', 'Vue sur l’océan', '150000.00', '2.00', 'c2.jpg', 'TYDKRRHI'),
-(45, 'Suite Junior', 'Vue sur la ville', '50000.00', '4.00', 'c3.jpeg', 'TYDKRRHI'),
-(46, 'Chambre Premium', 'Vue sur la ville', '50000.00', '5.00', 'c3.jpeg', 'FGDKRLDN'),
-(47, 'Suite', 'Vue sur la mer', '990000.00', '5.00', 'c3.jpeg', 'FGDKRLDN');
+(1, 'Chambre de Luxe', 'Vue sur la mer', 90000, 2, 'c4.jpeg', 'RDDKR117'),
+(2, 'Chambre Premium', 'Vue sur le jardin', 990000, 4, 'c4.jpeg', 'IQDKRTER'),
+(3, 'Chambre Premium', 'Vue sur la ville', 90000, 2, 'c4.jpeg', 'FGDKRLDN'),
+(4, 'Chambre Premium', 'Vue sur la mer', 150000, 4, 'c2.jpg', 'IQDKRTER'),
+(5, 'Chambre de Luxe', 'Vue sur la ville', 120000, 4, 'c3.jpeg', 'WKDKR563'),
+(6, 'Suite', 'Vue sur le jardin', 150000, 4, 'c3.jpeg', 'TYDKRRAC'),
+(7, 'Suite Junior', 'Vue sur le jardin', 150000, 2, 'c3.jpeg', 'TYDKRRHI'),
+(8, 'Suite Junior', 'Vue sur la mer', 50000, 2, 'c1.jpg', 'FGDKRLDN'),
+(9, 'Chambre Simple', 'Vue sur la mer', 120000, 2, 'c4.jpeg', 'TYDKRRHI'),
+(10, 'Suite', 'Vue sur la ville', 990000, 5, 'c3.jpeg', 'TYDKRRAC'),
+(11, 'Suite Junior', 'Vue sur l’océan', 50000, 4, 'c1.jpg', 'TYDKRRHI'),
+(12, 'Chambre Simple', 'Vue sur la mer', 50000, 2, 'c4.jpeg', 'IQDKRTER'),
+(13, 'Suite Junior', 'Vue sur la ville', 90000, 2, 'c2.jpg', 'IQDKRTER'),
+(14, 'Chambre Simple', 'Vue sur l’océan', 120000, 1, 'c1.jpg', 'FGDKRLDN'),
+(15, 'Chambre Simple', 'Vue sur la mer', 120000, 1, 'c1.jpg', 'TYDKRRAC'),
+(16, 'Chambre de Luxe', 'Vue sur le jardin', 90000, 2, 'c4.jpeg', 'FGDKRLDN'),
+(17, 'Suite', 'Vue sur la mer', 150000, 4, 'c2.jpg', 'IQDKRTER'),
+(18, 'Chambre de Luxe', 'Vue sur le jardin', 120000, 1, 'c3.jpeg', 'RDDKR117'),
+(19, 'Chambre de Luxe', 'Vue sur la ville', 990000, 1, 'c2.jpg', 'IQDKRTER'),
+(20, 'Chambre Simple', 'Vue sur l’océan', 90000, 4, 'c1.jpg', 'FGDKRLDN'),
+(21, 'Suite', 'Vue sur la mer', 50000, 4, 'c2.jpg', 'IQDKRTER'),
+(22, 'Chambre de Luxe', 'Vue sur la mer', 150000, 1, 'c1.jpg', 'FGDKRLDN'),
+(23, 'Chambre Simple', 'Vue sur l’océan', 90000, 5, 'c1.jpg', 'IQDKRTER'),
+(24, 'Chambre Simple', 'Vue sur la mer', 120000, 5, 'c3.jpeg', 'RDDKR117'),
+(25, 'Chambre Premium', 'Vue sur la ville', 90000, 5, 'c2.jpg', 'RDDKR117'),
+(26, 'Chambre Simple', 'Vue sur le jardin', 50000, 2, 'c4.jpeg', 'FGDKRLDN'),
+(27, 'Chambre Simple', 'Vue sur la mer', 120000, 2, 'c3.jpeg', 'TYDKRRHI'),
+(28, 'Suite', 'Vue sur la mer', 50000, 4, 'c3.jpeg', 'FGDKRLDN'),
+(29, 'Chambre Premium', 'Vue sur la mer', 90000, 1, 'c4.jpeg', 'FGDKRLDN'),
+(30, 'Chambre Simple', 'Vue sur le jardin', 90000, 2, 'c3.jpeg', 'IQDKRTER'),
+(31, 'Chambre de Luxe', 'Vue sur la ville', 120000, 2, 'c3.jpeg', 'FGDKRLDN'),
+(32, 'Suite Junior', 'Vue sur le jardin', 90000, 5, 'c3.jpeg', 'WKDKR563'),
+(33, 'Suite Junior', 'Vue sur la ville', 90000, 1, 'c3.jpeg', 'FGDKRLDN'),
+(34, 'Suite', 'Vue sur la ville', 90000, 2, 'c3.jpeg', 'FGDKRLDN'),
+(35, 'Chambre Simple', 'Vue sur la mer', 90000, 2, 'c2.jpg', 'WKDKR563'),
+(36, 'Chambre de Luxe', 'Vue sur le jardin', 90000, 1, 'c3.jpeg', 'IQDKRTER'),
+(37, 'Suite Junior', 'Vue sur le jardin', 990000, 2, 'c1.jpg', 'TYDKRRHI'),
+(38, 'Chambre Premium', 'Vue sur la ville', 120000, 4, 'c4.jpeg', 'IQDKRTER'),
+(39, 'Chambre Simple', 'Vue sur la mer', 90000, 2, 'c2.jpg', 'IQDKRTER'),
+(40, 'Chambre de Luxe', 'Vue sur la ville', 120000, 2, 'c4.jpeg', 'TYDKRRHI'),
+(41, 'Chambre Premium', 'Vue sur la mer', 50000, 4, 'c4.jpeg', 'RDDKR117'),
+(42, 'Chambre Premium', 'Vue sur la mer', 50000, 1, 'c1.jpg', 'FGDKRLDN'),
+(43, 'Chambre de Luxe', 'Vue sur l’océan', 120000, 4, 'c1.jpg', 'FGDKRLDN'),
+(44, 'Suite', 'Vue sur l’océan', 150000, 2, 'c2.jpg', 'TYDKRRHI'),
+(45, 'Suite Junior', 'Vue sur la ville', 50000, 4, 'c3.jpeg', 'TYDKRRHI'),
+(46, 'Chambre Premium', 'Vue sur la ville', 50000, 5, 'c3.jpeg', 'FGDKRLDN'),
+(47, 'Suite', 'Vue sur la mer', 990000, 5, 'c3.jpeg', 'FGDKRLDN');
 
 -- --------------------------------------------------------
 
@@ -1461,21 +1461,23 @@ INSERT INTO `app_reservation_compagnie` (`code`, `nom`) VALUES
 CREATE TABLE `app_reservation_hotel` (
   `id_hotel` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
   `nom` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `code_pays` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `code_pays` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `ville` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `app_reservation_hotel`
 --
 
-INSERT INTO `app_reservation_hotel` (`id_hotel`, `nom`, `code_pays`) VALUES
-('FGDKRLDN', 'LODGE DU DELTA NIOMINKA-ILE DE DIONEWAR', 'SN'),
-('HSDKRAAL', 'HOTEL DU PHARE LES MAMELLES - GUESTHOUSE', 'SN'),
-('IQDKRTER', 'TERROU-BI HOTEL CASINO MARINA', 'SN'),
-('RDDKR117', 'RADISSON BLU DAKAR', 'SN'),
-('TYDKRRAC', 'HOTEL LA VILLA RACINE', 'SN'),
-('TYDKRRHI', 'THE RHINO HOTEL RESORT & SPA', 'SN'),
-('WKDKR563', 'HOTEL JARDIN SAVANA DAKAR', 'SN');
+INSERT INTO `app_reservation_hotel` (`id_hotel`, `nom`, `code_pays`, `ville`, `photo`) VALUES
+('FGDKRLDN', 'LODGE DU DELTA NIOMINKA-ILE DE DIONEWAR', 'SN', 'Dakar\r\n', 'delta.jpg'),
+('HSDKRAAL', 'HOTEL DU PHARE LES MAMELLES - GUESTHOUSE', 'SN', 'Dakar', 'phare.jpeg'),
+('IQDKRTER', 'TERROU-BI HOTEL CASINO MARINA', 'SN', 'Dakar', 'terrou_bi.jpeg'),
+('RDDKR117', 'RADISSON BLU DAKAR', 'SN', 'Dakar', 'radisson.jpeg'),
+('TYDKRRAC', 'HOTEL LA VILLA RACINE', 'SN', 'Dakar', 'villa.jpeg'),
+('TYDKRRHI', 'THE RHINO HOTEL RESORT & SPA', 'SN', 'Dakar', 'rhino.jpeg'),
+('WKDKR563', 'HOTEL JARDIN SAVANA DAKAR', 'SN', 'Dakar', 'savana.jpeg');
 
 -- --------------------------------------------------------
 
@@ -1519,7 +1521,58 @@ CREATE TABLE `app_reservation_reservations_hotel` (
 
 INSERT INTO `app_reservation_reservations_hotel` (`id`, `date_reservation`, `date_restitution`, `chambre_id`, `utilisateur_id`) VALUES
 (1, '2023-05-24 13:32:09.653619', '2023-05-24 13:32:09.653623', 1, 1),
-(2, '2023-05-24 13:32:09.834204', '2023-05-24 13:32:09.834207', 1, 1);
+(2, '2023-05-24 13:32:09.834204', '2023-05-24 13:32:09.834207', 1, 1),
+(3, '2023-06-08 17:58:53.000000', '2023-06-07 17:58:53.000000', 22, 43),
+(11, '2023-06-08 17:58:53.000000', '2023-06-07 17:58:53.000000', 1, 43),
+(13, '2023-06-08 17:58:53.000000', '2023-06-07 17:58:53.000000', 1, 43),
+(14, '2022-03-12 00:00:00.000000', '2022-03-12 00:00:00.000000', 8, 8),
+(15, '2022-03-12 00:00:00.000000', '2022-04-12 00:00:00.000000', 14, 8),
+(16, '0002-02-11 00:00:00.000000', '0002-02-12 00:00:00.000000', 3, 8),
+(17, '0004-03-12 00:00:00.000000', '0004-03-12 00:00:00.000000', 8, 8),
+(18, '0004-03-12 00:00:00.000000', '0004-03-12 00:00:00.000000', 3, 8),
+(19, '0002-02-12 00:00:00.000000', '0033-02-12 00:00:00.000000', 18, 8),
+(20, '2024-06-12 00:00:00.000000', '2024-06-14 00:00:00.000000', 23, 8),
+(21, '2024-06-12 00:00:00.000000', '2024-06-14 00:00:00.000000', 2, 8),
+(22, '2024-06-12 00:00:00.000000', '2024-06-14 00:00:00.000000', 12, 8),
+(23, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(24, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(25, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 2, 8),
+(26, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 2, 8),
+(27, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(28, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(29, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(30, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(31, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(32, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(33, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 14, 8),
+(34, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(35, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(36, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(37, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(38, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(39, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(40, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(41, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(42, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(43, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(44, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(45, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(46, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(47, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 3, 8),
+(48, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(49, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(50, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(51, '2024-06-12 00:00:00.000000', '2024-06-13 00:00:00.000000', 8, 8),
+(52, '2024-06-20 00:00:00.000000', '2024-06-25 00:00:00.000000', 17, 8),
+(53, '2024-06-20 00:00:00.000000', '2024-06-25 00:00:00.000000', 4, 8),
+(54, '2023-07-04 00:00:00.000000', '2023-07-09 00:00:00.000000', 2, 8),
+(55, '2023-07-07 00:00:00.000000', '2023-07-09 00:00:00.000000', 8, 8),
+(56, '2023-06-12 00:00:00.000000', '2023-06-13 00:00:00.000000', 8, 42),
+(57, '2023-06-12 00:00:00.000000', '2023-06-14 00:00:00.000000', 8, 42),
+(58, '2023-07-12 00:00:00.000000', '2023-07-14 00:00:00.000000', 14, 42),
+(59, '2023-06-12 00:00:00.000000', '2023-06-13 00:00:00.000000', 33, 57),
+(60, '2023-06-12 00:00:00.000000', '2023-06-13 00:00:00.000000', 14, 57),
+(61, '2023-06-12 00:00:00.000000', '2023-06-14 00:00:00.000000', 8, 58);
 
 -- --------------------------------------------------------
 
@@ -1606,7 +1659,9 @@ INSERT INTO `app_reservation_utilisateur` (`id`, `nom`, `prenom`, `adresse`, `em
 (41, 'Diop', 'Aissatou', 'dakar', 'aissatou2109diop@gmail.com', '77777777', '1234'),
 (42, 'Faye', 'latte', 'Dakar', 'fayelatyr92@gmail.com', '779720064', 'Mbambe92'),
 (43, 'aida', 'diop', 'dakar', 'aida@gmail.com', '789999999', 'azerty'),
-(44, '', '', '', '', '', '');
+(44, '', '', '', '', '', ''),
+(57, 'Diop', 'Modou', 'Thies', 'serignemodoudiop55@gmail.com', '771234568', '12345'),
+(58, 'Goumballa', 'Djily', 'Dakar', 'goumballadjily@gmail.com', '781646707', 'aaaaa');
 
 -- --------------------------------------------------------
 
@@ -1951,7 +2006,10 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (26, 'app_reservation', '0008_voiture', '2023-05-24 12:35:05.064486'),
 (27, 'app_reservation', '0009_reservation_vol', '2023-05-24 13:20:41.880335'),
 (28, 'app_reservation', '0010_reservations_hotel', '2023-05-24 13:28:41.290150'),
-(29, 'app_reservation', '0011_location_voiture', '2023-05-24 13:41:51.109783');
+(29, 'app_reservation', '0011_location_voiture', '2023-05-24 13:41:51.109783'),
+(30, 'app_reservation', '0012_hotel_ville', '2023-05-29 18:23:38.723321'),
+(31, 'app_reservation', '0013_alter_chambre_nombre_place_alter_chambre_prix', '2023-05-29 18:25:45.816950'),
+(32, 'app_reservation', '0014_hotel_photo', '2023-05-29 18:26:31.355137');
 
 -- --------------------------------------------------------
 
@@ -2139,7 +2197,7 @@ ALTER TABLE `app_reservation_location_voiture`
 -- AUTO_INCREMENT pour la table `app_reservation_reservations_hotel`
 --
 ALTER TABLE `app_reservation_reservations_hotel`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT pour la table `app_reservation_reservation_vol`
@@ -2151,7 +2209,7 @@ ALTER TABLE `app_reservation_reservation_vol`
 -- AUTO_INCREMENT pour la table `app_reservation_utilisateur`
 --
 ALTER TABLE `app_reservation_utilisateur`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT pour la table `app_reservation_voiture`
@@ -2217,7 +2275,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT pour la table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Contraintes pour les tables déchargées

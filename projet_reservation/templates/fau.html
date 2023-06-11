@@ -1,35 +1,26 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Édition d'éléments</title>
+
 </head>
+<link rel="stylesheet" href="ddd.css">
 <body>
-  <ul id="listeElements">
-    <li>Élément 1 <button class="editer">Éditer</button></li>
-    <li>Élément 2 <button class="editer">Éditer</button></li>
-    <li>Élément 3 <button class="editer">Éditer</button></li>
-  </ul>
 
-  <script>
-    // Récupération de tous les boutons de classe "editer"
-    const boutonsEditer = document.querySelectorAll('.editer');
+<div class="card">
+  <div class="card-image">
+    <img src="https://wordpress-content.vroomly.com/wp-content/uploads/2023/03/koenigsegg.jpg">
+  </div>
+  <div class="card-details">
+    <h2 class="card-title">Nom de la voiture</h2>
+    <p class="card-description">Caractéristiques de la voiture :</p>
+    <ul>
+      <li>Caractéristique 1</li>
+      <li>Caractéristique 2</li>
+      <li>Caractéristique 3</li>
+      <li>Caractéristique 4</li>
+    </ul>
+  </div>
+</div>
 
-    // Fonction pour éditer le contenu de l'élément parent du bouton cliqué
-    function editerElement() {
-      const element = this.parentNode;
-      const texte = element.firstChild.textContent;
-      const nouveauTexte = prompt('Modifier le texte', texte);
-
-      if (nouveauTexte) {
-        element.firstChild.textContent = nouveauTexte;
-      }
-    }
-
-    // Ajout d'un gestionnaire d'événement de clic pour chaque bouton
-    boutonsEditer.forEach(bouton => {
-      bouton.addEventListener('click', editerElement);
-    });
-  </script>
 </body>
 </html>
-

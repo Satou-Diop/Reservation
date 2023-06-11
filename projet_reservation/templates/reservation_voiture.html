@@ -41,7 +41,7 @@
               </div>
 
             <div class="row ">
-              <div class="col-sm-4 text-end res_t "   id="voi">
+              <div class="col-sm-4 text-end res_t " id="voi">
                   Type de Voiture:
               </div>
               
@@ -94,6 +94,7 @@
 
       </div>
       <div class="col-sm-4 border">
+        
         <img src="" class="img-thumbnail mt-2" alt="...">
         <div class="h_name">toyota</div>
         <div>Dakar, SN</div>
@@ -118,7 +119,9 @@
              <form action="" method="post">
               {% csrf_token %} 
               <input type="hidden" name="id_reservation" value="{{ reservation.id }}">
-              <button class="bt_p">Proceder au paiement</button>
+              <a href="{%url 'paiement'%}">
+                <button class="bt_p">Proceder au paiement</button>
+              </a>
              </form>
           </div>
 
