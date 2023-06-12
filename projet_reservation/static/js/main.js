@@ -309,3 +309,12 @@ boutons.forEach(function(button) {
    
   });
 });
+
+var supprimer = document.querySelectorAll('.supprimer')
+supprimer.forEach(function(button) {
+    button.addEventListener('click', function() {
+      document.getElementById('id_reservation').value=button.value
+      
+     
+    });
+  });

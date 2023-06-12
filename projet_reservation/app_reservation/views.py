@@ -54,6 +54,12 @@ def connexion(request):
                     conn.close()
                     # Stocker le dictionnaire dans la session
                     request.session['info_utilisateur'] = result
+                    url_precedente = request.META.get('HTTP_REFERER')
+                    # if url_precedente:
+                    #     return redirect(url_precedente)
+                    # # Si l'URL précédente n'est pas disponible, vous pouvez rediriger vers une page par défaut
+                    # else:
+                    #     return redirect('index')
                     return redirect('index')
                 
             except Exception as e:
@@ -76,7 +82,7 @@ def inscription(request):
     if request.method=="POST":
         nom = request.POST.get('nom')
         prenom = request.POST.get('prenom')
-        email = request.POST.get('email')
+        email_user = request.POST.get('email')
         telephone = request.POST.get('telephone')
         adresse = request.POST.get('adresse')
         mot_de_passe = request.POST.get('mot_de_passe')
@@ -84,9 +90,15 @@ def inscription(request):
         try:
             conn = sql.connect(**config)
             cursor = conn.cursor()
-            requete="insert into app_reservation_utilisateur (id,nom,prenom,adresse,email,telephone,mot_de_passe) values (NULL,'{}','{}','{}','{}','{}','{}')".format(nom,prenom,adresse,email,telephone,mot_de_passe)
+            requete="insert into app_reservation_utilisateur (id,nom,prenom,adresse,email,telephone,mot_de_passe) values (NULL,'{}','{}','{}','{}','{}','{}')".format(nom,prenom,adresse,email_user,telephone,mot_de_passe)
             cursor.execute(requete)
             conn.commit()
+            subject = 'Bienvenue sur notre site'
+            html_message = render_to_string('bienvenue.html', {'user_email': email_user})
+            plain_message = strip_tags(html_message)
+            email = EmailMultiAlternatives(subject, plain_message, to=[email_user])
+            email.attach_alternative(html_message, "text/html")
+            email.send()
             cursor.close()
             conn.close()
             return redirect('connexion')  # Rediriger vers la page d'accueil après l'inscription réussie
@@ -190,7 +202,7 @@ def chambre(request):
         res=cursor.fetchall()
         keys = ['id', 'nom', 'code','ville','photo']
         hotel = dict(zip(keys, res[0]))
-        print(hotel)
+       
         context = {
                 'hotel': hotel,
                 }
@@ -211,6 +223,7 @@ def chambre(request):
             context = {
                 'hotel': hotel,
                 'liste_chambre': liste_chambre}
+          
             cursor.close()
             conn.close()
             # Stocker le dic{{hotel.nom}}tionnaire dans la session
@@ -247,7 +260,7 @@ def reservation(request):
         message=''
         conn = sql.connect(**config)
         cursor = conn.cursor()
-        requete="INSERT INTO app_reservation_reservations_hotel (id, date_reservation, date_restitution, chambre_id, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
+        requete="INSERT INTO app_reservation_reservations_hotel (id, date_reservation, date_restitution, chambre_id, utilisateur_id,paiement) VALUES (NULL, '{}', '{}', '{}', '{}',0);".format(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
         cursor.execute(requete)
         # Valider les modifications
         conn.commit()
@@ -301,23 +314,43 @@ def mes_reservations(request):
     try:
         conn = sql.connect(**config)
         cursor = conn.cursor()
-        requete="INSERT INTO app_reservation_reservations_hotel (id, date_reservation, date_restitution, chambre_id, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
-        cursor.execute(requete)
-        # Valider les modifications
-        conn.commit()
         cursor.execute("SELECT * FROM `app_reservation_reservations_hotel` where utilisateur_id ='{}' ".format(id_user))
         res=cursor.fetchall()
         if res==[]:
             return render(request,'mes_reservations.html',{})
         else :
+            resultats=[]
             keys = ['id', 'arrivee', 'depart']
-            reservations = dict(zip(keys, res[0]))
+            for i in res:
+                result = dict(zip(keys, i))
+                resultats.append(result)
+            liste_reservation = {item['id']: { 'arrivee': item['arrivee'],'depart': item['depart']} for item in resultats}
+            print(liste_reservation)
             context = {
-                'reservation': reservations,
+                'reservation': liste_reservation,
             }
             cursor.close()
             conn.close()
             return render(request,'mes_reservations.html',context)
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request,'mes_reservations.html',{})
+    
+
+def annuler(request):
+    if request.method=="POST":
+        id_reservation = request.POST.get('id_reservation')
+   
+    try:
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        cursor.execute(" DELETE FROM `app_reservation_reservations_hotel` WHERE `app_reservation_reservations_hotel`.`id` = {} ".format(int(id_reservation
+        )))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return redirect('mes_reservations')
     except Exception as e:
         print(str(e))  # Afficher l'erreur pour le débogage
         message='Erreur route'

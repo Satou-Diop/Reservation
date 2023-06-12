@@ -106,6 +106,7 @@
                                  <div class="localisation taxes">Frais et taxes compris</div>
                              </div>
                              <div class="col-sm-6 btn_div ">
+                              <form action="{% url 'chambre' %}"  method="post" class="p-2"> {% csrf_token %}<input type="hidden" name="id_hotel" value="{{ key }}">
                                 <form action="{% url 'chambre' %}"  method="post" class="p-2"> {% csrf_token %}<input type="hidden" name="id_hotel" value="{{ key }}"> <button class="offre " type= "submit">Voir Disponibilités</button></form>
                              </div>
 

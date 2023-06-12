@@ -228,6 +228,8 @@ class Reservations_Hotel(models.Model):
     chambre = models.ForeignKey(Chambre, to_field='id', on_delete=models.CASCADE, related_name='chambre')
     date_reservation = models.DateTimeField()
     date_restitution = models.DateTimeField()
+    paiement=models.BooleanField(default=False)
+
 
 # utilisateur = Utilisateur.objects.get(id=1)
 # chambre = Chambre.objects.get(id=1)
@@ -238,6 +240,7 @@ class Location_Voiture(models.Model):
     voiture = models.ForeignKey(Voiture, to_field='id', on_delete=models.CASCADE, related_name='voiture')
     date_reservation = models.DateTimeField()
     date_restitution = models.DateTimeField()
+    
 
 # utilisateur = Utilisateur.objects.get(id=1)
 # voiture = Voiture.objects.get(id=1)
