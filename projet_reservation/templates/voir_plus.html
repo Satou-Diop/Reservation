@@ -19,6 +19,9 @@
     <div class="card-image">
       <img src="{% static 'img/'|add:value.photo %}">
     </div>
+
+    <div class="texte"> 
+
     <div class="card-details">
       <h2 class="card-title">{{ value.marque }} - {{ value.modele }}</h2>
       <h5 class="card-description">Caractéristiques de la voiture :</h5>
@@ -31,17 +34,13 @@
         <p>disponible: {{value.disponible}}</p>
         <p class="card-text">Description: <br> Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <a href="{%url 'reservation_voiture'%}" class="btn btn-primary">Reserver</a>
-          
       </ul>
+    </div>
     </div>
   </div>
 
 
        
-
-
-
-
     <!-- <div class="card">
         <img class="card-img-top" src="{% static 'img/'|add:value.photo %}">
         <div class="card-body">

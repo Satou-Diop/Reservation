@@ -27,14 +27,14 @@
       <div class="lab_input">
         
         <div class="dateheure">
-        <input type="text" class="input" placeholder="ex : Dakar" value="{{ request.session.hotel_info.lieu }}"> 
+        <input type="text" class="input" placeholder="ex : Dakar" value="{{ request.session.voiture_info.lieu }}"> 
         </div>
       </div>
     </div>
     <div class="col-5">
       <div class="lab_input">
         <div class="dateheure">
-          <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+          <img src="{% static 'img/calendar.png' %}" class="calendrier" >
           <input type="datetime-local" class="input" value="{{ request.session.hotel_info.arrivee }}" >
         </div>
       </div>
@@ -43,7 +43,7 @@
     <div class="col-3">
       <div class="lab_input">
         <div class="dateheure">
-          <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+          <img src="{% static 'img/calendar.png' %}" class="calendrier" >
          
           <input type="datetime-local" class="input" value="{{ request.session.hotel_info.depart }}">
 
@@ -59,52 +59,71 @@
 </div>
 <br>
 
-
 <ul>
   <div class="row row-cols-4 g-4">
     <div class="col" id="contenu">
     {% for key, value in liste_voiture.items %}
    
-   
     <div class="card">
-        <img class="card-img-top" src="{% static 'img/'|add:value.photo %}">
+        <div>
+          <img class="card-img-top" src="{% static 'img/'|add:value.photo %}">
+        </div>
         <div class="card-body">
-          <h3 class="card-title">{{ value.marque }} - {{ value.modele }}</h3>
-        <div  class="icon"> 
-              <span class="icon">
+          <div>
+            <!-- <h4 class="card-title">{{ value.marque }} - {{ value.modele }}</h4> -->
+            <h3>{{ value.marque }} - {{ value.modele }}</h3>
+          </div>
+        <div class="icon"> 
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
+              <path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
+              <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
+            </svg> XOF {{value.prix}} CFA /jours
+
+          </div>
+          
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+              <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+            </svg> {{value.nombre_place }} <br>
+
+          </div>
+
+        </div>
+
+              <!-- <span class="icon">
                 <svg viewBox="0 0 200 200" width="10px"  height="10px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:20px;height:20px;line-height:inherit;color:inherit" >
                 <path d="M180 155.435V177.5H20v-22.064c50.314-24.61 110.67-24.128 160-.001zm-80-36.132c17.673 0 32-14.446 32-32.267V54.768c0-17.821-14.327-32.268-32-32.268S68 36.946 68 54.768v32.268c0 17.82 14.327 32.267 32 32.267z">
                 </path>
                 </svg>
-                {{ value.nombre_place }} <br>
-              </span>
+                {{ value.disponible }} <br>
+              </span> -->
           
-              <span style="transform:translate3d(0,0,0);vertical-align:middle;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale" class="iTHr-icon">
+
+              <!-- <span style="transform:translate3d(0,0,0);vertical-align:middle;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale" class="iTHr-icon">
                 <svg viewBox="0 0 200 200" width="50px"  height="15px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:inherit;height:inherit;line-height:inherit;color:inherit" >
                 <path d="M78.182 42h43.636v14.5h14.546V41.855c0-7.924-6.451-14.355-14.407-14.355H78.044c-7.956 0-14.407 6.431-14.407 14.355V56.5h14.546V42zM20 63.75V158c0 8.004 6.516 14.5 14.545 14.5h130.909c8.029 0 14.545-6.496 14.545-14.5V63.75H20z">
                 </path>
                 </svg>
-            </span>{{value.nombre_place }} <br>
+
+              </span>{{value.nombre_place }} <br> -->
           
         
             <span style="transform:translate3d(0,0,0);vertical-align:middle;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale" class="iTHr-icon">
-              <svg viewBox="0 0 200 200" width="50px"  height="15px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:inherit;height:inherit;line-height:inherit;color:inherit" >
-              <path d="M30.3 50.78a4.25 4.25 0 00-.2 1.1v48a6 6 0 006 6h58v42c0 .4.2.7.2 1.1a16 16 0 1011.6 0a4.25 4.25 0 00.2-1.1v-42H158v42c0 .4.2.7.2 1.1a16 16 0 1011.6 0a4.25 4.25 0 00.2-1.1v-96c0-.4-.2-.7-.2-1.1a16 16 0 10-11.6 0a4.25 4.25 0 00-.2 1.1v42h-52v-42c0-.4-.2-.7-.2-1.1a16 16 0 10-11.6 0a4.25 4.25 0 00-.2 1.1v42H42v-42c0-.4-.2-.7-.2-1.1A16 16 0 1020 35.88a16.1 16.1 0 0010.3 14.9z">
+              <svg viewBox="0 0 200 200" width="50px" height="15px" xmlns="http://www.w3.org/2000/svg" role="img" style="width:inherit;height:inherit;line-height:inherit;color:inherit" >
+              <path  d="M30.3 50.78a4.25 4.25 0 00-.2 1.1v48a6 6 0 006 6h58v42c0 .4.2.7.2 1.1a16 16 0 1011.6 0a4.25 4.25 0 00.2-1.1v-42H158v42c0 .4.2.7.2 1.1a16 16 0 1011.6 0a4.25 4.25 0 00.2-1.1v-96c0-.4-.2-.7-.2-1.1a16 16 0 10-11.6 0a4.25 4.25 0 00-.2 1.1v42h-52v-42c0-.4-.2-.7-.2-1.1a16 16 0 10-11.6 0a4.25 4.25 0 00-.2 1.1v42H42v-42c0-.4-.2-.7-.2-1.1A16 16 0 1020 35.88a16.1 16.1 0 0010.3 14.9z">
               </path>
               </svg>
-            </span> {{value.type}} <br>
-          </div>
+            </span>{{value.type}} <br>
 
           
-          <!-- <p>Type de carburant : {{ value.type }}</p>
-            <p>Capacité : {{ value.nombre_place }}</p>
-            <p>Annee: {{value.annee}} </p>
-            <p>type: {{value.type}} </p>
-            <p>prix: {{value.prix}} CFA </p>
-            <p>disponible: {{value.disponible}} </p> -->
-            <br>
-       
-          <p class="card-text"> Prix: {{value.prix}} CFA /jours  </p>
+            
+
+          <!-- <h5 class="card-text"> Prix: {{value.prix}} CFA /jours </h5> -->
+          <br>
+
+          <!-- <p class="card-text">Description : <br> Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
           <form action="{%url 'voir_plus'%}" method="post">
             {% csrf_token %}
             <input type="hidden" name="id_voiture" value="{{ key }}">
