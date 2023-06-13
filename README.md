@@ -6,7 +6,6 @@ git checkout nom de la branche
 # ajouter  les commit
 git add .
 
-
 git commit -m 'ajout'
 
 git push --set-upstream origin fatou
