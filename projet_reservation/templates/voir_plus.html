@@ -9,42 +9,43 @@
 
 <section>
  
-<ul>
   <!-- <div class="row row-cols-4 g-4"> -->
     {% for key, value in liste_voiture.items %}
 <!-- <div class="col"> -->
 
 
-  <div class="card">
-    <div class="card-image">
+  <div class="carte">
+   
+    <div class="carte-image">
       <img src="{% static 'img/'|add:value.photo %}">
+      <h1 class="prix"> XOF {{value.prix}} CFA </h1>
+
     </div>
 
     <div class="texte"> 
-
-    <div class="card-details">
-      <h2 class="card-title">{{ value.marque }} - {{ value.modele }}</h2>
-      <h5 class="card-description">Caractéristiques de la voiture :</h5>
-      <ul>
-        Type de carburant : {{ value.type }}</p>
-        <p>Capacité : {{ value.nombre_place }}</p>
-        <p>Annee: {{value.annee}} </p>
-        <p>type: {{value.type}} </p>
-        <p>prix: {{value.prix}} CFA </p>
-        <p>disponible: {{value.disponible}}</p>
-        <p class="card-text">Description: <br> Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="{%url 'reservation_voiture'%}" class="btn btn-primary">Reserver</a>
-      </ul>
-    </div>
+      <div class="carte-details">
+        <h2 class="carte-title">{{ value.marque }} - {{ value.modele }}</h2>
+        <h5 class="carte-description">Caractéristiques de la voiture:</h5>
+        <ul>
+          Type de carburant : {{ value.type }}</p>
+          <p>Capacité : {{ value.nombre_place }}</p>
+          <p>Annee: {{value.annee}} </p>
+          <p>type: {{value.type}} </p>
+          <!-- <p>prix: {{value.prix}} CFA </p> -->
+          <p>disponible: {{value.disponible}}</p>
+        </ul>
+          <h5 class="carte-text">Description: <br> Some quick example text to build on the carte title and make up the bulk of the carte's content.</h5>
+          <a href="{%url 'reservation_voiture'%}" class="btn btn-primary">Reserver</a>
+      </div>
     </div>
   </div>
 
 
        
-    <!-- <div class="card">
-        <img class="card-img-top" src="{% static 'img/'|add:value.photo %}">
-        <div class="card-body">
-          <h5 class="card-title">{{ value.marque }} - {{ value.modele }}</h5> -->
+    <!-- <div class="carte">
+        <img class="carte-img-top" src="{% static 'img/'|add:value.photo %}">
+        <div class="carte-body">
+          <h5 class="carte-title">{{ value.marque }} - {{ value.modele }}</h5> -->
             
            <!-- <p> Type de carburant : {{ value.type }}</p>
             <p>Capacité : {{ value.nombre_place }}</p>
@@ -53,7 +54,7 @@
             <p>prix: {{value.prix}} CFA </p>
             <p>disponible: {{value.disponible}} </p>
         -->
-          <!-- <p class="card-text">Description: <br> Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <!-- <p class="carte-text">Description: <br> Some quick example text to build on the carte title and make up the bulk of the carte's content.</p>
           <a href="{%url 'voir_plus'%}" class="btn btn-primary">Voir Plus</a>
 
         </div>
@@ -62,7 +63,6 @@
 <!-- </div> -->
 {% endfor %}
 <!-- </div> -->
-</ul>
 </section>
 {% endblock %}
 

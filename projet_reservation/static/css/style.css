@@ -144,7 +144,7 @@ a{
 .texte {
   padding-top: 7%;
   color: #FFFFFF;
-  text-shadow: 3px 2px 4px #000000;
+  /* text-shadow: 3px 2px 4px #000000; */
 }
 
 .texte h1 {
@@ -739,7 +739,7 @@ figure figcaption h1 {
   font-size: 120pt;
   line-height: 120pt;
   color: white;
-  text-shadow: 1px 1px 0px black, 2px 2px 0px black, 3px 3px 0px black;
+  /* text-shadow: 1px 1px 0px black, 2px 2px 0px black, 3px 3px 0px black; */
   font-weight: 900;
   margin: 0;
   overflow: hidden;
@@ -1588,7 +1588,7 @@ li{
 .titre_f{
   color: #201A6D;
   font-weight: 600;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.36);
+  /* text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.36); */
 }
 .taxes{
   color: green;
