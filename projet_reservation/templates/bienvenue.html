@@ -1,0 +1,119 @@
+{% extends 'template_base.html' %}
+
+{% block contenu %}
+{% load static %}
+<section >
+    <div class="container">
+      <br>
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Accueil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Mes reservations</li>
+        </ol>
+      </nav>
+    </div>
+  
+  
+  <!-- Aperçu Hotel -->
+
+  <div class="container r_carte p-0 mb-4 mt-2">
+      <div class="r_titre text-center">
+          <h2>Mes Réservations </h2>
+      </div>
+      <div class="liste_res">
+        {% for key, value in reservation.items %}
+
+        <div class="carte_res">
+          <div class=" d-flex justify-content-end">
+            <button class="modifier">
+              <img src="{% static 'img/modifie.png' %}"  style="width: 15px; height: 15px;" alt="">
+            </button>
+            <button class="supprimer"  data-bs-toggle="modal" data-bs-target="#staticBackdrop3" id="supprimer" value="{{ key }}">
+              <img src="{% static 'img/supprime.png' %}"  style="width: 15px; height: 15px;" alt="">
+            </button>
+          </div>
+          <div class="row">
+            <div class="col-sm-2 text-end h_name">
+              N° :
+            </div>
+            <div class="col-sm-4 r_text">
+              {{ key }}
+            </div>
+            <div class="col-sm-2 text-end h_name">
+              Type :
+            </div>
+            <div class="col-sm-4 r_text">
+              reservation_volvols
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2 text-end h_name">
+              Période :
+            </div>
+            <div class="col-sm-4 r_text">
+              {{ value.arrivee}} - {{ value.depart}}
+            </div>
+            <div class="col-sm-2 text-end h_name">
+              Statut Paiement :
+            </div>
+            <div class="col-sm-4">
+              {% if  value.paiement  %}
+              <p class="statut1">Validée</p>
+              {% else %}
+              <p class="statut2">En attente</p>  
+              {% endif %}
+                    
+            </div>
+          </div>
+
+          
+          
+          
+        </div>
+
+        {% endfor %}
+
+        <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 p_text text-center text-dark" id="staticBackdropLabel">Annuler réservation</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+             
+              <div class="modal-body text-dark">
+                  Souhaitez vous annuler votre réservation  ?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal">Annuler</button>
+                  <form action="{% url 'annuler' %}" method="post">
+                    {% csrf_token %} 
+                    <input type="hidden" name="id_reservation" id="id_reservation" >
+                    <button type="submit" class="btn btn-danger" > Confirmer Annulation</button>
+                   </form>
+                 
+                </div>
+              
+              
+            </div>
+          </div>
+          </div>
+
+      </div>
+  </div>
+  <br> <br>
+
+
+
+
+<!-- Button trigger modal -->
+
+
+
+</section>
+
+
+
+
+{% endblock %}

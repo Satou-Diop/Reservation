@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from app_reservation import views
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -29,6 +30,13 @@ urlpatterns = [
     path("inscription/", views.inscription, name='inscription'),
     path('reservation_vol/', views.reservation_vol, name='reservation_vol'),
     path('confirmation_vol/', views.confirmation_vol, name='confirmation_vol'),
+    path("mes_reservations/", views.mes_reservations, name='mes_reservations'),
+    path("deconnexion/", views.deconnexion, name='deconnexion'),
+    path("annuler/", views.annuler, name='annuler'),
+    path('profil/', views.profil, name='profil'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+
 
 
    

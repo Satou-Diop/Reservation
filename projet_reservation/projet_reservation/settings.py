@@ -86,6 +86,15 @@ DATABASES = {
         }
     }
 }
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'fayelatyr92@gmail.com'
+EMAIL_HOST_PASSWORD = 'bquieorwgsixnnta'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'fayelatyr92@gmail.com'
+
+
 
 
 # Password validation
@@ -135,3 +144,4 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+app_reservation_utilisateur_MODEL = 'app_reservation.Utilisateur'

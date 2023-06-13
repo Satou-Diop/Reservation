@@ -8,16 +8,20 @@
             {% for key, value in liste_vols.items %}
                 <div class="col-md-2">
                     <div class="card mb-3">
-                        <img src="{% static 'img/'|add:value.image %} " class="card-img-top" alt="Image">
+                        <a href="{% static 'img/'|add:value.image %}" target="_blank">
+                            <img src="{% static 'img/'|add:value.image %}" class="card-img-top" alt="Image">
+                        </a>
                         <div class="card-body">
                             <h5 class="card-title">{{ value.compagnie }}</h5>
                             <p>Prix : ${{ value.prix }}</p>
                             <p>Nombre de places disponibles : {{ value.nombre_place }}</p>
                             <p>Date de départ : {{ value.date_depart }}</p>
                             <p>Date d'arrivée : {{ value.date_arrivee }}</p>
+                            <p>aeroport_depart : {{ value.aeroport_depart }}</p>
+                            <p>aeroport_arrivee: {{ value.aeroport_arrivee }}</p>
                         </div>
                         <div class="card-footer">
-                            <a href="{% url 'reservation_vol' %}" class="btn btn-primary">Voir les offres</a>
+                            <a href="{% url 'reservation_vol' %}" class="btn btn-primary">reservation </a>
                         </div>
                     </div>
                 </div>

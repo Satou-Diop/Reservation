@@ -1,0 +1,22 @@
+{% extends 'template_base.html' %}
+
+{% block contenu %}
+{% load static %}
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="text-center cadre-info">
+            <h1>Informations personnelles</h1>
+          <p>Nom :  {{ request.session.info_utilisateur.nom }}  </p>
+          <p>Prénom :  {{ request.session.info_utilisateur.prenom }} </p>
+          <p>Adresse : {{ request.session.info_utilisateur.adresse }} </p>
+          <p>Email :  {{ request.session.info_utilisateur.email }} </p>
+          <p>Téléphone : {{ request.session.info_utilisateur.telephone }} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    {% endblock %}
