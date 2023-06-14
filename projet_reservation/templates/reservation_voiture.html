@@ -1,22 +1,23 @@
-  {% extends 'template_base.html' %}
+{% extends 'template_base.html' %}
+
 {% block contenu %}
-  {% load static %}  
-
-<section>
+{% load static %}
+<section class="chambre" id="info_reservation">
+    <div class="container">
+      <br>
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="#">Hotel</a></li>
+          <li class="breadcrumb-item"><a href="#">Chambre</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Reservation</li>
+        </ol>
+      </nav>
+    </div>
   
-  <div class="container">
-    <br>
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'car_list' %}">Voiture</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'car_list' %}">Reservation</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Paiement</li>
-      </ol>
-    </nav>
-  </div>
+  
+  <!-- Aperçu Hotel -->
   <div class="text-center">
-
     <h1 class="t2 mb-2">Informations sur la réservation</h1>
 </div>
   <div class="container r_info ">
@@ -25,88 +26,79 @@
         
        
           <div class="r_titre text-center h2">
-            <h2 class="t2">Détails sur la Voiture</h2>
+            <h2 class="t2">Détails sur la chambre</h2>
           </div>
             <div class="d-flex justify-content-center "><p class="notif">Votre réservation a été enregistrée</p></div>
           <div class="inf_ch">
               <div class="row ">
-
-                <div class="col-sm-4 text-end res_t ">
-                    Type de réservation :
+                <div class="col-sm-4 text-end res_t  ">
+                    Type de réservation : 
                 </div>
-
                 <div class="col-sm-6 res_t2 ">
-                    Voiture
                 </div>
               </div>
-
             <div class="row ">
-              <div class="col-sm-4 text-end res_t " id="voi">
+              <div class="col-sm-4 text-end res_t ">
                   Type de Voiture:
               </div>
-              
               <div class="col-sm-6 res_t2 ">
-                {{ value.modele }} 
-              </div>
-
-              <div class="col-sm-6 res_t2 ">
-                {{ value.marque }} 
+                {{ Voiture.type }} 
               </div>
             </div>
-
             <div class="row ">
               <div class="col-sm-4 text-end res_t ">
-                  Capacité:
+                  Nombre de personnes:
               </div>
-
               <div class="col-sm-6 res_t2 ">
-                {{ value.nombre_place }}
+                {{ chambre.nombre }}
               </div>
             </div>
-
-            
-            </div>
-            <div class="row ">
-                <div class="col-sm-4 text-end res_t ">
-                  Description:
-                </div>
-                <div class="col-sm-6 res_t2 ">
-                  and make up the bulk of the card's content.
-                </div>
-            </div>
-         
             <div class="row ">
               <div class="col-sm-4 text-end res_t ">
-                  Date Location:
+                  Arrivée:
               </div>
               <div class="col-sm-6 res_t2 ">
-                {{ reservation.depart }} 
+                {{ reservation.arrivee }} 
               </div>
             </div>
             <div class="row ">
                 <div class="col-sm-4 text-end res_t ">
-                    date de retour:
+                    Départ:
                 </div>
                 <div class="col-sm-6 res_t2 ">
-                  {{ reservation.retour }}
+                  {{ reservation.depart }}
                 </div>
             </div>
+            <div class="row ">
+                <div class="col-sm-4 text-end res_t ">
+                    Nuitée:
+                </div>
+                <div class="col-sm-6 res_t2 ">
+                  {{ chambre.prix }}  Francs CFA
+                </div>
+            </div>
+          </div>
+        
 
       </div>
       <div class="col-sm-4 border">
-        
-        <img src="" class="img-thumbnail mt-2" alt="...">
-        <div class="h_name">toyota</div>
+        <img src="{% static 'img/terrou_bi.jpeg'%}" class="img-thumbnail mt-2" alt="...">
+        <div class="h_name">LODGE DU DELTA NIOMINKA-ILE DE DIONEWAR</div>
         <div>Dakar, SN</div>
       </div>
     </div>     
 
+
+    
     <div class="row border ">
         <div class="col-sm-8 text-end res_m">
             Montant Total :
         </div>
-        <div class="col-sm-4 res_p ">
-          {{ Voiture.prix }} Francs CFA
+        <input type="hidden" id="date_arrivee" value="{{ reservation.arrivee }} ">
+        <input type="hidden" id="date_depart" value="{{ reservation.depart }}">
+        <input type="hidden" id="montantTotal" value="{{ voiture.prix }}">
+        <div class="col-sm-4 res_p " value="{{ voiture.prix }} ">
+          <span id="Total"></span> Francs CFA
         </div>
     </div>
     
@@ -116,22 +108,32 @@
       <div class="row">
           
           <div class="col-sm-12  d-flex justify-content-end mt-2">
-             <form action="" method="post">
+             <form action="{% url 'paiement' %}" method="post">
               {% csrf_token %} 
               <input type="hidden" name="id_reservation" value="{{ reservation.id }}">
-              <a href="{%url 'paiement'%}">
-                <button class="bt_p">Proceder au paiement</button>
-              </a>
+              <button class="bt_p">Proceder au paiement</button>
              </form>
           </div>
 
       </div>
+
     </div>
-  <br> 
+
+  <br>
+
+
 
 
 <!-- Button trigger modal -->
 
 
+
 </section>
+
+
+
 {% endblock %}
+
+
+
+

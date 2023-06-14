@@ -1693,7 +1693,6 @@ li{
 }
 
 .r_titre{
-  
   border-bottom: 1px solid grey;
   display: flex;
   flex-direction: column;
@@ -1713,14 +1712,16 @@ li{
   font-weight: 600;
   color: #030731;
   font-size: clamp(18px,22px,30px)
-
+  
 }
+
 .res_t2{
   font-weight: 500;
   color: #212122;
   font-size: clamp(18px,22px,30px);
   font-style: italic;
   justify-self: flex-end;
+  margin-top: -10%;
 
 }
 .res_m{
