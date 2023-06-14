@@ -35,6 +35,7 @@ urlpatterns = [
     path("annuler/", views.annuler, name='annuler'),
     path('profil/', views.profil, name='profil'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path("paiement/", views.paiement, name='paiement'),
 
 
 

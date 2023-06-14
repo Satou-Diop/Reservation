@@ -376,3 +376,12 @@ function register(event) {
         window.location.href = "{% url 'connexion' %}";
     });
 });
+
+const form1 = document.getElementById('myForm');
+const button = document.querySelector('.confirmer');
+
+button.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Soumettre le formulaire manuellement
+    form1.submit();
+});

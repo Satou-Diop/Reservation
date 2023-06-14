@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
-from .models import Utilisateur
+from .models import Utilisateur,Reservation_Vol
 import mysql.connector as sql
 from django.shortcuts import render, get_object_or_404
 from .models import Vol
@@ -10,6 +10,7 @@ from django.conf import settings
 from app_reservation.models import Utilisateur
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+import datetime
 
 
 
@@ -196,13 +197,57 @@ def resultatvol(request):
         message = 'Erreur route'
         return render(request, 'flight/resultatvol.html', {'liste_vols': []})
 
+def paiement(request):
+    id_reservation  = request.POST.get('id_reservation')
+
+    return render(request,'flight/paiement.html',{'id_reservation' :id_reservation})
+
 def reservation_vol(request):
     if request.method == 'POST':
-        # Traitement du formulaire et enregistrement de la réservation
+        # Récupérer les informations de réservation depuis la requête POST
+        if 'info_utilisateur' in request.session:
+            info_utilisateur = request.session['info_utilisateur']
+            if 'id' in info_utilisateur:
+                id_user = info_utilisateur['id']  
+    id_vol= request.POST.get('id_vol')
+    date= datetime.datetime.now()
+    date_forma=date.strftime("%Y-%m-%d %H:%M:%S")
+    if id_user:
+
+        print(id_vol)
+        print(id_user)
+        try:
+            message=''
+            conn = sql.connect(**config)
+            cursor = conn.cursor()
+            requete="INSERT INTO `app_reservation_reservation_vol` (`id`, `utilisateur`, `vol`, `date`) VALUES (NULL, '{}', '{}', '{}')".format(id_user,id_vol,date_forma);
+            
+            cursor.execute(requete)
+            # Valider les modifications
+            conn.commit()
+           
+            cursor.close()
+            conn.close()
+            
+            return redirect('paiement')
+        except Exception as e:
+            print(str(e))  # Afficher l'erreur pour le débogage
+            message='Erreur route'
+            return render(request, 'flight/paiement.html', {'erreur_message': message})
         
-        return render(request, 'flight/reservation.html')
+        
     else:
-        return render(request, 'flight/reservation.html')
+        return redirect('flight/paiement.html')
+    
+
+    
+
+     
+       
+
+       
+        
+       
 
 def confirmation_vol(request):
     if request.method == 'POST':
@@ -240,17 +285,17 @@ def mes_reservations(request):
     try:
         conn = sql.connect(**config)
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM `app_reservation_reservations_vol` where utilisateur_id ='{}' ".format(id_user))
+        cursor.execute("SELECT * FROM `app_reservation_reservation_vol` where utilisateur ='{}' ".format(id_user))
         res=cursor.fetchall()
         if res==[]:
             return render(request,'mes_reservation.html',{})
         else :
             resultats=[]
-            keys = ['id', 'arrivee', 'depart']
+            keys = ['id', 'date', 'vol_id']
             for i in res:
                 result = dict(zip(keys, i))
                 resultats.append(result)
-            liste_reservation = {item['id']: { 'arrivee': item['arrivee'],'depart': item['depart']} for item in resultats}
+            liste_reservation = {item['id']: { 'date': item['date'],'vol_id': item['vol_id']} for item in resultats}
             print(liste_reservation)
             context = {
                 'reservation': liste_reservation,
@@ -262,6 +307,7 @@ def mes_reservations(request):
         print(str(e))  # Afficher l'erreur pour le débogage
         message='Erreur route'
         return render(request,'mes_reservation.html',{})
+    
     
     
 
@@ -278,7 +324,7 @@ def annuler(request):
         conn.commit()
         cursor.close()
         conn.close()
-        return redirect('mes_reservations')
+        return redirect('mes_reservation')
     except Exception as e:
         print(str(e))  # Afficher l'erreur pour le débogage
         message='Erreur route'

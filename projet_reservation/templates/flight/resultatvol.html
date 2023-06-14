@@ -11,18 +11,27 @@
                         <a href="{% static 'img/'|add:value.image %}" target="_blank">
                             <img src="{% static 'img/'|add:value.image %}" class="card-img-top" alt="Image">
                         </a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ value.compagnie }}</h5>
-                            <p>Prix : ${{ value.prix }}</p>
+                        <div class="r_carte">
+                            <h5 class="card-title">
+                                <span style="color: blue;">{{ value.compagnie }}</span>
+                            </h5>
+                            <p>Prix : <span style="color: green;">${{ value.prix }}</span></p>
                             <p>Nombre de places disponibles : {{ value.nombre_place }}</p>
-                            <p>Date de départ : {{ value.date_depart }}</p>
-                            <p>Date d'arrivée : {{ value.date_arrivee }}</p>
-                            <p>aeroport_depart : {{ value.aeroport_depart }}</p>
-                            <p>aeroport_arrivee: {{ value.aeroport_arrivee }}</p>
+                            <p>Date de départ : <span style="color: violet;">{{ value.date_depart }}</span></p>
+                            <p>Date d'arrivée : <span style="color: violet;">{{ value.date_arrivee }}</span></p>
+                            <p>aeroport_depart : <span style="color:  rgb(0, 225, 255);">{{ value.aeroport_depart }}</span></p>
+                            <p>aeroport_arrivee : <span style="color: rgb(0, 225, 255);">{{ value.aeroport_arrivee }}</span></p>
                         </div>
-                        <div class="card-footer">
+
+                        <form action= "{% url 'paiement' %}" method="post"  id="myForm">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ key }}" name='id_vol' id='id_vol'  >
+                            <button type="submit"  class="btn btn-primary confirmer"> Confirmer</button>
+                            </form>
+                        
+                        <!-- <div class="card-footer">
                             <a href="{% url 'reservation_vol' %}" class="btn btn-primary">reservation </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             {% endfor %}
