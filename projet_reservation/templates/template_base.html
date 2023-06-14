@@ -45,7 +45,7 @@
                               <img src="{% static 'img/icone_user.png' %}" alt=""  style="width: 40px; height: 40px;"> {{ request.session.info_utilisateur.prenom }}  {{ request.session.info_utilisateur.nom }} 
                             </button>
                             <ul class="dropdown-menu menu_drop ">
-                              <li class="li_drop"><a class="a_drop text-light" href="#">Profil</a></li>
+                              <li class="li_drop"><a class="a_drop text-light" href="{% url 'profil' %}">Profil</a></li>
                               <li class="li_drop"><a class="a_drop text-light" href="{% url 'mes_reservations' %}">Mes réservations</a></li>
                               <li class="li_drop" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a class="a_drop text-light" href="#">Déconnexion</a></li>
 

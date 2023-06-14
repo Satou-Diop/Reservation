@@ -47,19 +47,14 @@ def connexion(request):
                     return render(request, 'connexion.html', {'erreur_message': message})
                     
                 else :
-                    keys = ['id', 'nom', 'prenom', 'addresse', 'email', 'telephone']
+                    keys = ['id', 'nom', 'prenom', 'adresse', 'email', 'telephone']
                     result = dict(zip(keys, res[0]))
                     result['estConnecte'] = True
                     cursor.close()
                     conn.close()
                     # Stocker le dictionnaire dans la session
                     request.session['info_utilisateur'] = result
-                    url_precedente = request.META.get('HTTP_REFERER')
-                    # if url_precedente:
-                    #     return redirect(url_precedente)
-                    # # Si l'URL précédente n'est pas disponible, vous pouvez rediriger vers une page par défaut
-                    # else:
-                    #     return redirect('index')
+                    url_precedente = request.META.get('HTTP_REFERER')                                                                                                       #     return redirect('index')
                     return redirect('index')
                 
             except Exception as e:
@@ -152,7 +147,7 @@ def resultat(request):
         message=''
         conn = sql.connect(**config)
         cursor = conn.cursor()
-        requete="select * from app_reservation_hotel where nom LIKE '%{}%' or ville LIKE '%{}%' ".format(lieu,lieu)
+        requete="SELECT h.id_hotel, h.nom, h.code_pays,h.ville,h.photo, MIN(c.prix) AS prix FROM app_reservation_chambre c INNER JOIN app_reservation_hotel h ON c.hotel_id = h.id_hotel WHERE h.ville LIKE '%{}%' GROUP BY h.id_hotel;' ".format(lieu)
         cursor.execute(requete)
         res=cursor.fetchall()
         if res==[]:
@@ -166,11 +161,11 @@ def resultat(request):
             
         else :
             resultats=[]
-            keys = ['id', 'nom', 'code','ville','photo']
+            keys = ['id', 'nom', 'code','ville','photo','prix']
             for i in res:
                 result = dict(zip(keys, i))
                 resultats.append(result)
-            liste_hotels = {item['id']: {'nom': item['nom'], 'code': item['code'],'ville': item['ville'],'photo': item['photo']} for item in resultats}
+            liste_hotels = {item['id']: {'nom': item['nom'], 'code': item['code'],'ville': item['ville'],'photo': item['photo'],'prix': item['prix']} for item in resultats}
             context = {'liste_hotels': liste_hotels}
             cursor.close()
             conn.close()
@@ -194,6 +189,9 @@ def chambre(request):
     
     id_hotel  = request.POST.get('id_hotel')
     request.session['id_hotel']=request.POST.get('id_hotel')
+    date_reservation = request.session['hotel_info']['arrivee']
+    date_restitution  = request.session['hotel_info']['depart']
+    print(date_restitution)
     try:
         conn = sql.connect(**config)
         cursor = conn.cursor()
@@ -206,7 +204,7 @@ def chambre(request):
         context = {
                 'hotel': hotel,
                 }
-        requete2="select * from app_reservation_chambre where hotel_id='{}' ".format(id_hotel)
+        requete2="SELECT * FROM app_reservation_chambre WHERE hotel_id = '{}' AND id NOT IN ( SELECT chambre_id FROM app_reservation_reservations_hotel WHERE date_reservation >= '{} 00:00:00.000000' AND date_restitution <= '{} 00:00:00.000000' ); ".format(id_hotel,date_reservation,date_restitution)
         cursor.execute(requete2)
         res=cursor.fetchall()
         if res==[]:
@@ -355,3 +353,7 @@ def annuler(request):
         print(str(e))  # Afficher l'erreur pour le débogage
         message='Erreur route'
         return render(request,'mes_reservations.html',{})
+    
+def profil(request):
+
+    return render(request,'profil.html',{})

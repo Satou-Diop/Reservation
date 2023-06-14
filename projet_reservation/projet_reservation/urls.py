@@ -30,5 +30,6 @@ urlpatterns = [
     path("deconnexion/", views.deconnexion, name='deconnexion'),
     path("inscription/", views.inscription, name='inscription'),
     path("annuler/", views.annuler, name='annuler'),
+    path("profil/", views.profil, name='profil')
     
 ]

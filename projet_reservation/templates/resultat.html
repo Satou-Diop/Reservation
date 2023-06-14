@@ -102,12 +102,13 @@
                          <div class="row">
                              <div class="col-sm-6">
                                  <div class="ind">A partir de</div>
-                                 <div class="tarif">90.000 Frs / Nuit</div>
+                                 <div class="tarif">{{ value.prix }} Frs / Nuit</div>
                                  <div class="localisation taxes">Frais et taxes compris</div>
                              </div>
                              <div class="col-sm-6 btn_div ">
-                              <form action="{% url 'chambre' %}"  method="post" class="p-2"> {% csrf_token %}<input type="hidden" name="id_hotel" value="{{ key }}">
-                                <form action="{% url 'chambre' %}"  method="post" class="p-2"> {% csrf_token %}<input type="hidden" name="id_hotel" value="{{ key }}"> <button class="offre " type= "submit">Voir Disponibilités</button></form>
+                                <form action="{% url 'chambre' %}"  method="post" class="p-2">
+                                   {% csrf_token %}<input type="hidden" name="id_hotel" value="{{ key }}">
+                                    <button class="offre " type= "submit">Voir Disponibilités</button></form>
                              </div>
 
                          </div>
