@@ -147,7 +147,7 @@ def resultat(request):
         message=''
         conn = sql.connect(**config)
         cursor = conn.cursor()
-        requete="SELECT h.id_hotel, h.nom, h.code_pays,h.ville,h.photo, MIN(c.prix) AS prix FROM app_reservation_chambre c INNER JOIN app_reservation_hotel h ON c.hotel_id = h.id_hotel WHERE h.ville LIKE '%{}%' GROUP BY h.id_hotel;' ".format(lieu)
+        requete="SELECT h.id_hotel, h.nom, h.code_pays,h.ville,h.photo, MIN(c.prix) AS prix FROM app_reservation_chambre c INNER JOIN app_reservation_hotel h ON c.hotel_id = h.id_hotel WHERE h.ville LIKE '%{}%' or h.nom LIKE '%{}%' GROUP BY h.id_hotel;' ".format(lieu,lieu)
         cursor.execute(requete)
         res=cursor.fetchall()
         if res==[]:
@@ -280,7 +280,7 @@ def reservation(request):
             info_utilisateur = request.session['info_utilisateur']
             if 'email' in info_utilisateur:
                 email_user = info_utilisateur['email']
-                subject = 'Bienvenue sur notre site'
+                subject = 'Reservation de chambre'
                 html_message = render_to_string('confirmation.html', {'user_email': email_user})
                 plain_message = strip_tags(html_message)
 

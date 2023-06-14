@@ -1093,13 +1093,7 @@ to{border-right-color: transparent;}
   }
   
    
-  textarea {
-    max-width: 400px;
-    background-color: #fafafa;
-    color: #06005f;
-    letter-spacing: 1px;
-    margin: 2%;
-  }
+ 
   
   .send-button {
     margin-top: 15px;
