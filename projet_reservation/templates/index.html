@@ -149,7 +149,7 @@
                       <span>Date de location : </span>
                       <div class="dateheure">
                         <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Mon Image">
-                        <input class="input"  name="Datelocation"  type="datetime-local"  >
+                        <input class="input"  name="Datelocation"  type="datetime-local" required  >
                       </div>
                     </div>
                   </div>
@@ -159,13 +159,12 @@
                       <span>Date de retour : </span>
                       <div class="dateheure">
                         <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
-                         <input class="input" name="Retourlocation"  type="datetime-local"  > 
+                         <input class="input" name="Retourlocation"  type="datetime-local" required > 
                       </div>
                     </div>
                   </div>
 
                 </div>
-            
               <br>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="bouton" type="submit">RECHERCHER</button>

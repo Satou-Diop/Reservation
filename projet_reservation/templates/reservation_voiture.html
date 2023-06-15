@@ -36,45 +36,46 @@
                 </div>
                 <div class="col-sm-6 res_t2 ">
                 </div>
+                Voiture
               </div>
             <div class="row ">
               <div class="col-sm-4 text-end res_t ">
                   Type de Voiture:
               </div>
               <div class="col-sm-6 res_t2 ">
-                {{ Voiture.type }} 
-              </div>
+              </div>              
             </div>
             <div class="row ">
               <div class="col-sm-4 text-end res_t ">
                   Nombre de personnes:
               </div>
               <div class="col-sm-6 res_t2 ">
-                {{ chambre.nombre }}
+                7
               </div>
             </div>
             <div class="row ">
               <div class="col-sm-4 text-end res_t ">
-                  Arrivée:
+                Date de location :
+                
               </div>
               <div class="col-sm-6 res_t2 ">
-                {{ reservation.arrivee }} 
+                20/07/2023
               </div>
             </div>
             <div class="row ">
                 <div class="col-sm-4 text-end res_t ">
-                    Départ:
+                  Date de retour :
                 </div>
                 <div class="col-sm-6 res_t2 ">
-                  {{ reservation.depart }}
+                  21/07/2023
                 </div>
             </div>
             <div class="row ">
                 <div class="col-sm-4 text-end res_t ">
-                    Nuitée:
+                    Type:
                 </div>
                 <div class="col-sm-6 res_t2 ">
-                  {{ chambre.prix }}  Francs CFA
+                 manuelle
                 </div>
             </div>
           </div>
@@ -82,17 +83,17 @@
 
       </div>
       <div class="col-sm-4 border">
-        <img src="{% static 'img/terrou_bi.jpeg'%}" class="img-thumbnail mt-2" alt="...">
-        <div class="h_name">LODGE DU DELTA NIOMINKA-ILE DE DIONEWAR</div>
+        <img src="{% static 'img/v1.jpeg'%}" class="img-thumbnail mt-2" alt="...">
+        <div class="h_name">Hyundai - Tucson
+        </div>
         <div>Dakar, SN</div>
       </div>
     </div>     
 
 
-    
     <div class="row border ">
         <div class="col-sm-8 text-end res_m">
-            Montant Total :
+            Montant Total : 100.000FCCFA
         </div>
         <input type="hidden" id="date_arrivee" value="{{ reservation.arrivee }} ">
         <input type="hidden" id="date_depart" value="{{ reservation.depart }}">

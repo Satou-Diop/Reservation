@@ -61,8 +61,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 
 :root{
-    --yellow:#063bf9;
-    --light-yellow:#ffee80;
+    --blue:#063bf9;
+    --light-blue:#0a5ae3;
     --black:#130f40;
     --light-color:#666;
     --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
@@ -86,16 +86,13 @@ html{
     scroll-behavior: smooth;
 }
 
+
+
 section{
     padding:2rem 9%;
 }
 
-/* .heading{
-    padding-bottom: 2rem;
-    text-align: center;
-    font-size: 4.5rem;
-    color:var(--black);
-} */
+
 /* 
 .heading span{
     position: relative;

@@ -29,6 +29,15 @@ urlpatterns = [
     path("voir_plus/", views.voir_plus, name='voir_plus'),
     path("my_reservations/", views.my_reservations, name='my_reservations'),
     path("deconnexion/", views.deconnexion, name='deconnexion'),
+    path("profilUser/", views.  profilUser, name='profilUser'),
+    path('test-email/', views.test_email, name='test_email'),
+
+
+
+
+
+
+
 
 
     # path('res/', views.res_app, name='res_app')

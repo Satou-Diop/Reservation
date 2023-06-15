@@ -137,3 +137,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'ndeyefatoumbengue20@gmail.com'  # Votre adresse e-mail
 EMAIL_HOST_PASSWORD = 'msvabdtpjfftiepv'  # Votre mot de passe
+
+
+
+
+
+
+
+
+

@@ -194,16 +194,75 @@ def deconnexion(request):
 
 
 
-
 def reservation_voiture(request):
- 
-    return render(request,'reservation_voiture.html',{})
+    # id_voiture  = request.POST.get('id_voiture')
+    # if 'info_utilisateur' in request.session:
+    #     info_utilisateur = request.session['info_utilisateur']
+    #     if 'id' in info_utilisateur:
+    #         id_user = info_utilisateur['id']
+    # if 'voiture_info' in request.session:
+    #     arrivee = request.session['voiture_info']['arrivee']
+    #     arrivee_datetime = datetime.strptime(arrivee, '%Y-%m-%d').replace(hour=0, minute=0, second=0)
+    #     depart = request.session['voiture_info']['depart']
+    #     depart_datetime = datetime.strptime(depart, '%Y-%m-%d').replace(hour=0, minute=0, second=0)
+
+    # try:
+    #     message=''
+    #     conn = sql.connect(**config)
+    #     cursor = conn.cursor()
+    #     requete="INSERT INTO app_reservation_location_voiture (id, date_reservation, date_restitution, utilisateur_id,voiture_id,paiement) VALUES (NULL, '{}', '{}', '{}', '{}',0);".format(arrivee_datetime,depart_datetime,int(id_voiture),int(id_user))
+    #     cursor.execute(requete)
+    # # Valider les modifications
+    #     conn.commit()
+    #     cursor.execute("SELECT * FROM `app_reservation_location_voiture` ORDER BY id DESC LIMIT 1;")
+    #     res=cursor.fetchall()
+    #     keys = ['id', 'arrivee', 'depart', 'id_voiture']
+    #     reservations = dict(zip(keys, res[0]))
+    #     cursor.execute(" SELECT * FROM app_reservation_location_voiture WHERE id = '{}' ".format(reservations['id_voiture']))
+    #     res=cursor.fetchall()
+    #     keys = ['id', 'type', 'desc','prix', 'nombre']
+    #     voiture = dict(zip(keys, res[0]))
+    #     context = {
+    #             'reservation_voiture': reservation_voiture,
+    #             'voiture':voiture
+    #             }
+    #     cursor.close()
+    #     conn.close()
+    #     if 'info_utilisateur' in request.session:
+    #         info_utilisateur = request.session['info_utilisateur']
+    #         if 'email' in info_utilisateur:
+    #             email_user = info_utilisateur['email']
+    #             subject = 'Bienvenue sur notre site'
+    #             html_message = render_to_string('confirmation.html', {'user_email': email_user})
+    #             plain_message = strip_tags(html_message)
+
+    #             email = EmailMultiAlternatives(subject, plain_message, to=[email_user])
+    #             email.attach_alternative(html_message, "text/html")
+    #             email.send()
+    #     return render(request, 'reservation_voiture.html', context)
+    # except Exception as e:
+    #     print(str(e))  # Afficher l'erreur pour le débogage
+    #     message='Erreur route'
+        
+    #     return render(request, 'connexion.html', {'erreur_message': message})
+
+        return render(request,'reservation_voiture.html',{})
+
+from django.core.mail import send_mail
 
    
+def test_email(request):
+    subject = 'Test Email'
+    message = 'This is a test email.'
+    from_email = 'ndeyefatoumbengue20@gmail.com'
+    to_email = ['ndeyefatoumbengue20@gmail.com']
+    send_mail(subject, message, from_email, to_email)
 
 
 
 def paiement(request):
+
+    id_reservation  = request.POST.get('id_reservation')
 
     return render(request,'paiement.html',{})
 
@@ -270,11 +329,11 @@ def my_reservations(request):
     try:
         conn = sql.connect(**config)
         cursor = conn.cursor()
-        requete="INSERT INTO app_reservation_reservations_hotel (id, date_reservation, date_restitution, chambre_id, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_chambre),int(id_user))
+        requete="INSERT INTO app_reservation_location_voiture (id, date_reservation, date_restitution, voitureid, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_voiture),int(id_user))
         cursor.execute(requete)
         # Valider les modifications
         conn.commit()
-        cursor.execute("SELECT * FROM `app_reservation_reservations_hotel` where utilisateur_id ='{}' ".format(id_user))
+        cursor.execute("SELECT * FROM `app_reservation_location_voiture` where utilisateur_id ='{}' ".format(id_user))
         res=cursor.fetchall()
         if res==[]:
             return render(request,'my_reservations.html',{})
@@ -292,6 +351,11 @@ def my_reservations(request):
         message='Erreur route'
         return render(request,'my_reservations.html',{})
    
+
+
+def profilUser(request):
+
+    return render(request,'profilUser.html',{})
 
 
 
