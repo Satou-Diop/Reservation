@@ -7,7 +7,7 @@ from datetime import datetime
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
+from django.contrib.auth.hashers import make_password,check_password
 
 config = {
     'user': 'admin_reservation',
@@ -21,13 +21,12 @@ cursor = conn.cursor()
 nom,prenom,email,telephone,adresse,mot_de_passe='','','','','',''
 # Create your views here.
 def index(request):
-    # Definir les variables globale
+
     return render(request, 'index.html',  {})
     
     
 
 def connexion(request):
-    submitted=False
     if request.method=="POST":
         message=''
         email = request.POST.get('email')
@@ -59,13 +58,7 @@ def connexion(request):
                 
             except Exception as e:
                 print(str(e))  # Afficher l'erreur pour le débogage
-                message='Erreur route'
-                return render(request, 'connexion.html', {'erreur_message': message})
-        
-    # Effectuer des opérations
-    
-    # Renvoyer une réponse HTTP
-    #return HttpResponse('Un texte pour tester')
+                return render(request, 'erreur.html', {})
     else:
         context = {
         'variable': 'Contenu dynamique'
@@ -81,7 +74,8 @@ def inscription(request):
         telephone = request.POST.get('telephone')
         adresse = request.POST.get('adresse')
         mot_de_passe = request.POST.get('mot_de_passe')
-
+        hash_mdp=make_password(mot_de_passe)
+        print(hash_mdp)
         try:
             conn = sql.connect(**config)
             cursor = conn.cursor()
@@ -96,15 +90,10 @@ def inscription(request):
             email.send()
             cursor.close()
             conn.close()
-            return redirect('connexion')  # Rediriger vers la page d'accueil après l'inscription réussie
+            return redirect('connexion')  
         except Exception as e:
-            print(str(e))  # Afficher l'erreur pour le débogage
-            return render(request, 'inscription.html', {'error_message': 'erreur'})
-        
-    # Effectuer des opérations
-    
-    # Renvoyer une réponse HTTP
-    #return HttpResponse('Un texte pour tester')
+            print(str(e)) 
+            return render(request, 'erreur.html', {})
     else:
         context = {
         'variable': 'Contenu dynamique'
@@ -180,9 +169,8 @@ def resultat(request):
             return render(request, 'resultat.html', context)
         
     except Exception as e:
-        print(str(e))  # Afficher l'erreur pour le débogage
-        message='Erreur route'
-        return render(request, 'connexion.html', {'erreur_message': message})
+        print(str(e))  
+        return render(request, 'erreur.html', {})
 
 
 def chambre(request):
@@ -217,28 +205,19 @@ def chambre(request):
                 result = dict(zip(keys, i))
                 resultats.append(result)
             liste_chambre = {item['id']: { 'type': item['type'],'description': item['description'],'prix': item['prix'],'nombre': item['nombre'],'photo': item['photo']} for item in resultats}
-            
-            context = {
-                'hotel': hotel,
-                'liste_chambre': liste_chambre}
-          
+            context = {'hotel': hotel,'liste_chambre': liste_chambre}
             cursor.close()
             conn.close()
-            # Stocker le dic{{hotel.nom}}tionnaire dans la session
             return render(request, 'chambre.html', context)
         
     except Exception as e:
         print(str(e))  # Afficher l'erreur pour le débogage
-        message='Erreur route'
-        return render(request, 'chambre.html', {'erreur_message': message})
+        return render(request, 'erreur.html', {})
 
 
 def deconnexion(request):
     # Supprimer la session
     request.session.flush()
-
-    # Autres traitements de votre vue
-
     return redirect(index)
 
 def reservation(request):
@@ -252,8 +231,6 @@ def reservation(request):
         arrivee_datetime = datetime.strptime(arrivee, '%Y-%m-%d').replace(hour=0, minute=0, second=0)
         depart = request.session['hotel_info']['depart']
         depart_datetime = datetime.strptime(depart, '%Y-%m-%d').replace(hour=0, minute=0, second=0)
-
-    
     try:
         message=''
         conn = sql.connect(**config)
@@ -289,18 +266,14 @@ def reservation(request):
                 email.send()
         return render(request, 'reservation.html', context)
     except Exception as e:
-        print(str(e))  # Afficher l'erreur pour le débogage
-        message='Erreur route'
-        return render(request, 'connexion.html', {'erreur_message': message})
-
-
-    
+        print(str(e))  
+        return render(request, 'erreur.html',{})
 
 
 def paiement(request):
     id_reservation  = request.POST.get('id_reservation')
-
-    return render(request,'paiement.html',{'id_reservation' :id_reservation})
+    type_reservation= request.POST.get('type_reservation')
+    return render(request,'paiement.html',{'id_reservation' :id_reservation,'type_reservation' :type_reservation})
 
 
 def mes_reservations(request):
@@ -310,50 +283,271 @@ def mes_reservations(request):
         if 'id' in info_utilisateur:
             id_user = info_utilisateur['id']
     try:
+        liste_chambre,liste_voiture,liste_vol={},{},{}
         conn = sql.connect(**config)
         cursor = conn.cursor()
+        #Recuperer les chambres
         cursor.execute("SELECT * FROM `app_reservation_reservations_hotel` where utilisateur_id ='{}' ".format(id_user))
         res=cursor.fetchall()
-        if res==[]:
-            return render(request,'mes_reservations.html',{})
-        else :
+        if res!=[]:
             resultats=[]
-            keys = ['id', 'arrivee', 'depart']
+            keys = ['id', 'arrivee', 'depart','user','chambre','paiement']
             for i in res:
                 result = dict(zip(keys, i))
                 resultats.append(result)
-            liste_reservation = {item['id']: { 'arrivee': item['arrivee'],'depart': item['depart']} for item in resultats}
-            print(liste_reservation)
-            context = {
-                'reservation': liste_reservation,
-            }
-            cursor.close()
-            conn.close()
-            return render(request,'mes_reservations.html',context)
+            liste_chambre = {item['id']: { 'arrivee': item['arrivee'],'depart': item['depart'],'paiement': item['paiement']} for item in resultats}
+        #Recuperer les voitures
+        cursor.execute("SELECT * FROM `app_reservation_location_voiture` where utilisateur_id ='{}' ".format(id_user))
+        res=cursor.fetchall()
+        if res!=[]:
+            resultats=[]
+            keys = ['id', 'arrivee', 'depart','user','voiture','paiement']
+            for i in res:
+                result = dict(zip(keys, i))
+                resultats.append(result)
+            liste_voiture = {item['id']: { 'arrivee': item['arrivee'],'depart': item['depart'],'paiement': item['paiement']} for item in resultats}
+        context = {
+            'chambre': liste_chambre,
+            'voiture':liste_voiture
+        }
+        cursor.close()
+        conn.close()
+        return render(request,'mes_reservations.html',context)
     except Exception as e:
-        print(str(e))  # Afficher l'erreur pour le débogage
-        message='Erreur route'
-        return render(request,'mes_reservations.html',{})
+        print(str(e)) 
+        return render(request,'erreur.html',{})
     
 
 def annuler(request):
-    if request.method=="POST":
-        id_reservation = request.POST.get('id_reservation')
+  
+    id_reservation = request.POST.get('id_reservation')
+    print(id_reservation)
+    type_reservation= request.POST.get('type_reservation')
    
     try:
         conn = sql.connect(**config)
         cursor = conn.cursor()
-        cursor.execute(" DELETE FROM `app_reservation_reservations_hotel` WHERE `app_reservation_reservations_hotel`.`id` = {} ".format(int(id_reservation
-        )))
+        cursor.execute(" DELETE FROM `{}` WHERE `{}`.`id` = {} ".format(type_reservation,type_reservation, int(id_reservation)))
         conn.commit()
         cursor.close()
         conn.close()
         return redirect('mes_reservations')
     except Exception as e:
-        print(str(e))  # Afficher l'erreur pour le débogage
-        message='Erreur route'
-        return render(request,'mes_reservations.html',{})
+        print(str(e))  
+        return render(request,'erreur.html',{})
     
 def profil(request):
 
     return render(request,'profil.html',{})
+
+def erreur(request):
+
+    return render(request,'erreur.html',{})
+
+def valider_paiement(request):
+    id_reservation  = request.POST.get('id_reservation')
+    type_reservation= request.POST.get('type_reservation')
+    if 'info_utilisateur' in request.session:
+        info_utilisateur = request.session['info_utilisateur']
+        if 'id' in info_utilisateur:
+            id_user = info_utilisateur['id']
+   
+    try:
+        print(id_reservation)
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="UPDATE {} SET paiement = '1' WHERE {}.id = '{}';".format(type_reservation,type_reservation,id_reservation)
+        cursor.execute(requete)
+        # Valider les modifications
+        conn.commit()
+        cursor.close()
+        conn.close()
+        if 'info_utilisateur' in request.session:
+            info_utilisateur = request.session['info_utilisateur']
+            if 'email' in info_utilisateur:
+                email_user = info_utilisateur['email']
+                subject = 'Validation Paiement'
+                html_message = render_to_string('validation.html', {'user_email': email_user})
+                plain_message = strip_tags(html_message)
+                email = EmailMultiAlternatives(subject, plain_message, to=[email_user])
+                email.attach_alternative(html_message, "text/html")
+                email.send()
+        return redirect('mes_reservations')
+    except Exception as e:
+        print(str(e))  
+        return render(request, 'erreur.html',{})
+
+
+
+def car_list(request):
+    if request.method =="POST":
+        Lieulocation  = request.POST.get('Lieulocation')
+        Datelocation  = request.POST.get('Datelocation')
+        Retourlocation  = request.POST.get('Retourlocation')
+
+        try:
+            message=''
+            conn = sql.connect(**config)
+            cursor = conn.cursor()
+            requete="select * from app_reservation_voiture where localisation LIKE '%{}%'  ".format(Lieulocation)
+            cursor.execute(requete)
+            res=cursor.fetchall()
+            print(res)
+            if res==[]:
+                
+                return render(request, 'car_list.html', {})
+                
+            else :
+                resultats=[]
+                keys = ['id', 'marque','modele','localisation','annee','type','prix', 'nombre_place','photo','disponible']
+                for i in res:
+                    result = dict(zip(keys, i))
+                    resultats.append(result)
+                liste_voiture= {item['id']: {'marque': item['marque'], 'modele': item['modele'],'localisation': item['localisation'],'annee': item['annee'],'type': item['type'],'prix': item['prix'],'nombre_place': item['nombre_place'],'photo': item['photo'],'disponible': item['disponible']} for item in resultats}
+                inputs={
+                    'lieu': Lieulocation,
+                    'arrivee':Datelocation,
+                    'depart':Retourlocation,  
+                }
+                request.session['voiture_info']={
+                    'arrivee':Datelocation,
+                    'depart':Retourlocation
+                }
+                context = {
+                    'liste_voiture': liste_voiture,
+                    'inputs':inputs
+                    }
+                cursor.close()
+                conn.close()
+
+                return render(request, 'car_list.html', context)
+            
+        except Exception as e:
+            print(str(e))  # Afficher l'erreur pour le débogage
+            message='Erreur route'
+            return render(request, 'connexion.html', {'erreur_message': message})
+
+
+
+def voir_plus(request):
+    id_voiture  = request.POST.get('id_voiture')
+    print(id_voiture)
+    try:
+        message=''
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="select * from app_reservation_voiture where id = {}  ".format(int(id_voiture))
+        cursor.execute(requete)
+        res=cursor.fetchall()
+        print(res)
+        if res==[]:
+           
+            return render(request, 'voir_plus.html', {})
+            
+        else :
+            resultats=[]
+            keys = ['id', 'marque','modele','localisation','annee','type','prix', 'nombre_place','photo','disponible']
+            for i in res:
+                result = dict(zip(keys, i))
+                resultats.append(result)
+            liste_voiture= {item['id']: {'marque': item['marque'], 'modele': item['modele'],'localisation': item['localisation'],'annee': item['annee'],'type': item['type'],'prix': item['prix'],'nombre_place': item['nombre_place'],'photo': item['photo'],'disponible': item['disponible']} for item in resultats}
+            context = {'liste_voiture': liste_voiture}
+            cursor.close()
+            conn.close()
+            
+            return render(request, 'voir_plus.html', context)
+        
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request, 'connexion.html', {'erreur_message': message})
+
+   
+
+def my_reservations(request):
+    
+    if 'info_utilisateur' in request.session:
+        info_utilisateur = request.session['info_utilisateur']
+        if 'id' in info_utilisateur:
+            id_user = info_utilisateur['id']
+    if 'voiture_info' in request.session:
+        voiture_info = request.session['voiture_info']
+        if 'arrivee' in voiture_info:
+            arrivee = voiture_info['arrivee']
+        if 'depart' in voiture_info:
+            depart = voiture_info['depart']
+    
+    try:
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="INSERT INTO app_reservation_location_voiture (id, date_reservation, date_restitution, voitureid, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_voiture),int(id_user))
+        cursor.execute(requete)
+        # Valider les modifications
+        conn.commit()
+        cursor.execute("SELECT * FROM `app_reservation_location_voiture` where utilisateur_id ='{}' ".format(id_user))
+        res=cursor.fetchall()
+        if res==[]:
+            return render(request,'my_reservations.html',{})
+        else :
+            keys = ['id', 'arrivee', 'depart']
+            reservations = dict(zip(keys, res[0]))
+            context = {
+                'reservation': reservations,
+            }
+            cursor.close()
+            conn.close()
+            return render(request,'my_reservations.html',context)
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+        message='Erreur route'
+        return render(request,'my_reservations.html',{})
+   
+
+def reservation_voiture(request):
+    id_voiture  = request.POST.get('id_voiture')
+    if 'info_utilisateur' in request.session:
+        info_utilisateur = request.session['info_utilisateur']
+        if 'id' in info_utilisateur:
+            id_user = info_utilisateur['id']
+    if 'voiture_info' in request.session:
+        voiture_info = request.session['voiture_info']
+        if 'arrivee' in voiture_info:
+            arrivee = voiture_info['arrivee']
+        if 'depart' in voiture_info:
+            depart = voiture_info['depart']
+    try:
+        message=''
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="INSERT INTO app_reservation_location_voiture (id, date_reservation, date_restitution,utilisateur_id,voiture_id, paiement) VALUES (NULL, '{}', '{}', '{}', '{}',0);".format(arrivee,depart,int(id_user),int(id_voiture))
+        cursor.execute(requete)
+    # Valider les modifications
+        conn.commit()
+        cursor.execute("SELECT * FROM `app_reservation_location_voiture` ORDER BY id DESC LIMIT 1;")
+        res=cursor.fetchall()
+        keys = ['id', 'arrivee', 'depart', 'id_user','id_voiture']
+        reservations = dict(zip(keys, res[0]))
+        cursor.execute(" SELECT * FROM app_reservation_voiture WHERE id = '{}' ".format(reservations['id_voiture']))
+        res=cursor.fetchall()
+        keys = ['id','marque','modele','localisation','annee', 'type', 'prix', 'nombre_place','photo']
+        voiture = dict(zip(keys, res[0]))
+        context = {
+                'reservations': reservations,
+                'voiture':voiture
+                }
+        cursor.close()
+        conn.close()
+        if 'info_utilisateur' in request.session:
+            info_utilisateur = request.session['info_utilisateur']
+            if 'email' in info_utilisateur:
+                email_user = info_utilisateur['email']
+                subject = 'Confirmation Réservation Voiture'
+                html_message = render_to_string('confirmation.html', {'user_email': email_user})
+                plain_message = strip_tags(html_message)
+                email = EmailMultiAlternatives(subject, plain_message, to=[email_user])
+                email.attach_alternative(html_message, "text/html")
+                email.send()
+        return render(request, 'reservation_voiture.html', context)
+    except Exception as e:
+        print(str(e))  
+        return render(request, 'erreur.html', {})
