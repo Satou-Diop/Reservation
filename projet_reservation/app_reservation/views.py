@@ -462,44 +462,6 @@ def voir_plus(request):
 
    
 
-def my_reservations(request):
-    
-    if 'info_utilisateur' in request.session:
-        info_utilisateur = request.session['info_utilisateur']
-        if 'id' in info_utilisateur:
-            id_user = info_utilisateur['id']
-    if 'voiture_info' in request.session:
-        voiture_info = request.session['voiture_info']
-        if 'arrivee' in voiture_info:
-            arrivee = voiture_info['arrivee']
-        if 'depart' in voiture_info:
-            depart = voiture_info['depart']
-    
-    try:
-        conn = sql.connect(**config)
-        cursor = conn.cursor()
-        requete="INSERT INTO app_reservation_location_voiture (id, date_reservation, date_restitution, voitureid, utilisateur_id) VALUES (NULL, '{}', '{}', '{}', '{}');".format(arrivee_datetime,depart_datetime,int(id_voiture),int(id_user))
-        cursor.execute(requete)
-        # Valider les modifications
-        conn.commit()
-        cursor.execute("SELECT * FROM `app_reservation_location_voiture` where utilisateur_id ='{}' ".format(id_user))
-        res=cursor.fetchall()
-        if res==[]:
-            return render(request,'my_reservations.html',{})
-        else :
-            keys = ['id', 'arrivee', 'depart']
-            reservations = dict(zip(keys, res[0]))
-            context = {
-                'reservation': reservations,
-            }
-            cursor.close()
-            conn.close()
-            return render(request,'my_reservations.html',context)
-    except Exception as e:
-        print(str(e))  
-        return render(request, 'erreur.html', {})
-   
-
 def reservation_voiture(request):
     id_voiture  = request.POST.get('id_voiture')
     if 'info_utilisateur' in request.session:

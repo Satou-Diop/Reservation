@@ -35,7 +35,6 @@ urlpatterns = [
     path("valider_paiement/", views.valider_paiement, name='valider_paiement'),
     path("car_list/", views.car_list, name='car_list'),
     path("reservation_voiture/", views.reservation_voiture, name='reservation_voiture'),
-    path("my_reservations/", views.my_reservations, name='my_reservations'),
     path("voir_plus/", views.voir_plus, name='voir_plus'),
     
 ]
