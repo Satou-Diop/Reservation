@@ -314,7 +314,8 @@ var supprimer = document.querySelectorAll('.supprimer')
 supprimer.forEach(function(button) {
     button.addEventListener('click', function() {
       document.getElementById('id_reservation').value=button.value
-      
+      document.getElementById('id_reservation2').value=button.value
+      console.log(document.getElementById('id_reservation2'))
      
     });
   });

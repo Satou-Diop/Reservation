@@ -30,6 +30,11 @@ urlpatterns = [
     path("deconnexion/", views.deconnexion, name='deconnexion'),
     path("inscription/", views.inscription, name='inscription'),
     path("annuler/", views.annuler, name='annuler'),
-    path("profil/", views.profil, name='profil')
+    path("profil/", views.profil, name='profil'),
+    path("erreur/", views.erreur, name='erreur'),
+    path("valider_paiement/", views.valider_paiement, name='valider_paiement'),
+    path("car_list/", views.car_list, name='car_list'),
+    path("reservation_voiture/", views.reservation_voiture, name='reservation_voiture'),
+    path("voir_plus/", views.voir_plus, name='voir_plus'),
     
 ]

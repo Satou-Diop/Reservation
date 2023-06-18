@@ -129,42 +129,52 @@
             </form>
             
           </div>
+
           <input type="radio" name="tabs" id="tabthree">
           <label for="tabthree">VOITURES</label>
           <div class="tab">
             <!-- PARTIE VOITURE -->
+            <form action="{% url 'car_list' %}" method="post">
+              {% csrf_token %}
               <div class="row">
                 <div class="col-4">
+
                   <div class="lab_input">
                     <span>Lieu: </span>
                     <div class="dateheure">
-                    <input type="text" class="input"   placeholder="ex : Dakar"> 
+                    <input type="text" name="Lieulocation" class="input" placeholder="ex : Dakar" required> 
                     </div>
                   </div>
                 </div>
+
                 <div class="col-4">
                   <div class="lab_input">
                     <span>Date de location : </span>
                     <div class="dateheure">
-                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input type="date" class="input" ><input  class="input"  type="time" >
+                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Mon Image">
+                      <input class="input"  name="Datelocation"  type="datetime-local" required  >
                     </div>
                   </div>
                 </div>
+
                 <div class="col-4">
                   <div class="lab_input">
                     <span>Date de retour : </span>
                     <div class="dateheure">
-                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image"><input class="input"  type="date"><input class="input"  type="time" >
+                      <img src="{% static 'img/calendar.png' %}" class="calendrier" alt="Ma Image">
+                       <input class="input" name="Retourlocation"  type="datetime-local" required > 
                     </div>
                   </div>
                 </div>
+
               </div>
-              <br>
-              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="bouton" >RECHERCHER</button>
-              </div>
+            <br>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="bouton" type="submit">RECHERCHER</button>
+            </div>
+            </form>
           </div>
-        </div>
+          </div>
   
       </div>
     </div>
@@ -262,7 +272,7 @@
       <br> <br>
         <!-- fin effets -->
      <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
+    <section id="apropos" class="about">
       <div class="container">
 
         <div class="section-title">
@@ -431,7 +441,7 @@
    
     <!-- FIN CARROUSELLES VOITUES -->
      <!-- LES PARTENAIRES -->
-     <div class="section_partner container">
+     <div class="section_partner container" id="services">
       <div class="div1">
           <p class="p1">PARTNERS</p>
           <p class="p2">NOS PARTENAIRES</p>
@@ -459,56 +469,31 @@
     <section id="contact">
   
       <h1 class="section-header">Contact</h1>
+
+      <br>
+      <div class="container">
+
       
-      <div class="contact-wrapper">
-      
-      <!-- Left contact page --> 
-        
-        <form id="contact-form" class="form-horizontal" role="form">
-           
-          <div class="form-group">
-            <div class="col-sm-12">
-              <input type="text" class="form-control" id="name" placeholder="NAME" name="name" value="" required>
-            </div>
-          </div>
-    
-          <div class="form-group">
-            <div class="col-sm-12">
-              <input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="" required>
-            </div>
-          </div>
-    
-          <textarea class="form-control" rows="10" placeholder="MESSAGE" name="message" required></textarea>
-          
-          <button class="btn btn-primary send-button" id="submit" type="submit" value="SEND">
-            <div class="alt-send-button">
-              <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
-            </div>
-          
-          </button>
-          
-        </form>
-        
-      <!-- Left contact page --> 
-        
-          <div class="direct-contact-container">
-    
-            <ul class="contact-list">
-              <li class="list-item"><i class="fa fa-map-marker fa-2x"><span class="contact-text place">Mermoz, Dakar, SEnegal</span></i></li>
-              
-              <li class="list-item"><i class="fa fa-phone fa-2x"><span class="contact-text phone"><a href="tel:+221 77 123 45 67" title="Give me a call">(212) 555-2368</a></span></i></li>
-              
-              <li class="list-item"><i class="fa fa-envelope fa-2x"><span class="contact-text gmail"><a href="mailto:#" title="Send me an email">sentripcontact@gmail.com</a></span></i></li>
-              
-            </ul>
-    
-          
-    
-            <div class="copyright">Lorem ipsum dolor sit amet  .</div>
-            <div class="copyright">Lorem ipsum dolor ur adipisicing elit. .</div>
-          </div>
-        
+      <div class="row">
+        <div class="col-sm-6">
+          <div><input  class="form-control" type="text"  id="name" placeholder="NOM" name="name" value="" required></div><br>
+          <div><input  class="form-control" type="text"  id="name" placeholder="EMAIL" name="name" value="" required></div><br>
+          <div><textarea class="form-control" rows="10" placeholder="MESSAGE" name="message" required></textarea></div><br>
+          <div><button class="btn btn-primary " id="submit" type="submit" value="SEND">
+            Envoyer
+           </button></div>
+        </div>
+        <div class="col-sm-6 p-5"  >
+          <br>
+          <div class="h3 mb-2">Mermoz, Dakar, Senegal</div><br>
+          <div  class=" h3 text-body-secondary">+221 33 880 23 23</div><br>
+          <div class=" h3 text-body-secondary">sentripcontact@gmail.com</div>
+        </div>
+
       </div>
+    </div>
+      <br>
+      
       
     </section>  
       
