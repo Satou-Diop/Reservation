@@ -98,6 +98,7 @@ class Vol(models.Model):
     date_arrivee = models.DateTimeField()
     prix = models.DecimalField(max_digits=10, decimal_places=2)
     nombre_place = models.IntegerField()
+    image=models.CharField(max_length=255,null=True)
     
 
 #INSERTION DES DONNÉES DANS LA TABLE VOLS

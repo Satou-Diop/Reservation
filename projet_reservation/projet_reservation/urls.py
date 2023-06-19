@@ -36,5 +36,7 @@ urlpatterns = [
     path("car_list/", views.car_list, name='car_list'),
     path("reservation_voiture/", views.reservation_voiture, name='reservation_voiture'),
     path("voir_plus/", views.voir_plus, name='voir_plus'),
+    path("resultatvol/", views.resultatvol, name='resultatvol'),
+    path('reservation_vol/', views.reservation_vol, name='reservation_vol'),
     
 ]

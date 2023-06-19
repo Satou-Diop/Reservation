@@ -306,9 +306,20 @@ def mes_reservations(request):
                 result = dict(zip(keys, i))
                 resultats.append(result)
             liste_voiture = {item['id']: { 'arrivee': item['arrivee'],'depart': item['depart'],'paiement': item['paiement']} for item in resultats}
+        #Recuperer les vols
+        cursor.execute("SELECT * FROM `app_reservation_reservation_vol` where utilisateur ='{}' ".format(id_user))
+        res=cursor.fetchall()
+        if res!=[]:
+            resultats=[]
+            keys = ['id','user','vol','date','paiement']
+            for i in res:
+                result = dict(zip(keys, i))
+                resultats.append(result)
+            liste_vol = {item['id']: { 'vol': item['vol'],'date': item['date'],'paiement': item['paiement']} for item in resultats}
         context = {
             'chambre': liste_chambre,
-            'voiture':liste_voiture
+            'voiture':liste_voiture,
+            'vol':liste_vol
         }
         cursor.close()
         conn.close()
@@ -510,3 +521,96 @@ def reservation_voiture(request):
     except Exception as e:
         print(str(e))  
         return render(request, 'erreur.html', {})
+    
+
+
+def resultatvol(request):
+    departure = request.POST.get('departure', '')
+    arrival = request.POST.get('arrival', '')
+    departure_time = request.POST.get('departure_time', '')
+    arrival_time = request.POST.get('arrival_time', '')
+    nombre_place = request.POST.get('nombre_place', '')
+    prix = request.POST.get('prix', '')
+    compagnie = request.POST.get('compagnie', '')
+    image=request.POST.get('image','')
+    print(departure,arrival,departure_time)
+    try:
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete = "SELECT * FROM `app_reservation_vol` WHERE aeroport_depart_id = '{}' AND aeroport_arrivee_id = '{}' AND date_depart >= '{}';".format(departure, arrival, departure_time)
+        cursor.execute(requete)
+        res = cursor.fetchall()
+
+        print(res)
+        if res == []:
+            return render(request, 'resultatvol.html', {})
+        else:
+            resultats = []
+            keys = ['id', 'date_depart', 'date_arrivee', 'prix','nombre_place','aeroport_depart', 'aeroport_arrivee', 'compagnie','image']
+            for row in res:
+                result = dict(zip(keys, row))
+                resultats.append(result)
+            liste_vols = { result['id']:{ 
+                    'date_depart': result['date_depart'],
+                    'date_arrivee': result['date_arrivee'],
+                    'aeroport_depart': result['aeroport_depart'],
+                    'aeroport_arrivee': result['aeroport_arrivee'],
+                    'nombre_place': result['nombre_place'],
+                    'prix': result['prix'],
+                    'image': result['image'],
+
+                    'compagnie': result['compagnie']
+                } for result in resultats
+                }
+          
+            context = {'liste_vols': liste_vols}
+            cursor.close()
+            conn.close()
+
+            return render(request, 'resultatvol.html', context)
+
+    except Exception as e:
+        print(str(e))  # Afficher l'erreur pour le débogage
+       
+        return render(request, 'erreur.html', {})
+    
+
+def reservation_vol(request):
+    if request.method == 'POST':
+        # Récupérer les informations de réservation depuis la requête POST
+        if 'info_utilisateur' in request.session:
+            info_utilisateur = request.session['info_utilisateur']
+            if 'id' in info_utilisateur:
+                id_user = info_utilisateur['id']  
+    id_vol= request.POST.get('id_vol')
+    date= datetime.now()
+    date_forma=date.strftime("%Y-%m-%d %H:%M:%S")
+    if id_user:
+
+        print(id_vol)
+        print(id_user)
+        try:
+            message=''
+            conn = sql.connect(**config)
+            cursor = conn.cursor()
+            requete="INSERT INTO `app_reservation_reservation_vol` (`id`, `utilisateur`, `vol`, `date`) VALUES (NULL, '{}', '{}', '{}')".format(id_user,id_vol,date_forma);
+            
+            cursor.execute(requete)
+            # Valider les modifications
+            conn.commit()
+           
+            cursor.close()
+            conn.close()
+            
+            return redirect('paiement')
+        except Exception as e:
+            print(str(e))  # Afficher l'erreur pour le débogage
+            message='Erreur route'
+            return render(request, 'flight/paiement.html', {'erreur_message': message})
+        
+        
+    else:
+        return redirect('flight/paiement.html')
+    
+
+
