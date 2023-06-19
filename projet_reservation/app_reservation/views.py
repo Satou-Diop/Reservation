@@ -10,8 +10,8 @@ from django.utils.html import strip_tags
 from django.contrib.auth.hashers import make_password,check_password
 
 config = {
-    'user': 'admin_reservation',
-    'password': 'Reservation123@',
+    'user': 'fatou',
+    'password': 'SEYnabou16',
     'host': 'localhost',
     'database': 'bd_app',
 }
@@ -426,7 +426,6 @@ def car_list(request):
             print(str(e))  # Afficher l'erreur pour le débogage
             message='Erreur route'
             return render(request, 'connexion.html', {'erreur_message': message})
-
 
 
 def voir_plus(request):
