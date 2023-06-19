@@ -42,7 +42,17 @@
                 <div class="nom_hotel">Prix : {{value.prix}} CFA / Jour</div>
               </div>
               <div class="col-sm-6 d-flex justify-content-end">
+<<<<<<< HEAD
                     <button class="btn btn-primary" type="submit"  data-info="{{ key }}" data-bs-toggle="modal"  data-bs-target="#staticBackdrop5" >Reserver</button>
+=======
+                <form action="{%url 'reservation_voiture'%}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="id_voiture" value="{{ key }}">
+                  
+                    <button class="btn btn-primary" type="submit" >Reserver</button>
+                  
+                </form>
+>>>>>>> fatou
               </div>
 
             </div>
@@ -56,6 +66,7 @@
    </div>
   <p>{{ hotel.description }}</p>
 
+<<<<<<< HEAD
   
 
   <br>
@@ -100,11 +111,60 @@
   
   {% endfor %}
 
+=======
+  {% endfor %}
+
+  <br>
+
+  
+  <br>
+
+  
+
+>>>>>>> fatou
 
 <!-- Button trigger modal -->
 
 
+<<<<<<< HEAD
 
+=======
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5 p_text" id="staticBackdropLabel">Reservation</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    {% if request.session.info_utilisateur.nom %}
+    <div class="modal-body">
+        Souhaitez vous reserver la chambre ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <form action="{% url 'reservation' %}" method="post"  id="myForm">
+        {% csrf_token %}
+        <input type="hidden"  name='id_chambre' id='id_chambre'  >
+        <button type="submit"  class="btn btn-primary confirmer"> Confirmer</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="modal-body">
+        Vous devez-vous connecter pour pouvoir effectuer une réservation 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <a href="/connexion"><button type="button" class="btn btn-primary"> Se Connecter</button></a>
+        
+      </div>
+
+    {% endif %}
+    
+  </div>
+</div>
+</div>
+>>>>>>> fatou
 </section>
 
 

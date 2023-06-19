@@ -21,7 +21,6 @@ from app_reservation import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name='index'),
-    path("resultat/", views.resultat, name='resultat'),
     path("chambre/", views.chambre, name='chambre'),
     path("reservation/", views.reservation, name='reservation'),
     path("mes_reservations/", views.mes_reservations, name='mes_reservations'),
@@ -30,11 +29,6 @@ urlpatterns = [
     path("deconnexion/", views.deconnexion, name='deconnexion'),
     path("inscription/", views.inscription, name='inscription'),
     path("annuler/", views.annuler, name='annuler'),
-    path("profil/", views.profil, name='profil'),
-    path("erreur/", views.erreur, name='erreur'),
-    path("valider_paiement/", views.valider_paiement, name='valider_paiement'),
-    path("car_list/", views.car_list, name='car_list'),
-    path("reservation_voiture/", views.reservation_voiture, name='reservation_voiture'),
-    path("voir_plus/", views.voir_plus, name='voir_plus'),
+    path("profil/", views.profil, name='profil')
     
 ]

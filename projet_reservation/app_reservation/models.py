@@ -240,6 +240,7 @@ class Location_Voiture(models.Model):
     voiture = models.ForeignKey(Voiture, to_field='id', on_delete=models.CASCADE, related_name='voiture')
     date_reservation = models.DateTimeField()
     date_restitution = models.DateTimeField()
+    paiement=models.BooleanField(default=False)
     
 
 # utilisateur = Utilisateur.objects.get(id=1)

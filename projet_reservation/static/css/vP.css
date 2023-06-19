@@ -1,0 +1,65 @@
+.carte_vp {
+    margin-top: 2%;
+    margin-left: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    /* overflow: hidden; */
+    width: 50%;
+    height: 100%;
+  }
+  
+  .carte-image_vp {
+    flex:  10%;
+    /* display: inline-block; */
+
+  }
+
+  .prix_vp{
+    margin-left: 10px;
+    /* border: 10% solid black; */
+
+  }
+
+  .texte_vp{
+    margin-top: -1%;
+    flex: 1 1 10%;
+    display: inline-block;
+    color: black;
+
+  } 
+
+
+  .carte-image_vp img {
+    width: 100%;
+    height: 90%;
+    display: inline-block;
+
+  }
+  
+  .carte-details_vp {
+    flex: 1 1 50%;
+    padding: 20px;
+  }
+  
+  .carte-title_vp {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .carte-description_vp {
+    font-size: 30px;
+    line-height: 1.5;
+  }
+  
+
+
+
+  
+  
+
+

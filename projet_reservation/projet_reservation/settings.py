@@ -76,9 +76,9 @@ WSGI_APPLICATION = "projet_reservation.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bd_app',
-        'USER': 'admin_reservation',
-        'PASSWORD': 'Reservation123@',
+        'NAME': 'ma_base',
+        'USER': 'fatou',
+        'PASSWORD': 'SEYnabou16',
         'HOST': 'localhost',
         'PORT': '3306',
     }
