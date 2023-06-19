@@ -36,6 +36,8 @@ urlpatterns = [
     path('profil/', views.profil, name='profil'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path("paiement/", views.paiement, name='paiement'),
+    path("valider_paiement/", views.valider_paiement, name='valider_paiement'),
+    path("erreur/", views.erreur, name='erreur'),
 
 
 

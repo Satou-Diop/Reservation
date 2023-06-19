@@ -6,35 +6,53 @@
         <h1>Résultats de recherche de vols</h1>
         <div class="row">
             {% for key, value in liste_vols.items %}
-                <div class="col-md-2">
-                    <div class="card mb-3">
-                        <a href="{% static 'img/'|add:value.image %}" target="_blank">
-                            <img src="{% static 'img/'|add:value.image %}" class="card-img-top" alt="Image">
-                        </a>
-                        <div class="r_carte">
-                            <h5 class="card-title">
-                                <span style="color: blue;">{{ value.compagnie }}</span>
-                            </h5>
-                            <p>Prix : <span style="color: green;">${{ value.prix }}</span></p>
-                            <p>Nombre de places disponibles : {{ value.nombre_place }}</p>
-                            <p>Date de départ : <span style="color: violet;">{{ value.date_depart }}</span></p>
-                            <p>Date d'arrivée : <span style="color: violet;">{{ value.date_arrivee }}</span></p>
-                            <p>aeroport_depart : <span style="color:  rgb(0, 225, 255);">{{ value.aeroport_depart }}</span></p>
-                            <p>aeroport_arrivee : <span style="color: rgb(0, 225, 255);">{{ value.aeroport_arrivee }}</span></p>
-                        </div>
-
-                        <form action= "{% url 'paiement' %}" method="post"  id="myForm">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{ key }}" name='id_vol' id='id_vol'  >
-                            <button type="submit"  class="btn btn-primary confirmer"> Confirmer</button>
+            <div class="col-md-4">
+                <div class="container r_carte mb-3">
+                    <a href="{% static 'img/'|add:value.image %}" target="_blank">
+                        <img src="{% static 'img/'|add:value.image %}" class="card-img-top" alt="Image">
+                    </a>
+                    <div class="carte-body">
+                        <h5 class="carte-title">
+                            <span style="color: blue;">{{ value.compagnie }}</span>
+                        </h5>
+                        <p>Prix : <span style="color: green;">${{ value.prix }}</span></p>
+                        {% if request.session.info_utilisateur.nom %}
+                            <form action="{% url 'paiement' %}" method="post" id="myForm">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ key }}" name="id_vol" id="id_vol">
+                                <button type="submit" class="btn btn-primary btn-block confirmer">RESERVEZ</button>
                             </form>
-                        
-                        <!-- <div class="card-footer">
-                            <a href="{% url 'reservation_vol' %}" class="btn btn-primary">reservation </a>
-                        </div> -->
+                        {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            Veuillez vous connecter pour réserver.
+                            </div>
+                            <button class="btn btn-primary btn-block confirmer disabled" disabled style="opacity: 0.3;">RESERVEZ</button>
+                        {% endif %}
+                        <div class="d-grid gap-2" style="padding-top: 20px;">
+                            <button class="btn btn-success voir-plus" onclick="toggleDetails('{{ key }}')"  style="padding-top: 20px;">Voir plus de détails</button>
+                        </div>
+                        <div id="details_{{ key }}" style="display: none;">
+                            {% for item_key, item_value in value.items %}
+                                {% if item_key != 'image' and item_key != 'compagnie' and item_key != 'prix' %}
+                                    <p>{{ item_key }} : {{ item_value }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        function toggleDetails(key) {
+            var detailsDiv = document.getElementById('details_' + key);
+            if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
+                detailsDiv.style.display = 'block';
+            } else {
+                detailsDiv.style.display = 'none';
+            }
+        }
+    </script>
 {% endblock %}

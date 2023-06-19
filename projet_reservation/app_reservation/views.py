@@ -11,6 +11,11 @@ from app_reservation.models import Utilisateur
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 import datetime
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.contrib.auth.hashers import make_password,check_password
+
 
 
 
@@ -174,18 +179,6 @@ def resultatvol(request):
                     'compagnie': result['compagnie']
                 } for result in resultats
                 }
-           
-            # for result in resultats:
-            #     vol_id = result['id']
-            #     liste_vols[vol_id] = {
-            #         'date_depart': result['date_depart'],
-            #         'date_arrivee': result['date_arrivee'],
-            #         'aeroport_depart': result['aeroport_depart.nom_aeroport'],
-            #         'aeroport_arrivee': result['aeroport_arrivee.nom_aeroport'],
-            #         'nombre_place': result['nombre_place'],
-            #         'prix': result['prix'],
-            #         'compagnie': result['compagnie']
-            #     }
             context = {'liste_vols': liste_vols}
             cursor.close()
             conn.close()
@@ -199,8 +192,8 @@ def resultatvol(request):
 
 def paiement(request):
     id_reservation  = request.POST.get('id_reservation')
-
-    return render(request,'flight/paiement.html',{'id_reservation' :id_reservation})
+    type_reservation= request.POST.get('type_reservation')
+    return render(request,'flight/paiement.html',{'id_reservation' :id_reservation,'type_reservation' :type_reservation})
 
 def reservation_vol(request):
     if request.method == 'POST':
@@ -240,13 +233,7 @@ def reservation_vol(request):
         return redirect('flight/paiement.html')
     
 
-    
-
      
-       
-
-       
-        
        
 
 def confirmation_vol(request):
@@ -285,7 +272,7 @@ def mes_reservations(request):
     try:
         conn = sql.connect(**config)
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM `app_reservation_reservation_vol` where utilisateur ='{}' ".format(id_user))
+        cursor.execute("SELECT * FROM `app_reservation_reservation_vol` WHERE utilisateur ='{}' ".format(id_user))
         res=cursor.fetchall()
         if res==[]:
             return render(request,'mes_reservation.html',{})
@@ -328,7 +315,7 @@ def annuler(request):
     except Exception as e:
         print(str(e))  # Afficher l'erreur pour le débogage
         message='Erreur route'
-        return render(request,'mes_reservations.html',{})
+        return render(request,'mes_reservation.html',{})
     
 
 
@@ -431,3 +418,41 @@ def profil(request):
 
     return render(request, 'profil.html', context)
 
+
+
+def valider_paiement(request):
+    id_reservation  = request.POST.get('id_reservation')
+    type_reservation= request.POST.get('type_reservation')
+    if 'info_utilisateur' in request.session:
+        info_utilisateur = request.session['info_utilisateur']
+        if 'id' in info_utilisateur:
+            id_user = info_utilisateur['id']
+   
+    try:
+        print(id_reservation)
+        conn = sql.connect(**config)
+        cursor = conn.cursor()
+        requete="UPDATE {} SET paiement = '1' WHERE {}.id = '{}';".format(type_reservation,id_reservation)
+        cursor.execute(requete)
+        # Valider les modifications
+        conn.commit()
+        cursor.close()
+        conn.close()
+        if 'info_utilisateur' in request.session:
+            info_utilisateur = request.session['info_utilisateur']
+            if 'email' in info_utilisateur:
+                email_user = info_utilisateur['email']
+                subject = 'Validation Paiement'
+                html_message = render_to_string('flight/validation_paiement.html', {'user_email': email_user})
+                plain_message = strip_tags(html_message)
+                email = EmailMultiAlternatives(subject, plain_message, to=[email_user])
+                email.attach_alternative(html_message, "text/html")
+                email.send()
+        return redirect('mes_reservation')
+    except Exception as e:
+        print(str(e))  
+        return render(request, 'flight/erreur.html',{})
+    
+def erreur(request):
+
+    return render(request,'flight/erreur.html',{})

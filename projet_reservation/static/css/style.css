@@ -1866,3 +1866,47 @@ li{
   color: rgb(12, 12, 12);  /* Couleur du texte à l'intérieur du cadre */
   padding: 20px;  /* Espacement intérieur du cadre */
 }
+
+
+/* .listBody{
+  display: flex;
+  justify-content: center;
+  display: block;
+
+} */
+
+.carte-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.carte {
+  background-color: #f1f1f1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  width: 300px; /* Augmenter la longueur des cartes selon vos besoins */
+  margin: 10px;
+}
+
+.carte-img {
+  width: 100px; /* Définir la largeur de l'image selon vos besoins */
+  margin-right: 10px; /* Espacement entre l'image et le texte */
+}
+
+.carte-text {
+  flex: 1; /* Permet au texte de remplir l'espace disponible */
+}
+
+.carte-title {
+  color: blue;
+  margin-bottom: 10px;
+}
+
+.carte-price {
+  color: green;
+  margin-bottom: 10px;
+}
+
+/* Autres styles pour les autres éléments de texte */

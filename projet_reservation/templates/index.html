@@ -92,9 +92,61 @@
               <button class="bouton" type="submit">RECHERCHER</button>
           </div>
       </form>
+    </div>
+      <script>
+     // Variable globale pour gérer l'état de connexion
+var session,info_utilisateur,nom = false;
+
+// Fonction pour vérifier l'authentification et soumettre le formulaire si l'utilisateur est connecté
+function checkAuthentication(event) {
+  event.preventDefault(); // Empêche l'action par défaut du bouton
+
+  if (session,info_utilisateur,nom) {
+    document.getElementById("searchForm").submit();
+  } else {
+    var confirmation = confirm("Vous devez vous connecter pour effectuer une recherche. Cliquez sur OK pour vous connecter ou Annuler pour revenir à la page de recherche.");
+    if (confirmation) {
+      window.location.href = "{% url 'connexion' %}"; // Remplacez 'connexion' par l'URL de votre page de connexion
+    } else {
+      // L'utilisateur a annulé, vous pouvez ajouter un comportement supplémentaire si nécessaire
+      // Par exemple, rediriger l'utilisateur vers une autre page ou afficher un message d'annulation
+      alert("Recherche annulée.");
+    }
+  }
+}
+
+// Fonction pour mettre à jour l'état d'authentification
+function updateAuthenticationStatus(isAuthenticated) {
+  session,info_utilisateur,nom = isAuthenticated;
+  console.log("Valeur de isLoggedIn :", session,info_utilisateur,nom); // Ajout du console.log
+}
+
+
+// Événement de connexion réussie
+function onLoginSuccess() {
+  updateAuthenticationStatus(true);
+}
+
+// Événement de déconnexion réussie
+function onLogoutSuccess() {
+  updateAuthenticationStatus(false);
+}
+
+// Appeler la fonction onLoginSuccess après la connexion réussie
+// Par exemple, vous pouvez appeler cette fonction à partir de votre logique de connexion
+onLoginSuccess();
+
+// Appeler la fonction onLogoutSuccess après la déconnexion réussie
+// Par exemple, vous pouvez appeler cette fonction à partir de votre logique de déconnexion
+onLogoutSuccess();
+
+document.getElementById("searchButton").addEventListener("click", checkAuthentication);
+
+    </script>
+        
       
          
-           </div> 
+           
           <input type="radio" name="tabs" id="tabtwo">
           <label for="tabtwo">HOTELS</label>
           <div class="tab">

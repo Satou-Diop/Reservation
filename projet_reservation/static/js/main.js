@@ -385,3 +385,23 @@ button.addEventListener('click', (e) => {
     // Soumettre le formulaire manuellement
     form1.submit();
 });
+
+function toggleDetails(key) {
+  var detailsDiv = document.getElementById('details_' + key);
+  if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
+      detailsDiv.style.display = 'block';
+  } else {
+      detailsDiv.style.display = 'none';
+  }
+}
+
+function checkAuthentication() {
+  var isAuthenticated = "{{ user.is_authenticated }}";
+  if (isAuthenticated === "True") {
+    document.getElementById("searchForm").submit();
+  } else {
+    alert("Vous devez vous connecter pour effectuer une recherche.");
+  }
+}
+
+
